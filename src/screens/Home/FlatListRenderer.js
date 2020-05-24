@@ -20,6 +20,9 @@ function renderLocationItem(key, location, navigation, currentLocation) {
 }
 
 function renderTourItem(key, tourData, navigation, currentLocation) {
+  if (key <= 20 || key >= 40) {
+    return;
+  }
   return (
     <TourItem
       key={key}
@@ -35,16 +38,12 @@ function renderTourItem(key, tourData, navigation, currentLocation) {
   );
 }
 
-function onContentOffsetChanged(distanceFromTop, callback) {
-  distanceFromTop === 0 && callback();
+function isCloseToTop(distanceFromTop, callback) {
+  return distanceFromTop === 0;
 }
 
 function isCloseToBottom({layoutMeasurement, contentOffset, contentSize}) {
-  const paddingToBottom = 20;
-  return (
-    layoutMeasurement.height + contentOffset.y >=
-    contentSize.height - paddingToBottom
-  );
+  return layoutMeasurement.height + contentOffset.y == contentSize.height;
 }
 
 class FlatListRenderer {
@@ -78,9 +77,9 @@ class FlatListRenderer {
         style={styles.contentWrapper}
         showsVerticalScrollIndicator={false}
         onScroll={event => {
-          onContentOffsetChanged(event.nativeEvent.contentOffset.y, () => {
+          if (isCloseToTop(event.nativeEvent.contentOffset.y)) {
             console.log('top');
-          });
+          }
           if (isCloseToBottom(event.nativeEvent)) {
             console.log('end');
           }

@@ -165,12 +165,6 @@ class Home extends Component {
               value={this.state.showPlaces}
             />
           </View>
-          {/* <TourItem
-            name={'Tour Xuyên Việt'}
-            price={3999000}
-            nbDay={3}
-            nbNight={2}
-          /> */}
         </View>
         {this.flatListRenderer.renderLocationsFlatList(styles)}
         {this.flatListRenderer.renderToursFlatList(styles)}
