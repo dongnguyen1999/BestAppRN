@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text, Image} from 'react-native';
-import fetchPhotosGgApi from '../../../api/fetchPhotosGgApi';
-import {defaultFoodImg} from '../../../assets/images';
+import fetchPhotosGgApi from '../api/fetchPhotosGgApi';
+import {defaultFoodImg} from '../assets/images';
 import {StyleSheet} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
 
@@ -25,9 +25,10 @@ class RefImage extends Component {
   }
 
   render() {
+    const {wrapperStyle, imgStyle} = this.props;
     return (
-      <View style={styles.wrapper}>
-        <Image source={this.state.imgSrc} style={styles.imgSlide} />
+      <View style={[styles.wrapper, wrapperStyle]}>
+        <Image source={this.state.imgSrc} style={[styles.imgSlide, imgStyle]} />
       </View>
     );
   }

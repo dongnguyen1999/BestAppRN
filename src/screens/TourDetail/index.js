@@ -25,10 +25,14 @@ class TourDetail extends Component {
   }
 
   fetchPlaces = async tourId => {
-    let response = await fetchPlacesUseTourId(tourId);
-    let placeIds = response.data.map(object => object.id);
-    if (!placeIds) {
-      placeIds = [];
+    const {navigation} = this.props;
+    let placeIds = navigation.getParam('placeIds');
+    if (placeIds.length == 0) {
+      let response = await fetchPlacesUseTourId(tourId);
+      let placeIds = response.data.map(object => object.id);
+      if (!placeIds) {
+        placeIds = [];
+      }
     }
     return await fetchAllDetail(placeIds);
   };
@@ -77,7 +81,6 @@ class TourDetail extends Component {
   render() {
     const {navigation} = this.props;
     const tourDetail = navigation.getParam('tourDetail');
-    const locations = navigation.getParam('locations');
     return (
       <View style={styles.container}>
         <View style={styles.contentWrapper}>

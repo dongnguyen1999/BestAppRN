@@ -21,6 +21,7 @@ import * as ClientFilter from '../../utilities/ClientFilter';
 import PlaceItem from '../../components/PlaceItem';
 import TourItem from './components/TourItem';
 import fetchTours from '../../api/fetchTours';
+import FlatListRenderer from './FlatListRenderer';
 
 class Home extends Component {
   constructor(props) {
@@ -47,6 +48,7 @@ class Home extends Component {
     this.setShowFilters = this.setShowFilters.bind(this);
     this.voiceRecognition = new VoiceRecognition(this);
     this.locationsFetcher = new LocationsFetcher(this);
+    this.flatListRenderer = new FlatListRenderer(this);
   }
 
   componentDidMount() {
@@ -85,41 +87,6 @@ class Home extends Component {
     }
     this.setState({fetchingLocations: false, tours: toursData});
   };
-
-  renderLocationItem(key, location) {
-    const {navigation} = this.props;
-    return (
-      <PlaceItem
-        key={key}
-        placeId={location.place_id}
-        imgRef={location.photo_reference}
-        name={location.name}
-        address={location.formatted_address}
-        currentLocation={this.state.currentLocation}
-        distance={location.distance}
-        navigation={navigation}
-        detail={location.detail}
-      />
-    );
-  }
-
-  renderTourItem(key, tourData) {
-    const {navigation} = this.props;
-    return (
-      <TourItem
-        key={key}
-        id={tourData.id}
-        name={tourData.name}
-        price={tourData.price}
-        nbDay={tourData.nb_day}
-        nbNight={tourData.nb_night}
-        navigation={navigation}
-        comId={tourData.com_id}
-        locations={this.state.locations}
-        currentLocation={this.state.currentLocation}
-      />
-    );
-  }
 
   renderLocationList() {
     let data = [...this.state.locations.values()];
@@ -198,34 +165,21 @@ class Home extends Component {
               value={this.state.showPlaces}
             />
           </View>
+          {/* <TourItem
+            name={'Tour Xuyên Việt'}
+            price={3999000}
+            nbDay={3}
+            nbNight={2}
+          /> */}
         </View>
-        {this.state.locations.size != 0 && this.state.showPlaces ? (
-          <FlatList
-            showsVerticalScrollIndicator={false}
-            style={styles.contentWrapper}
-            onEndReached={this.locationsFetcher.getNextPageLocations}
-            data={this.renderLocationList()}
-            renderItem={({index, item}) => this.renderLocationItem(index, item)}
-          />
-        ) : (
-          undefined
-        )}
-        <ScrollView style={styles.contentWrapper}>
-          {this.state.tours.length != 0 && !this.state.showPlaces ? (
-            <FlatList
-              showsVerticalScrollIndicator={false}
-              data={this.state.tours}
-              renderItem={({index, item}) => this.renderTourItem(index, item)}
-            />
-          ) : (
-            undefined
-          )}
-          {this.state.fetchingLocations ? (
-            <View style={styles.smallIndicator}>
-              <ActivityIndicator color={theme.lightElementColor} />
-            </View>
-          ) : null}
-        </ScrollView>
+        {this.flatListRenderer.renderLocationsFlatList(styles)}
+        {this.flatListRenderer.renderToursFlatList(styles)}
+        {this.state.fetchingLocations ? (
+          <View style={styles.smallIndicator}>
+            <ActivityIndicator color={theme.lightElementColor} />
+          </View>
+        ) : null}
+        {/* </ScrollView> */}
         {this.state.started ? (
           <RecordingAminated
             onDestroyVoice={this.voiceRecognition.destroyRecognition}

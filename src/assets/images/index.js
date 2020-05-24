@@ -13,6 +13,8 @@ import PhoneCall from './svg/phoneCall.svg';
 import BlueStar from './svg/blueStar.svg';
 import BlueLink from './svg/blueLink.svg';
 import HalfStar from './svg/halfStar.svg';
+import Watch from './svg/watch.svg';
+import TravelPlan from './svg/travelPlan.svg';
 
 export const usernameIcon = require('./usernameInput.png');
 export const passwordIcon = require('./passwordInput.png');
@@ -39,4 +41,6 @@ export {
   BlueLink,
   BlueStar,
   HalfStar,
+  Watch,
+  TravelPlan,
 };

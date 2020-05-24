@@ -4,7 +4,7 @@ import Swiper from 'react-native-swiper';
 import {RFValue} from 'react-native-responsive-fontsize';
 import theme from '../../../themes/default';
 import {Dot, ActiveDot, defaultFoodImg} from '../../../assets/images';
-import RefImage from './RefImage';
+import RefImage from '../../../components/RefImage';
 
 function ImageSlideshow(props) {
   function renderImages() {
