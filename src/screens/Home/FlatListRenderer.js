@@ -56,7 +56,8 @@ class FlatListRenderer {
   }
 
   renderLocationsFlatList(styles) {
-    const {navigation, currentLocation} = this.props;
+    const {navigation} = this.props;
+    let currentLocation = this.state.currentLocation;
     return this.state.locations.size != 0 && this.state.showPlaces ? (
       <FlatList
         showsVerticalScrollIndicator={false}

@@ -99,6 +99,7 @@ class Home extends Component {
       toursData = response.data;
     }
     let maxIndex = Math.floor(toursData.length / this.maxNbToursShown);
+    toursData.sort(() => Math.random() - 0.5);
     let splitedData = [];
     for (let i = 0; i <= maxIndex; i++) {
       splitedData.push(

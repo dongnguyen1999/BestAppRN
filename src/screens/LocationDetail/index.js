@@ -36,7 +36,6 @@ class LocationDetail extends Component {
     const {navigation} = this.props;
     const currentLocation = navigation.getParam('currentLocation');
     const location = this.state.location;
-    console.log(currentLocation, location);
     if (!currentLocation || !location) return;
     const data = {
       source: {
