@@ -10,7 +10,7 @@ class TourImgsPane extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      imgRefs: [defaultFoodImg],
+      imgRefs: undefined,
     };
   }
 
@@ -49,30 +49,38 @@ class TourImgsPane extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {this.state.imgRefs.map((imgRef, index) => {
-          let borderRadius = {};
-          if (index == 0) {
-            borderRadius = {
-              ...borderRadius,
-              borderTopLeftRadius: RFValue(3),
-              borderBottomLeftRadius: RFValue(3),
-            };
-          }
-          if (index == this.state.imgRefs.length - 1) {
-            borderRadius = {
-              ...borderRadius,
-              borderTopRightRadius: RFValue(3),
-              borderBottomRightRadius: RFValue(3),
-            };
-          }
-          return (
-            <RefImage
-              imgRef={imgRef}
-              wrapperStyle={styles.imgView}
-              imgStyle={styles.img}
-            />
-          );
-        })}
+        {this.state.imgRefs ? (
+          this.state.imgRefs.map((imgRef, index) => {
+            let borderRadius = {};
+            if (index == 0) {
+              borderRadius = {
+                ...borderRadius,
+                borderTopLeftRadius: RFValue(3),
+                borderBottomLeftRadius: RFValue(3),
+              };
+            }
+            if (index == this.state.imgRefs.length - 1) {
+              borderRadius = {
+                ...borderRadius,
+                borderTopRightRadius: RFValue(3),
+                borderBottomRightRadius: RFValue(3),
+              };
+            }
+            return (
+              <RefImage
+                imgRef={imgRef}
+                wrapperStyle={styles.imgView}
+                imgStyle={[styles.img, borderRadius]}
+              />
+            );
+          })
+        ) : (
+          <RefImage
+            wrapperStyle={styles.imgView}
+            imgStyle={[styles.img, {borderRadius: RFValue(3)}]}
+          />
+        )}
+        {console.log('end')}
       </View>
     );
   }
@@ -96,9 +104,7 @@ const styles = StyleSheet.create({
   img: {
     height: RFValue(63),
     width: '100%',
-    aspectRatio: 11.5 / 6,
-    borderTopLeftRadius: RFValue(3),
-    borderBottomLeftRadius: RFValue(3),
+    aspectRatio: 10 / 6,
   },
 });
 

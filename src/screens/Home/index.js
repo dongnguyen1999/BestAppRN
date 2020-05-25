@@ -36,16 +36,18 @@ class Home extends Component {
       tours: [],
       currentLocation: undefined,
       nextPageToken: undefined,
-      views: undefined,
+      currentToursIndex: 0,
       fetchingLocations: false,
       showPlaces: true,
     };
 
+    this.maxNbToursShown = 10;
     this.updateSearchText = this.updateSearchText.bind(this);
     this.updateFiltersData = this.updateFiltersData.bind(this);
     this.clearFiltersData = this.clearFiltersData.bind(this);
     this.updateShowFilters = this.updateShowFilters.bind(this);
     this.setShowFilters = this.setShowFilters.bind(this);
+    this.updateToursIndex = this.updateToursIndex.bind(this);
     this.voiceRecognition = new VoiceRecognition(this);
     this.locationsFetcher = new LocationsFetcher(this);
     this.flatListRenderer = new FlatListRenderer(this);
@@ -74,6 +76,17 @@ class Home extends Component {
   updateFiltersData = data => this.setState({filtersData: data});
   clearFiltersData = () => this.setState({filtersData: new Map()});
   setShowFilters = flag => this.setState({showFilters: flag});
+  updateToursIndex = dir => {
+    let newIndex = this.state.currentToursIndex + dir;
+    let maxIndex = this.state.maxToursIndex;
+    if (newIndex < 0) {
+      newIndex = 0;
+    }
+    if (newIndex > maxIndex) {
+      newIndex = maxIndex;
+    }
+    this.setState({currentToursIndex: newIndex});
+  };
 
   fetchToursList = async () => {
     this.setState({fetchingLocations: true});
@@ -85,7 +98,21 @@ class Home extends Component {
       let response = await fetchTours(placeIds);
       toursData = response.data;
     }
-    this.setState({fetchingLocations: false, tours: toursData});
+    let maxIndex = Math.floor(toursData.length / this.maxNbToursShown);
+    let splitedData = [];
+    for (let i = 0; i <= maxIndex; i++) {
+      splitedData.push(
+        toursData.slice(
+          i * this.maxNbToursShown,
+          i * this.maxNbToursShown + this.maxNbToursShown,
+        ),
+      );
+    }
+    this.setState({
+      fetchingLocations: false,
+      tours: splitedData,
+      maxToursIndex: maxIndex,
+    });
   };
 
   renderLocationList() {

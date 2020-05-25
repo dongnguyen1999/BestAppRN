@@ -14,7 +14,13 @@ function ImageSlideshow(props) {
       imgList
         .filter((imgRef, index) => index < MAX_NB_IMAGE)
         .map(imgRef => {
-          return <RefImage imgRef={imgRef} />;
+          return (
+            <RefImage
+              imgRef={imgRef}
+              wrapperStyle={styles.wrapper}
+              imgStyle={styles.imgSlide}
+            />
+          );
         })
     ) : (
       <View style={styles.wrapper}>
@@ -57,12 +63,12 @@ const styles = StyleSheet.create({
     marginRight: RFValue(4),
   },
   wrapper: {
-    alignItems: 'center',
+    // alignItems: 'center',
   },
   imgSlide: {
     width: '100%',
     height: RFValue(240),
-    aspectRatio: 1,
+    // aspectRatio: 8 / 6,
   },
 });
 

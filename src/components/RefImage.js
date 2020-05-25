@@ -15,6 +15,7 @@ class RefImage extends Component {
 
   componentDidMount() {
     const {imgRef} = this.props;
+    // console.log(imgRef);
     if (imgRef) {
       fetchPhotosGgApi(imgRef, 400)
         .then(response =>
@@ -27,8 +28,11 @@ class RefImage extends Component {
   render() {
     const {wrapperStyle, imgStyle} = this.props;
     return (
-      <View style={[styles.wrapper, wrapperStyle]}>
-        <Image source={this.state.imgSrc} style={[styles.imgSlide, imgStyle]} />
+      <View style={wrapperStyle ? wrapperStyle : styles.wrapper}>
+        <Image
+          source={this.state.imgSrc}
+          style={imgStyle ? imgStyle : styles.imgSlide}
+        />
       </View>
     );
   }
