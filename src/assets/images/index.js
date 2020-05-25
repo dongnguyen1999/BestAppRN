@@ -15,7 +15,6 @@ import BlueLink from './svg/blueLink.svg';
 import HalfStar from './svg/halfStar.svg';
 import Watch from './svg/watch.svg';
 import TravelPlan from './svg/travelPlan.svg';
-import TourDetailHeader from './svg/tourDetailHeader.svg';
 import TourDetailDot from './svg/tourDetailDot.svg';
 import OutlinePhone from './svg/outlinePhone.svg';
 import OutlineMail from './svg/outlineMail.svg';
@@ -24,6 +23,7 @@ export const usernameIcon = require('./usernameInput.png');
 export const passwordIcon = require('./passwordInput.png');
 export const minhthuImg = require('./minhthu.png');
 export const minhthu1Img = require('./minhthu1.jpg');
+export const tourDetailHeader = require('./tourDetailHeader.jpeg');
 export const minhthu2Img = require('./minhthu2.jpg');
 export const mytamImg = require('./mytam.jpeg');
 export const recordingIcon = require('./recordingIcon.png');
@@ -47,7 +47,6 @@ export {
   HalfStar,
   Watch,
   TravelPlan,
-  TourDetailHeader,
   TourDetailDot,
   OutlinePhone,
   OutlineMail,

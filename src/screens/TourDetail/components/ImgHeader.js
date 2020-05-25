@@ -7,41 +7,35 @@ import {
   Watch,
   TravelPlan,
   TourDetailDot,
+  tourDetailHeader,
 } from '../../../assets/images';
 import theme from '../../../themes/default';
+import {Image} from 'react-native';
 
-class ImgHeader extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  formatNumber(num) {
+function ImgHeader(props) {
+  function formatNumber(num) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
   }
-
-  render() {
-    const {name, nbDay, nbNight, nbPlaces, price} = this.props;
-    return (
-      <View style={styles.container}>
-        <TourDetailHeader height={RFValue(103)} width={'100%'} />
-        <View style={styles.contentView}>
-          <Text style={styles.tourName}>{name}</Text>
-          <View style={styles.infoContainer}>
-            <Watch width={RFValue(11)} height={RFValue(11)} />
-            <Text style={styles.middleText}>
-              {nbDay} ngày {nbNight} đêm
-            </Text>
-            <TourDetailDot width={RFValue(3)} height={RFValue(3)} />
-            <View style={{height: '100%', width: RFValue(13)}} />
-            <TravelPlan width={RFValue(11)} height={RFValue(11)} />
-            <Text style={styles.middleText}>{nbPlaces} địa điểm</Text>
-          </View>
-          <Text style={styles.price}>Giá {this.formatNumber(price)} vnđ</Text>
+  const {name, nbDay, nbNight, nbPlaces, price} = props;
+  return (
+    <View style={styles.container}>
+      <Image source={tourDetailHeader} style={styles.imgHeader} />
+      <View style={styles.contentView}>
+        <Text style={styles.tourName}>{name}</Text>
+        <View style={styles.infoContainer}>
+          <Watch width={RFValue(11)} height={RFValue(11)} />
+          <Text style={styles.middleText}>
+            {nbDay} ngày {nbNight} đêm
+          </Text>
+          <TourDetailDot width={RFValue(3)} height={RFValue(3)} />
+          <View style={{height: '100%', width: RFValue(13)}} />
+          <TravelPlan width={RFValue(11)} height={RFValue(11)} />
+          <Text style={styles.middleText}>{nbPlaces} địa điểm</Text>
         </View>
+        <Text style={styles.price}>Giá {formatNumber(price)} vnđ</Text>
       </View>
-    );
-  }
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -59,6 +53,11 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  imgHeader: {
+    width: '100%',
+    height: RFValue(103),
+    borderRadius: RFValue(12),
   },
   tourName: {
     flex: 1,

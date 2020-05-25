@@ -4,7 +4,6 @@ import {StyleSheet} from 'react-native';
 import theme from '../../themes/default';
 import {RFValue} from 'react-native-responsive-fontsize';
 import PlaceItem from '../../components/PlaceItem';
-import TourInfo from './components/TourInfo';
 import CompanyInfo from './components/CompanyInfo';
 import fetchPlacesUseTourId from '../../api/fetchPlacesUseTourId';
 import fetchCompanyInfo from '../../api/fetchCompanyInfo';
@@ -138,7 +137,7 @@ const styles = StyleSheet.create({
     marginBottom: RFValue(13),
   },
   flatList: {
-    height: RFValue(400),
+    height: '50%',
   },
   resultCaption: {
     marginTop: RFValue(11),
