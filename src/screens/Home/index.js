@@ -89,7 +89,7 @@ class Home extends Component {
   };
 
   fetchToursList = async () => {
-    this.setState({fetchingLocations: true});
+    this.setState({fetchingLocations: true, tours: []});
     let toursData = [];
     if (this.state.locations.size != 0) {
       let placeIds = [...this.state.locations.values()].map(

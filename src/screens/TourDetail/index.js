@@ -10,6 +10,7 @@ import fetchPlacesUseTourId from '../../api/fetchPlacesUseTourId';
 import fetchCompanyInfo from '../../api/fetchCompanyInfo';
 import fetchAllDetail from '../../api/fetchAllDetail';
 import {getDistanceFrom2Locations} from '../../utilities/computeDistance';
+import ImgHeader from './components/ImgHeader';
 
 class TourDetail extends Component {
   constructor(props) {
@@ -84,11 +85,12 @@ class TourDetail extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.contentWrapper}>
-          <TourInfo
+          <ImgHeader
             name={tourDetail.name}
-            price={tourDetail.price}
             nbDay={tourDetail.nbDay}
             nbNight={tourDetail.nbNight}
+            price={tourDetail.price}
+            nbPlaces={this.state.locations ? this.state.locations.length : 0}
           />
           {this.state.loading ? (
             <View style={styles.smallIndicator}>
@@ -96,7 +98,12 @@ class TourDetail extends Component {
             </View>
           ) : (
             <View>
-              <CompanyInfo data={this.state.companyData} />
+              <CompanyInfo
+                name={this.state.companyData.name}
+                address={this.state.companyData.address}
+                mail={this.state.companyData.mail}
+                phone={this.state.companyData.phone}
+              />
               <Text style={styles.resultCaption}>Các địa điểm tham quan</Text>
               {this.state.locations ? (
                 <FlatList
@@ -131,17 +138,17 @@ const styles = StyleSheet.create({
     marginBottom: RFValue(13),
   },
   flatList: {
-    height: RFValue(320),
+    height: RFValue(400),
   },
   resultCaption: {
-    marginTop: RFValue(13),
+    marginTop: RFValue(11),
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: '500',
     fontSize: RFValue(20),
-    lineHeight: RFValue(24),
+    lineHeight: RFValue(32),
     color: theme.fontColor,
-    marginBottom: RFValue(15),
+    marginBottom: RFValue(3),
   },
   smallIndicator: {
     width: '100%',

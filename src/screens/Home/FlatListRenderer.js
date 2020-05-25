@@ -78,15 +78,16 @@ class FlatListRenderer {
     return this.state.tours.length != 0 && !this.state.showPlaces ? (
       <ScrollView
         style={styles.contentWrapper}
-        showsVerticalScrollIndicator={true}
+        showsVerticalScrollIndicator={false}
         ref={view => (this.toursList = view)}
         onScroll={event => {
           if (isCloseToTop(event.nativeEvent)) {
-            this.toursList.scrollTo(RFValue(1));
+            this.toursList.scrollTo(RFValue(1), 0, false);
             this.updateToursIndex(-1);
           }
           if (isCloseToBottom(event.nativeEvent)) {
-            this.toursList.scrollTo(RFValue(1));
+            if (this.state.currentToursIndex != this.state.maxToursIndex) 
+              this.toursList.scrollTo(RFValue(1), 0, false);
             this.updateToursIndex(1);
           }
         }}>
