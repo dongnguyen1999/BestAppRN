@@ -18,6 +18,11 @@ import TravelPlan from './svg/travelPlan.svg';
 import TourDetailDot from './svg/tourDetailDot.svg';
 import OutlinePhone from './svg/outlinePhone.svg';
 import OutlineMail from './svg/outlineMail.svg';
+import CommentIcon from './svg/commentIcon.svg';
+import BlueCommentIcon from './svg/blueCommentIcon.svg';
+import ImagesLib from './svg/imagesLib.svg';
+import BlueImagesLib from './svg/blueImagesLib.svg';
+import BlueDirection from './svg/blueDirection.svg';
 
 export const usernameIcon = require('./usernameInput.png');
 export const passwordIcon = require('./passwordInput.png');
@@ -50,4 +55,9 @@ export {
   TourDetailDot,
   OutlinePhone,
   OutlineMail,
+  CommentIcon,
+  ImagesLib,
+  BlueCommentIcon,
+  BlueDirection,
+  BlueImagesLib,
 };

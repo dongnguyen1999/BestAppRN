@@ -12,13 +12,11 @@ import Reviews from './components/Reviews';
 import Images from './components/Images';
 import FunctionOptionsBar from './components/FunctionOptionsBar';
 
-const navTabs = [<Information />, <Reviews />, <Images />];
-
 class LocationDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeTab: 0,
+      activeTab: 1,
       name: 'Địa điểm ăn uống',
       rating: 0,
       reviews: [],
@@ -36,7 +34,9 @@ class LocationDetail extends Component {
     const {navigation} = this.props;
     const currentLocation = navigation.getParam('currentLocation');
     const location = this.state.location;
-    if (!currentLocation || !location) return;
+    if (!currentLocation || !location) {
+      return;
+    }
     const data = {
       source: {
         latitude: currentLocation.lat,
@@ -85,6 +85,11 @@ class LocationDetail extends Component {
   };
 
   render() {
+    let navTabs = [
+      <Information />,
+      <Reviews reviews={this.state.reviews} />,
+      <Images photos={this.state.photos} />,
+    ];
     return (
       <View style={styles.container}>
         <ImageSlideshow imgList={this.state.photos} />
@@ -94,12 +99,11 @@ class LocationDetail extends Component {
           nbReviews={this.state.reviews.length}
           address={this.state.address}
         />
-        <ButtonsBar
-          tabs={['THÔNG TIN', 'ĐÁNH GIÁ', 'HÌNH ẢNH']}
+        <FunctionOptionsBar
+          onDirection={this.handleGetDirections}
           activeTab={this.state.activeTab}
           onChangeTab={this.changeTab}
         />
-        <FunctionOptionsBar onDirection={this.handleGetDirections} />
         {navTabs[this.state.activeTab]}
       </View>
     );

@@ -10,6 +10,7 @@ const theme = {
   ratingColor: '#EB6E00',
   borderTabs: 'rgba(0, 0, 0, 0.12);',
   fontButtonTabs: '#E0E0E0',
+  commentDividers: '#4F4F4F',
 };
 
 export default theme;
