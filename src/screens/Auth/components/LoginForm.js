@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {View, StyleSheet} from 'react-native';
-import Input from './Input';
+import Input from '../../../components/Input';
 import {RFValue} from 'react-native-responsive-fontsize';
 
 function LoginForm(props) {

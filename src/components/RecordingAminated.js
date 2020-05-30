@@ -12,7 +12,7 @@ import {
   ScrollView,
   Animated,
 } from 'react-native';
-import {recordingIcon} from '../../../assets/images';
+import {recordingIcon} from '../assets/images';
 import {RFValue} from 'react-native-responsive-fontsize';
 import Voice from '@react-native-community/voice';
 
@@ -130,5 +130,5 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-  }
+  },
 });

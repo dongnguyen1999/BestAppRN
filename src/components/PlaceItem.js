@@ -5,6 +5,7 @@ import {defaultFoodImg} from '../assets/images';
 import theme from '../themes/default';
 import fetchPhotosGgApi from '../api/fetchPhotosGgApi';
 import {convertMeter} from '../utilities/computeDistance';
+import CheckBox from '@react-native-community/checkbox';
 
 class PlaceItem extends Component {
   constructor(props) {
@@ -37,32 +38,51 @@ class PlaceItem extends Component {
       placeId,
       currentLocation,
       detail,
+      checkable,
+      checked,
+      checkItemCallback,
     } = this.props;
     return (
-      <TouchableOpacity
-        style={styles.container}
-        onPress={() =>
-          navigation.navigate('LocationDetail', {
-            placeId: placeId,
-            detail: detail,
-            currentLocation: currentLocation,
-          })
-        }>
-        <View style={styles.leftContainer}>
-          <Image style={styles.img} source={this.state.imgSrc} />
-        </View>
-        <View style={styles.rightContainer}>
-          <Text style={styles.nameText}>{name}</Text>
-          <Text numberOfLines={1} style={styles.addressText}>
-            {address}
-          </Text>
-          <Text style={styles.distanceText}>{`Cách bạn ${
-            distance < 1
-              ? `${Math.round(convertMeter(distance))} m`
-              : `${Math.round(distance)} km`
-          }`}</Text>
-        </View>
-      </TouchableOpacity>
+      <View style={styles.container}>
+        <TouchableOpacity
+          style={styles.touchableView}
+          onPress={() =>
+            navigation.navigate('LocationDetail', {
+              placeId: placeId,
+              detail: detail,
+              currentLocation: currentLocation,
+            })
+          }>
+          <View style={styles.leftContainer}>
+            <Image style={styles.img} source={this.state.imgSrc} />
+          </View>
+          <View style={styles.rightContainer}>
+            <Text style={styles.nameText}>{name}</Text>
+            <Text numberOfLines={1} style={styles.addressText}>
+              {address}
+            </Text>
+            <Text style={styles.distanceText}>{`Cách bạn ${
+              distance < 1
+                ? `${Math.round(convertMeter(distance))} m`
+                : `${Math.round(distance)} km`
+            }`}</Text>
+          </View>
+        </TouchableOpacity>
+        {checkable ? (
+          <View style={styles.checkView}>
+            <CheckBox
+              value={checked}
+              tintColors={{
+                true: theme.lightElementColor,
+                false: theme.placeholderColor,
+              }}
+              onValueChange={checkItemCallback}
+            />
+          </View>
+        ) : (
+          undefined
+        )}
+      </View>
     );
   }
 }
@@ -71,11 +91,16 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: RFValue(69),
-    display: 'flex',
-    flexDirection: 'row',
     backgroundColor: theme.darkElementColor,
     borderRadius: RFValue(5),
     marginBottom: RFValue(4),
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  touchableView: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'row',
   },
   leftContainer: {
     height: RFValue(69),
@@ -124,6 +149,11 @@ const styles = StyleSheet.create({
     lineHeight: RFValue(20),
     color: theme.lightElementColor,
     marginBottom: RFValue(2),
+  },
+  checkView: {
+    width: RFValue(40),
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 

@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
-import ModalDropdown from '../../../components/ModalDropdown';
-import StourButton from '../../../components/StourButton';
-import {FacebookIcon, ArrowDownIcon, ArrowUpIcon} from '../../../assets/images';
+import ModalDropdown from './ModalDropdown';
+import {FacebookIcon, ArrowDownIcon, ArrowUpIcon} from '../assets/images';
 import {RFValue} from 'react-native-responsive-fontsize';
-import theme from '../../../themes/default';
+import theme from '../themes/default';
 
 class Filter extends Component {
   constructor(props) {
@@ -16,23 +15,35 @@ class Filter extends Component {
 
   componentDidMount() {
     const {title, callbackValue, selectedValue} = this.props;
-    callbackValue(title, selectedValue);
+    if (callbackValue) callbackValue(title, selectedValue);
   }
 
   changeDropDownState = flag => this.setState({isDropDown: flag});
 
   render() {
-    const {title, listItem, callbackValue, style, selectedValue} = this.props;
+    const {
+      title,
+      listItem,
+      callbackValue,
+      style,
+      selectedValue,
+      onPop,
+    } = this.props;
     return (
-      <View style={[styles.container, style]}>
+      <View onTouchStart={onPop} style={[styles.container, style]}>
         <View>
           <Text style={styles.caption}>{title}</Text>
         </View>
         <ModalDropdown
           options={listItem}
-          onDropdownWillShow={() => this.changeDropDownState(true)}
+          onDropdownWillShow={async () => this.changeDropDownState(true)}
           onDropdownWillHide={() => this.changeDropDownState(false)}
-          dropdownStyle={[styles.dropdownStyle, style]}
+          dropdownStyle={[
+            styles.dropdownStyle,
+            style
+              ? {width: `${parseFloat(style.width.replace('%', '')) - 4}%`}
+              : undefined,
+          ]}
           dropdownTextStyle={styles.dropdownTextStyle}
           dropdownTextHighlightStyle={styles.selectedTextStyle}
           onSelect={(index, value) => {

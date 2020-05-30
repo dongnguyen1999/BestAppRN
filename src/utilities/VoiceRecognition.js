@@ -1,5 +1,5 @@
 import Voice from '@react-native-community/voice';
-import * as lang from '../../constants/langCode';
+import * as lang from '../constants/langCode';
 export default class VoiceRecognition {
   constructor(context) {
     Voice.onSpeechStart = this.onSpeechStart.bind(context);

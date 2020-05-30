@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
-import {SearchIcon, VoiceInputIcon} from '../../../assets/images';
+import {SearchIcon, VoiceInputIcon} from '../assets/images';
 import {RFValue} from 'react-native-responsive-fontsize';
-import theme from '../../../themes/default';
+import theme from '../themes/default';
 import Voice from '@react-native-community/voice';
 
 function SearchBar(props) {

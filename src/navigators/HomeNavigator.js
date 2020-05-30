@@ -7,6 +7,7 @@ import {RFValue} from 'react-native-responsive-fontsize';
 import LogoutButton from '../components/LogoutButton';
 import LocationDetail from '../screens/LocationDetail';
 import TourDetail from '../screens/TourDetail';
+import AdjustTour from '../screens/AdjustTour';
 
 const homeNavigationOptions = ({navigation}) => {
   return {
@@ -27,19 +28,9 @@ const homeNavigationOptions = ({navigation}) => {
   };
 };
 
-const detailNavigationOptions = ({navigation}) => {
+const navigationOptions = (navigation, title) => {
   return {
-    title: 'Chi tiết địa điểm',
-    headerStyle: styles.header,
-    headerTitleStyle: [styles.headerTitle, styles.detailHeaderTitle],
-    headerTitleContainerStyle: styles.titleContainer,
-    headerTintColor: theme.headerTintColor,
-  };
-};
-
-const tourNavigationOptions = ({navigation}) => {
-  return {
-    title: 'Chi tiết tour du lịch',
+    title: title,
     headerStyle: styles.header,
     headerTitleStyle: [styles.headerTitle, styles.detailHeaderTitle],
     headerTitleContainerStyle: styles.titleContainer,
@@ -48,14 +39,21 @@ const tourNavigationOptions = ({navigation}) => {
 };
 
 const HomeNavigator = createStackNavigator({
+  AdjustTour: {
+    screen: AdjustTour,
+    navigationOptions: ({navigation}) =>
+      navigationOptions(navigation, 'Chi tiết tour'),
+  },
   Home: {screen: Home, navigationOptions: homeNavigationOptions},
   LocationDetail: {
     screen: LocationDetail,
-    navigationOptions: detailNavigationOptions,
+    navigationOptions: ({navigation}) =>
+      navigationOptions(navigation, 'Chi tiết địa điểm'),
   },
   TourDetail: {
     screen: TourDetail,
-    navigationOptions: tourNavigationOptions,
+    navigationOptions: ({navigation}) =>
+      navigationOptions(navigation, 'Chi tiết tour du lịch'),
   },
 });
 

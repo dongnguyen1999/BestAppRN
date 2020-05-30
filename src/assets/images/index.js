@@ -23,6 +23,7 @@ import BlueCommentIcon from './svg/blueCommentIcon.svg';
 import ImagesLib from './svg/imagesLib.svg';
 import BlueImagesLib from './svg/blueImagesLib.svg';
 import BlueDirection from './svg/blueDirection.svg';
+import ArrowRightIcon from './svg/arrowRightIcon.svg';
 
 export const usernameIcon = require('./usernameInput.png');
 export const passwordIcon = require('./passwordInput.png');
@@ -60,4 +61,5 @@ export {
   BlueCommentIcon,
   BlueDirection,
   BlueImagesLib,
+  ArrowRightIcon,
 };

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, ActivityIndicator, Button} from 'react-native';
-import Input from './components/Input';
 import {usernameIcon} from '../../assets/images';
 import firebaseApp from '../../utilities/firebaseApp';
 import LoginForm from './components/LoginForm';

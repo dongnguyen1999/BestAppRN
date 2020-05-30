@@ -10,4 +10,5 @@ export const databaseDomain = 'https://dongb1709590.000webhostapp.com';
 export const stourDatabase = '/stour';
 export const getTours = '/get_tours.php';
 export const getPlaces = '/get_places.php';
+export const getTourDetail = '/get_tour_detail.php';
 export const getCompanyInfo = '/get_company_info.php';

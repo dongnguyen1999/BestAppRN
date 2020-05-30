@@ -1,7 +1,7 @@
-import * as googleAPI from '../../api/searchGooglePlaces';
-import * as resolveLocations from '../../utilities/resolveLocations';
-import * as offlineFilter from '../../constants/offlineFilters';
-import fetchAllDetail from '../../api/fetchAllDetail';
+import * as googleAPI from '../api/searchGooglePlaces';
+import * as resolveLocations from './resolveLocations';
+import * as offlineFilter from '../constants/offlineFilters';
+import fetchAllDetail from '../api/fetchAllDetail';
 
 export default class LocationsFetcher {
   constructor(context) {

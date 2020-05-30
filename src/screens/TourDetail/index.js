@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
 import {View, Text, FlatList, ActivityIndicator} from 'react-native';
 import {StyleSheet} from 'react-native';
@@ -137,6 +138,7 @@ const styles = StyleSheet.create({
     marginBottom: RFValue(13),
   },
   flatList: {
+    // flex: 1,
     height: '50%',
   },
   resultCaption: {

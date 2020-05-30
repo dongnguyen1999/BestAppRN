@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import StourButton from '../../../components/StourButton';
-import Filter from './Filter';
+import Filter from '../../../components/Filter';
 import data from '../../../constants/filtersData';
 import {RFValue} from 'react-native-responsive-fontsize';
 import theme from '../../../themes/default';
 import ExceptionInput from './ExceptionInput';
-import { EXCEPT } from '../../../constants/offlineFilters';
+import {EXCEPT} from '../../../constants/offlineFilters';
 
 class FiltersButton extends Component {
   constructor(props) {

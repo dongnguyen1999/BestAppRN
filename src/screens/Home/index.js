@@ -10,13 +10,13 @@ import {
 } from 'react-native';
 import theme from '../../themes/default';
 import Dialog from '../../components/Dialog';
-import SearchBar from './components/SearchBar';
+import SearchBar from '../../components/SearchBar';
 import {RFValue} from 'react-native-responsive-fontsize';
 import FiltersButton from './components/FiltersButton';
-import RecordingAminated from './components/RecordingAminated';
+import RecordingAminated from '../../components/RecordingAminated';
 import getCurrentPosition from '../../api/getCurrentLocation';
-import VoiceRecognition from './VoiceRecognition';
-import LocationsFetcher from './LocationsFetcher';
+import VoiceRecognition from '../../utilities/VoiceRecognition';
+import LocationsFetcher from '../../utilities/LocationsFetcher';
 import * as ClientFilter from '../../utilities/ClientFilter';
 import PlaceItem from '../../components/PlaceItem';
 import TourItem from './components/TourItem';

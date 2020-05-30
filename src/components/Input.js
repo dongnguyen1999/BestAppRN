@@ -2,13 +2,14 @@ import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
 import {RFValue} from 'react-native-responsive-fontsize';
-import theme from '../../../themes/default';
+import theme from '../themes/default';
 
 class Input extends Component {
   constructor(props) {
     super(props);
+    let value = props.value;
     this.state = {
-      textInside: '',
+      textInside: value ? value : '',
     };
   }
 
@@ -21,14 +22,18 @@ class Input extends Component {
       autoCapitalize,
       returnKeyType,
       callbackValue,
+      titleStyle,
+      value,
+      type,
     } = this.props;
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>{title}</Text>
+        <Text style={[styles.title, titleStyle]}>{title}</Text>
         <TextInput
           style={styles.textInput}
           placeholder={placeholder}
           secureTextEntry={secureTextEntry}
+          keyboardType={type}
           autoCorrect={autoCorrect}
           autoCapitalize={autoCapitalize}
           returnKeyType={returnKeyType}
@@ -36,6 +41,7 @@ class Input extends Component {
             callbackValue(text);
             this.setState({textInside: text});
           }}
+          value={value}
           // onBlur={() => callbackValue(this.state.textInside)}
         />
       </View>
