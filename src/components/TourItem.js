@@ -89,7 +89,7 @@ class InfoItem extends Component {
               <View style={styles.detailRow}>
                 <TravelPlan width={RFValue(11)} height={RFValue(11)} />
                 <Text style={styles.detailText}>
-                  {this.state.placeIds.length}+ ngày
+                  {this.state.placeIds.length}+ địa điểm
                 </Text>
               </View>
             </View>
