@@ -1,10 +1,12 @@
 <?php
   require "connect.php";
   
-  $ids = $_GET['place_ids'];
-
-  $sql = "SELECT * FROM TOUR WHERE T_Id in (SELECT DISTINCT TOUR_PLACE.T_Id FROM TOUR_PLACE WHERE TOUR_PLACE.P_Id in (".$ids.")) ORDER BY T_Id;";
-  
+  if (isset($_GET['place_ids'])) {
+    $ids = $_GET['place_ids'];
+    $sql = "SELECT * FROM TOUR WHERE T_Id in (SELECT DISTINCT TOUR_PLACE.T_Id FROM TOUR_PLACE WHERE TOUR_PLACE.P_Id in (".$ids.")) ORDER BY T_Id;";
+  } else {
+    $sql = "SELECT * FROM TOUR;";
+  }
 
   $result = $connect->query($sql);
 
