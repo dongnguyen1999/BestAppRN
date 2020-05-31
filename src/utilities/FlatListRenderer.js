@@ -1,8 +1,8 @@
 import React from 'react';
-import PlaceItem from '../../components/PlaceItem';
-import TourItem from './components/TourItem';
+import PlaceItem from '../components/PlaceItem';
+import TourItem from '../components/TourItem';
 import {FlatList, ScrollView} from 'react-native';
-import { RFValue } from 'react-native-responsive-fontsize';
+import {RFValue} from 'react-native-responsive-fontsize';
 
 function renderLocationItem(key, location, navigation, currentLocation) {
   return (
@@ -20,7 +20,14 @@ function renderLocationItem(key, location, navigation, currentLocation) {
   );
 }
 
-function renderTourItem(key, tourData, navigation, currentLocation) {
+function renderTourItem(
+  key,
+  tourData,
+  navigation,
+  currentLocation,
+  showImgs,
+  onRefreshTours,
+) {
   return (
     <TourItem
       key={key}
@@ -32,6 +39,8 @@ function renderTourItem(key, tourData, navigation, currentLocation) {
       navigation={navigation}
       comId={tourData.com_id}
       currentLocation={currentLocation}
+      onRefreshTours={onRefreshTours}
+      showImgs={showImgs}
     />
   );
 }
@@ -73,10 +82,11 @@ class FlatListRenderer {
     );
   }
 
-  renderToursFlatList(styles) {
+  renderToursFlatList(styles, showImgs) {
     const {navigation} = this.props;
     let currentLocation = this.state.currentLocation;
-    return this.state.tours.length != 0 && !this.state.showPlaces ? (
+    return this.state.tours.length != 0 &&
+      (!this.state.showPlaces || this.state.isAdmin) ? (
       <ScrollView
         style={styles.contentWrapper}
         showsVerticalScrollIndicator={false}
@@ -87,13 +97,20 @@ class FlatListRenderer {
             this.updateToursIndex(-1);
           }
           if (isCloseToBottom(event.nativeEvent)) {
-            if (this.state.currentToursIndex != this.state.maxToursIndex) 
+            if (this.state.currentToursIndex != this.state.maxToursIndex)
               this.toursList.scrollTo(RFValue(1), 0, false);
             this.updateToursIndex(1);
           }
         }}>
         {this.state.tours[this.state.currentToursIndex].map((item, index) =>
-          renderTourItem(index, item, navigation, currentLocation),
+          renderTourItem(
+            index,
+            item,
+            navigation,
+            currentLocation,
+            showImgs,
+            this.fetchToursList,
+          ),
         )}
       </ScrollView>
     ) : (

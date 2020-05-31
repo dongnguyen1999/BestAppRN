@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
-import {defaultFoodImg} from '../../../assets/images';
-import fetchAllDetail from '../../../api/fetchAllDetail';
-import fetchPhotosGgApi from '../../../api/fetchPhotosGgApi';
-import RefImage from '../../../components/RefImage';
+import {defaultFoodImg} from '../assets/images';
+import fetchAllDetail from '../api/fetchAllDetail';
+import fetchPhotosGgApi from '../api/fetchPhotosGgApi';
+import RefImage from '../components/RefImage';
 
 class TourImgsPane extends Component {
   constructor(props) {

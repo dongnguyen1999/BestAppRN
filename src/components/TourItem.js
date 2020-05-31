@@ -1,23 +1,9 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
-import {
-  minhthuImg,
-  defaultFoodImg,
-  Watch,
-  TravelPlan,
-} from '../../../assets/images';
-import theme from '../../../themes/default';
-import fetchPhotosGgApi from '../../../api/fetchPhotosGgApi';
-import {googleApiKey} from '../../../constants/apiKey';
-import {
-  getDistanceFrom2Locations,
-  convertMeter,
-} from '../../../utilities/computeDistance';
-import fetchLocationDetail from '../../../api/fetchLocationDetail';
-import {resolveDetail} from '../../../utilities/resolveDetail';
-import fetchPlacesUseTourId from '../../../api/fetchPlacesUseTourId';
-import fetchCompanyInfo from '../../../api/fetchCompanyInfo';
+import {Watch, TravelPlan} from '../assets/images';
+import theme from '../themes/default';
+import fetchPlacesUseTourId from '../api/fetchPlacesUseTourId';
 import TourImgsPane from './TourImgsPane';
 import PriceBox from './PriceBox';
 
@@ -28,6 +14,7 @@ class InfoItem extends Component {
       placeIds: [],
       loading: true,
     };
+    this.navigateToDetail = this.navigateToDetail.bind(this);
   }
 
   componentDidMount() {
@@ -40,9 +27,9 @@ class InfoItem extends Component {
     let placeIds = response.data.map(object => object.id);
     this.setState({placeIds: placeIds ? placeIds : [], loading: false});
   };
-  render() {
+
+  navigateToDetail = () => {
     const {
-      imgRef,
       id,
       name,
       price,
@@ -52,18 +39,41 @@ class InfoItem extends Component {
       comId,
       currentLocation,
     } = this.props;
+    navigation.navigate('TourDetail', {
+      id: id,
+      placeIds: this.state.placeIds,
+      comId: comId,
+      tourDetail: {name, price, nbDay, nbNight},
+      currentLocation: currentLocation,
+    });
+  };
+
+  navigateAsAdmin = () => {
+    const {navigation, id, onRefreshTours} = this.props;
+    navigation.navigate('AdjustTour', {
+      id: id,
+      onRefreshTours: onRefreshTours,
+    });
+  };
+
+  render() {
+    const {
+      name,
+      price,
+      nbDay,
+      nbNight,
+
+      showImgs,
+    } = this.props;
     return !this.state.loading ? (
       <TouchableOpacity
-        style={styles.container}
-        onPress={() =>
-          navigation.navigate('TourDetail', {
-            id: id,
-            placeIds: this.state.placeIds,
-            comId: comId,
-            tourDetail: {name, price, nbDay, nbNight},
-            currentLocation: currentLocation,
-          })
-        }>
+        style={[
+          styles.container,
+          !showImgs
+            ? {height: RFValue(87), marginBottom: RFValue(8)}
+            : undefined,
+        ]}
+        onPress={showImgs ? this.navigateToDetail : this.navigateAsAdmin}>
         <View style={styles.header}>
           <Text style={styles.headerText}>{name}</Text>
         </View>
@@ -85,7 +95,11 @@ class InfoItem extends Component {
             </View>
             <PriceBox price={price} />
           </View>
-          <TourImgsPane placeIds={this.state.placeIds} />
+          {showImgs ? (
+            <TourImgsPane placeIds={this.state.placeIds} />
+          ) : (
+            undefined
+          )}
         </View>
       </TouchableOpacity>
     ) : (

@@ -12,6 +12,7 @@ class PlaceItem extends Component {
     super(props);
     this.state = {
       imgSrc: defaultFoodImg,
+      checked: props.checked,
     };
   }
 
@@ -39,7 +40,6 @@ class PlaceItem extends Component {
       currentLocation,
       detail,
       checkable,
-      checked,
       checkItemCallback,
     } = this.props;
     return (
@@ -71,12 +71,15 @@ class PlaceItem extends Component {
         {checkable ? (
           <View style={styles.checkView}>
             <CheckBox
-              value={checked}
+              value={this.state.checked}
               tintColors={{
                 true: theme.lightElementColor,
                 false: theme.placeholderColor,
               }}
-              onValueChange={checkItemCallback}
+              onValueChange={value => {
+                checkItemCallback(placeId, value);
+                this.setState({checked: !this.state.checked});
+              }}
             />
           </View>
         ) : (

@@ -160,6 +160,7 @@ const styles = StyleSheet.create({
     width: '48%',
   },
   titleButton: {
+    width: '100%',
     backgroundColor: theme.pageColor,
     borderColor: theme.lightElementColor,
   },

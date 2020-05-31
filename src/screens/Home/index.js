@@ -18,16 +18,16 @@ import getCurrentPosition from '../../api/getCurrentLocation';
 import VoiceRecognition from '../../utilities/VoiceRecognition';
 import LocationsFetcher from '../../utilities/LocationsFetcher';
 import * as ClientFilter from '../../utilities/ClientFilter';
-import PlaceItem from '../../components/PlaceItem';
-import TourItem from './components/TourItem';
 import fetchTours from '../../api/fetchTours';
-import FlatListRenderer from './FlatListRenderer';
+import FlatListRenderer from '../../utilities/FlatListRenderer';
+import firebaseApp from '../../utilities/firebaseApp';
+import {GoogleSignin} from '@react-native-community/google-signin';
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchText: 'cháo gà',
+      searchText: '',
       filtersData: new Map(),
       recognized: '',
       started: '',
@@ -57,14 +57,50 @@ class Home extends Component {
     this.firstLoadHomeScreen();
   }
 
+  getLoggedInEmail = async () => {
+    const {navigation} = this.props;
+    const loggedInBy = navigation.getParam('loggedInBy');
+    let user;
+    if (loggedInBy === 'GOOGLE') {
+      user = await this.isLoggedInWithGoogle();
+    }
+    if (loggedInBy === 'EMAIL') {
+      user = await this.isLoggedInWithAccount();
+    }
+    return user.email;
+  };
+
+  isLoggedInWithAccount() {
+    return new Promise(resolve => {
+      firebaseApp.auth().onAuthStateChanged(user => {
+        resolve(user);
+      });
+    });
+  }
+  isLoggedInWithGoogle = async () => {
+    let profile = await GoogleSignin.getCurrentUser();
+    return profile.user;
+  };
+
+  checkIsAdmin(email) {
+    //...temp
+    return email === 'nvdkg1999@gmail.com';
+  }
+
   firstLoadHomeScreen = async () => {
-    this.setState({isLoading: true});
+    const {navigation} = this.props;
+    let loggedInEmail = await this.getLoggedInEmail();
+    let isAdmin = this.checkIsAdmin(loggedInEmail);
+    console.log(isAdmin);
+    const loggedInBy = navigation.getParam('loggedInBy');
+    if (isAdmin)
+      navigation.navigate('AdminHomeStack', {loggedInBy: loggedInBy});
     let info = await getCurrentPosition();
     this.setState({
       isLoading: false,
       currentLocation: {lat: info.coords.latitude, lng: info.coords.longitude},
     });
-    this.locationsFetcher.searchLocations();
+    // this.locationsFetcher.searchLocations();
   };
 
   componentWillUnmount() {
@@ -123,6 +159,8 @@ class Home extends Component {
   }
 
   render() {
+    // console.log(this.state.tours);
+
     // this.offlineFilter.updateData(
     //   this.state.locationsDetail,
     //   this.state.filtersData,
@@ -201,7 +239,6 @@ class Home extends Component {
             <ActivityIndicator color={theme.lightElementColor} />
           </View>
         ) : null}
-        {/* </ScrollView> */}
         {this.state.started ? (
           <RecordingAminated
             onDestroyVoice={this.voiceRecognition.destroyRecognition}

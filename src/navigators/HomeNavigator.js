@@ -8,10 +8,11 @@ import LogoutButton from '../components/LogoutButton';
 import LocationDetail from '../screens/LocationDetail';
 import TourDetail from '../screens/TourDetail';
 import AdjustTour from '../screens/AdjustTour';
+import AdminHome from '../screens/AdminHome';
 
-const homeNavigationOptions = ({navigation}) => {
+const homeNavigationOptions = (navigation, title) => {
   return {
-    title: 'STour',
+    title: title,
     headerStyle: styles.header,
     headerTitleStyle: styles.headerTitle,
     headerTitleContainerStyle: styles.titleContainer,
@@ -38,22 +39,43 @@ const navigationOptions = (navigation, title) => {
   };
 };
 
-const HomeNavigator = createStackNavigator({
+const AdminHomeNavigator = createStackNavigator({
+  AdminHome: {
+    screen: AdminHome,
+    navigationOptions: ({navigation}) =>
+      homeNavigationOptions(navigation, 'Admin'),
+  },
   AdjustTour: {
     screen: AdjustTour,
     navigationOptions: ({navigation}) =>
       navigationOptions(navigation, 'Chi tiết tour'),
   },
-  Home: {screen: Home, navigationOptions: homeNavigationOptions},
   LocationDetail: {
     screen: LocationDetail,
     navigationOptions: ({navigation}) =>
       navigationOptions(navigation, 'Chi tiết địa điểm'),
   },
+});
+
+const HomeNavigator = createStackNavigator({
+  Home: {
+    screen: Home,
+    navigationOptions: ({navigation}) =>
+      homeNavigationOptions(navigation, 'Stour'),
+  },
+  AdminHomeStack: {
+    screen: AdminHomeNavigator,
+    navigationOptions: {headerShown: false},
+  },
   TourDetail: {
     screen: TourDetail,
     navigationOptions: ({navigation}) =>
       navigationOptions(navigation, 'Chi tiết tour du lịch'),
+  },
+  LocationDetail: {
+    screen: LocationDetail,
+    navigationOptions: ({navigation}) =>
+      navigationOptions(navigation, 'Chi tiết địa điểm'),
   },
 });
 

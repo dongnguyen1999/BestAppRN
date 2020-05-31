@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, {Component} from 'react';
+import {View, Text, StyleSheet} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
-import theme from '../../../themes/default';
+import theme from '../themes/default';
 
 class PriceBox extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-    };
+    this.state = {};
   }
 
   formatNumber(num) {
@@ -18,7 +17,9 @@ class PriceBox extends Component {
     const {price} = this.props;
     return (
       <View style={styles.container}>
-        <Text style={styles.priceText}>{`${this.formatNumber(price)} vnđ`}</Text>
+        <Text style={styles.priceText}>{`${this.formatNumber(
+          price,
+        )} vnđ`}</Text>
       </View>
     );
   }
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
     fontSize: RFValue(17),
     lineHeight: RFValue(20),
     color: theme.lightElementColor,
-  }
+  },
 });
 
 export default PriceBox;

@@ -36,9 +36,7 @@ export default class VoiceRecognition {
   }
 
   async startRecognition(e) {
-    if (this.state.started) {
-      return;
-    }
+    await Voice.destroy();
     this.setState({
       searchText: '',
       recognized: '',
