@@ -194,7 +194,6 @@ class AdjustTour extends Component {
 
   render() {
     const {navigation} = this.props;
-    console.log(navigation.getParam('reload'));
     return (
       <ScrollView style={styles.container} ref={ref => (this.mainScroll = ref)}>
         <View

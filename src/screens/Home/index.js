@@ -91,7 +91,6 @@ class Home extends Component {
     const {navigation} = this.props;
     let loggedInEmail = await this.getLoggedInEmail();
     let isAdmin = this.checkIsAdmin(loggedInEmail);
-    console.log(isAdmin);
     const loggedInBy = navigation.getParam('loggedInBy');
     if (isAdmin)
       navigation.navigate('AdminHomeStack', {loggedInBy: loggedInBy});
