@@ -20,6 +20,11 @@
       $temp['nb_day'] = $row['T_Nb_day'];
       $temp['nb_night'] = $row['T_Nb_night'];
       $temp['price'] = $row['T_Price'];
+
+      $sql = "SELECT P_Id FROM TOUR_PLACE WHERE T_Id = '".$row['T_Id']."'";
+      $r = $connect->query($sql);
+      $temp['nb_places'] = $r->num_rows;
+      
       array_push($tours, $temp);
     }
   }

@@ -41,7 +41,7 @@ class Home extends Component {
       showPlaces: true,
     };
 
-    this.maxNbToursShown = 10;
+    this.maxNbToursShown = 15;
     this.updateSearchText = this.updateSearchText.bind(this);
     this.updateFiltersData = this.updateFiltersData.bind(this);
     this.clearFiltersData = this.clearFiltersData.bind(this);
@@ -92,6 +92,7 @@ class Home extends Component {
     let loggedInEmail = await this.getLoggedInEmail();
     let isAdmin = this.checkIsAdmin(loggedInEmail);
     const loggedInBy = navigation.getParam('loggedInBy');
+    this.isAdmin = isAdmin;
     if (isAdmin)
       navigation.navigate('AdminHomeStack', {loggedInBy: loggedInBy});
     let info = await getCurrentPosition();

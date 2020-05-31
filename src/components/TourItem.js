@@ -57,14 +57,7 @@ class InfoItem extends Component {
   };
 
   render() {
-    const {
-      name,
-      price,
-      nbDay,
-      nbNight,
-
-      showImgs,
-    } = this.props;
+    const {name, price, nbDay, nbNight, nbPlaces, showImgs} = this.props;
     return !this.state.loading ? (
       <TouchableOpacity
         style={[
@@ -88,9 +81,7 @@ class InfoItem extends Component {
               </View>
               <View style={styles.detailRow}>
                 <TravelPlan width={RFValue(11)} height={RFValue(11)} />
-                <Text style={styles.detailText}>
-                  {this.state.placeIds.length}+ địa điểm
-                </Text>
+                <Text style={styles.detailText}>{nbPlaces}+ địa điểm</Text>
               </View>
             </View>
             <PriceBox price={price} />

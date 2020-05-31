@@ -36,6 +36,7 @@ function renderTourItem(
       price={tourData.price}
       nbDay={tourData.nb_day}
       nbNight={tourData.nb_night}
+      nbPlaces={tourData.nb_places}
       navigation={navigation}
       comId={tourData.com_id}
       currentLocation={currentLocation}
@@ -107,7 +108,7 @@ class FlatListRenderer {
             item,
             navigation,
             currentLocation,
-            showImgs,
+            !this.isAdmin,
             this.fetchToursList,
           ),
         )}

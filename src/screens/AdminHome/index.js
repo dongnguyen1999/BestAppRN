@@ -16,7 +16,8 @@ class AdminHome extends Component {
       currentToursIndex: 0,
       currentLocation: undefined,
     };
-    this.maxNbToursShown = 10;
+    this.isAdmin = true;
+    this.maxNbToursShown = 15;
     this.updateToursIndex = this.updateToursIndex.bind(this);
     this.fetchToursList = this.fetchToursList.bind(this);
     this.flatListRenderer = new FlatListRenderer(this);
