@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import {RFValue} from 'react-native-responsive-fontsize';
 import theme from '../../../themes/default';
+import * as Scaled from '../../../utilities/scaled';
 
 function Button(props) {
   const {title, isActive, onPress, id} = props;
@@ -24,11 +24,11 @@ const styles = StyleSheet.create({
   button: {
     flex: 1,
     justifyContent: 'center',
-    marginLeft: RFValue(8),
-    marginRight: RFValue(8),
+    marginLeft: Scaled.width(8),
+    marginRight: Scaled.width(8),
   },
   activeButton: {
-    borderBottomWidth: RFValue(2),
+    borderBottomWidth: Scaled.width(2),
     borderBottomColor: theme.lightElementColor,
   },
   buttonText: {
@@ -36,8 +36,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: '500',
-    fontSize: RFValue(14),
-    lineHeight: RFValue(24),
+    fontSize: Scaled.fontSize(14),
+    lineHeight: Scaled.height(24),
     color: theme.fontButtonTabs,
   },
   activeButtonText: {

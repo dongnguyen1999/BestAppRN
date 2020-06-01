@@ -3,7 +3,7 @@ import {View, Text, Image} from 'react-native';
 import fetchPhotosGgApi from '../api/fetchPhotosGgApi';
 import {defaultFoodImg} from '../assets/images';
 import {StyleSheet} from 'react-native';
-import {RFValue} from 'react-native-responsive-fontsize';
+import * as Scaled from '../utilities/scaled';
 
 class RefImage extends Component {
   constructor(props) {
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   },
   imgSlide: {
     width: '100%',
-    height: RFValue(240),
+    height: Scaled.height(240),
     aspectRatio: 1,
   },
 });

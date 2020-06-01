@@ -30,6 +30,9 @@ const TOUCHABLE_ELEMENTS = [
   'TouchableNativeFeedback',
 ];
 
+function timeout(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 export default class ModalDropdown extends Component {
   static propTypes = {
     disabled: PropTypes.bool,
@@ -147,6 +150,8 @@ export default class ModalDropdown extends Component {
   }
 
   show() {
+    const {show} = this.props;
+    if (!show) return;
     this._updatePosition(() => {
       this.setState({
         showDropdown: true,

@@ -4,7 +4,7 @@ import firebaseApp from '../utilities/firebaseApp';
 import {GoogleSignin} from '@react-native-community/google-signin';
 import theme from '../themes/default';
 import {LogoutIcon} from '../assets/images';
-import {RFValue} from 'react-native-responsive-fontsize';
+import * as Scaled from '../utilities/scaled';
 
 class LogoutButton extends Component {
   constructor(props) {
@@ -55,7 +55,7 @@ class LogoutButton extends Component {
         style={styles.logoutButton}
         activeOpacity={0.5}
         onPress={() => this.willLogout()}>
-        <LogoutIcon width={RFValue(22)} height={RFValue(18)} />
+        <LogoutIcon width={Scaled.width(22)} height={Scaled.height(18)} />
       </TouchableOpacity>
     );
   }

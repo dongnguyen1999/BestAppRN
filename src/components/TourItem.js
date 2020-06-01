@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
-import {RFValue} from 'react-native-responsive-fontsize';
 import {Watch, TravelPlan} from '../assets/images';
 import theme from '../themes/default';
 import fetchPlacesUseTourId from '../api/fetchPlacesUseTourId';
 import TourImgsPane from './TourImgsPane';
 import PriceBox from './PriceBox';
+import * as Scaled from '../utilities/scaled';
 
 class InfoItem extends Component {
   constructor(props) {
@@ -63,7 +63,7 @@ class InfoItem extends Component {
         style={[
           styles.container,
           !showImgs
-            ? {height: RFValue(87), marginBottom: RFValue(8)}
+            ? {height: Scaled.height(87), marginBottom: Scaled.height(8)}
             : undefined,
         ]}
         onPress={showImgs ? this.navigateToDetail : this.navigateAsAdmin}>
@@ -74,13 +74,16 @@ class InfoItem extends Component {
           <View style={styles.infoContainer}>
             <View style={styles.detailContainer}>
               <View style={styles.detailRow}>
-                <Watch width={RFValue(11)} height={RFValue(11)} />
+                <Watch width={Scaled.height(11)} height={Scaled.height(11)} />
                 <Text style={styles.detailText}>
                   {nbDay} ngày {nbNight} đêm
                 </Text>
               </View>
               <View style={styles.detailRow}>
-                <TravelPlan width={RFValue(11)} height={RFValue(11)} />
+                <TravelPlan
+                  width={Scaled.height(11)}
+                  height={Scaled.height(11)}
+                />
                 <Text style={styles.detailText}>{nbPlaces}+ địa điểm</Text>
               </View>
             </View>
@@ -102,32 +105,32 @@ class InfoItem extends Component {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: RFValue(159),
-    borderRadius: RFValue(5),
+    height: Scaled.height(159),
+    borderRadius: Scaled.fontSize(5),
     backgroundColor: theme.darkElementColor,
-    marginBottom: RFValue(15),
+    marginBottom: Scaled.height(15),
   },
   header: {
     width: '100%',
-    height: RFValue(39),
-    borderTopLeftRadius: RFValue(5),
-    borderTopRightRadius: RFValue(5),
+    height: Scaled.height(39),
+    borderTopLeftRadius: Scaled.fontSize(5),
+    borderTopRightRadius: Scaled.fontSize(5),
     backgroundColor: theme.lightElementColor,
     display: 'flex',
     justifyContent: 'center',
   },
   headerText: {
-    marginLeft: RFValue(16),
+    marginLeft: Scaled.width(16),
     color: theme.fontColor,
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: '500',
-    fontSize: RFValue(18),
-    lineHeight: RFValue(24),
+    fontSize: Scaled.fontSize(18),
+    lineHeight: Scaled.height(24),
   },
   content: {
     flex: 1,
-    margin: RFValue(7),
+    margin: Scaled.width(7),
   },
   infoContainer: {
     flex: 1,
@@ -135,24 +138,27 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    marginLeft: Scaled.width(9),
+    marginRight: Scaled.width(9),
   },
   // detailContainer: {
-
+  //   // marginLeft: Scaled.width(9),
+  //   // marginRight: Scaled.width(9),
   // },
   detailRow: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    marginLeft: RFValue(9),
+    marginLeft: Scaled.width(9),
   },
   detailText: {
     color: theme.fontColor,
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: RFValue(12),
-    lineHeight: RFValue(20),
-    marginLeft: RFValue(8),
+    fontSize: Scaled.fontSize(12),
+    lineHeight: Scaled.height(20),
+    marginLeft: Scaled.width(8),
   },
 });
 

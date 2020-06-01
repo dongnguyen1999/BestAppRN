@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {RFValue} from 'react-native-responsive-fontsize';
 import theme from '../themes/default';
+import * as Scaled from '../utilities/scaled';
 
 class PriceBox extends Component {
   constructor(props) {
@@ -27,21 +27,21 @@ class PriceBox extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    height: RFValue(34),
-    width: '40%',
+    height: Scaled.height(34),
+    width: Scaled.width(136),
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     borderColor: theme.lightElementColor,
-    borderWidth: RFValue(1),
-    borderRadius: RFValue(17),
+    borderWidth: Scaled.width(1),
+    borderRadius: Scaled.fontSize(17),
   },
   priceText: {
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: RFValue(17),
-    lineHeight: RFValue(20),
+    fontSize: Scaled.width(17),
+    lineHeight: Scaled.height(20),
     color: theme.lightElementColor,
   },
 });

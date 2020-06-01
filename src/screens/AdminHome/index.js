@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import {View, Text, StyleSheet, ActivityIndicator} from 'react-native';
 import Dialog from '../../components/Dialog';
 import theme from '../../themes/default';
-import {RFValue} from 'react-native-responsive-fontsize';
 import FlatListRenderer from '../../utilities/FlatListRenderer';
 import fetchTours from '../../api/fetchTours';
 import getCurrentPosition from '../../api/getCurrentLocation';
+import * as Scaled from '../../utilities/scaled';
 
 class AdminHome extends Component {
   constructor(props) {
@@ -103,26 +103,26 @@ const styles = StyleSheet.create({
   },
   contentWrapper: {
     width: '100%',
-    paddingLeft: RFValue(16),
-    paddingRight: RFValue(16),
-    marginBottom: RFValue(13),
+    paddingLeft: Scaled.width(16),
+    paddingRight: Scaled.height(16),
+    marginBottom: Scaled.height(13),
   },
   adminHeader: {
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: '500',
-    fontSize: RFValue(20),
-    lineHeight: RFValue(32),
+    fontSize: Scaled.fontSize(20),
+    lineHeight: Scaled.height(32),
     color: 'white',
-    marginTop: RFValue(14),
-    marginBottom: RFValue(6),
-    paddingLeft: RFValue(16),
-    paddingRight: RFValue(16),
+    marginTop: Scaled.height(14),
+    marginBottom: Scaled.height(6),
+    paddingLeft: Scaled.width(16),
+    paddingRight: Scaled.width(16),
   },
   smallIndicator: {
     width: '100%',
-    height: RFValue(30),
-    marginBottom: RFValue(10),
+    height: Scaled.height(30),
+    marginBottom: Scaled.height(10),
   },
 });
 

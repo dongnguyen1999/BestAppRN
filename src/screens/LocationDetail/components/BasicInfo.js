@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {RFValue} from 'react-native-responsive-fontsize';
 import theme from '../../../themes/default';
 import {Star, HalfStar} from '../../../assets/images';
+import * as Scaled from '../../../utilities/scaled';
 
 function BasicInfo(props) {
   function renderStars(nbStars) {
@@ -35,18 +35,18 @@ function BasicInfo(props) {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: RFValue(109),
+    height: Scaled.height(109),
     backgroundColor: theme.darkBackground,
-    paddingTop: RFValue(12),
-    paddingLeft: RFValue(24),
-    paddingRight: RFValue(24),
+    paddingTop: Scaled.height(12),
+    paddingLeft: Scaled.width(24),
+    paddingRight: Scaled.width(24),
   },
   textName: {
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'bold',
-    fontSize: RFValue(20),
-    lineHeight: RFValue(32),
+    fontSize: Scaled.fontSize(20),
+    lineHeight: Scaled.height(32),
     color: theme.fontColor,
   },
   ratingContainer: {
@@ -58,13 +58,13 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'bold',
-    fontSize: RFValue(14),
-    lineHeight: RFValue(32),
+    fontSize: Scaled.fontSize(14),
+    lineHeight: Scaled.height(32),
     color: theme.ratingColor,
   },
   ratingStars: {
-    marginLeft: RFValue(10),
-    marginRight: RFValue(10),
+    marginLeft: Scaled.width(10),
+    marginRight: Scaled.width(10),
     display: 'flex',
     flexDirection: 'row',
   },
@@ -72,16 +72,16 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: RFValue(14),
-    lineHeight: RFValue(20),
+    fontSize: Scaled.fontSize(14),
+    lineHeight: Scaled.height(20),
     color: theme.fontColor,
   },
   address: {
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: RFValue(12),
-    lineHeight: RFValue(20),
+    fontSize: Scaled.fontSize(12),
+    lineHeight: Scaled.height(20),
     color: theme.fontColor,
   },
 });

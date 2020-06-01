@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {View, Text, TextInput} from 'react-native';
 import {StyleSheet} from 'react-native';
-import {RFValue} from 'react-native-responsive-fontsize';
 import theme from '../../../themes/default';
 import {EXCEPT} from '../../../constants/offlineFilters';
+import * as Scaled from '../../../utilities/scaled';
 
 class ExceptionInput extends Component {
   constructor(props) {
@@ -46,22 +46,23 @@ const styles = StyleSheet.create({
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
+    marginBottom: Scaled.height(3),
   },
   title: {
-    height: RFValue(40),
+    height: Scaled.height(40),
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     backgroundColor: theme.pageColor,
-    borderWidth: RFValue(1),
+    borderWidth: Scaled.width(1),
     borderColor: theme.lightElementColor,
-    borderRadius: RFValue(3),
+    borderRadius: Scaled.fontSize(3),
   },
   titleText: {
     flex: 5,
     display: 'flex',
     justifyContent: 'center',
-    paddingLeft: RFValue(8),
+    paddingLeft: Scaled.width(8),
   },
   iconContainer: {
     flex: 1,
@@ -73,25 +74,25 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: RFValue(12),
-    lineHeight: RFValue(20),
+    fontSize: Scaled.fontSize(12),
+    lineHeight: Scaled.height(20),
     color: theme.fontColor,
   },
   dropdownStyle: {
-    width: RFValue(160),
+    width: Scaled.width(160),
     height: 'auto',
-    borderWidth: RFValue(1),
+    borderWidth: Scaled.width(1),
     borderColor: theme.lightElementColor,
-    borderRadius: RFValue(3),
+    borderRadius: Scaled.fontSize(3),
     backgroundColor: theme.darkElementColor,
   },
   dropdownTextStyle: {
-    height: RFValue(36),
+    height: Scaled.height(36),
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: RFValue(12),
-    lineHeight: RFValue(20),
+    fontSize: Scaled.fontSize(12),
+    lineHeight: Scaled.height(20),
     color: theme.fontColor,
     backgroundColor: theme.darkElementColor,
     display: 'flex',
@@ -104,9 +105,9 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'bold',
-    fontSize: RFValue(12),
-    lineHeight: RFValue(20),
-    paddingLeft: RFValue(8),
+    fontSize: Scaled.fontSize(12),
+    lineHeight: Scaled.height(20),
+    paddingLeft: Scaled.width(8),
     color: theme.fontColor,
   },
 });

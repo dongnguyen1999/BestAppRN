@@ -1,10 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {RFValue} from 'react-native-responsive-fontsize';
 import theme from '../../../themes/default';
 import {OutlinePhone, OutlineMail} from '../../../assets/images';
 import AutoScrolling from 'react-native-auto-scrolling';
+import * as Scaled from '../../../utilities/scaled';
 
 function CompanyInfo(props) {
   const {name, address, mail, phone} = props;
@@ -21,9 +21,9 @@ function CompanyInfo(props) {
         {address}
       </Text>
       <View style={styles.contact}>
-        <OutlinePhone width={RFValue(12)} height={RFValue(12)} />
+        <OutlinePhone width={Scaled.height(12)} height={Scaled.height(12)} />
         <Text style={styles.contactText}>{phone}</Text>
-        <OutlineMail width={RFValue(12)} height={RFValue(12)} />
+        <OutlineMail width={Scaled.height(12)} height={Scaled.height(12)} />
         <Text style={[styles.contactText, {marginRight: 0}]} numberOfLines={1}>
           {mail}
         </Text>
@@ -35,16 +35,16 @@ function CompanyInfo(props) {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: RFValue(108),
+    height: Scaled.height(108),
     backgroundColor: theme.darkElementColor,
-    borderRadius: RFValue(12),
+    borderRadius: Scaled.fontSize(12),
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingLeft: RFValue(20),
-    paddingRight: RFValue(20),
-    marginTop: RFValue(9),
+    paddingLeft: Scaled.width(20),
+    paddingRight: Scaled.width(20),
+    marginTop: Scaled.height(9),
   },
   header: {
     flex: 1,
@@ -53,9 +53,9 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: RFValue(12),
-    lineHeight: RFValue(20),
-    // marginTop: -RFValue(15),
+    fontSize: Scaled.fontSize(12),
+    lineHeight: Scaled.height(20),
+    // marginTop: -Scaled.height(15),
     color: theme.lightElementColor,
   },
   name: {
@@ -65,11 +65,11 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: '500',
-    fontSize: RFValue(15),
-    lineHeight: RFValue(20),
+    fontSize: Scaled.fontSize(15),
+    lineHeight: Scaled.height(20),
     textTransform: 'uppercase',
     color: theme.fontColor,
-    marginTop: -RFValue(3),
+    marginTop: -Scaled.height(3),
   },
   address: {
     flex: 1,
@@ -78,8 +78,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: '300',
-    fontSize: RFValue(12),
-    lineHeight: RFValue(14),
+    fontSize: Scaled.fontSize(12),
+    lineHeight: Scaled.height(14),
     color: theme.fontColor,
   },
   contact: {
@@ -93,10 +93,10 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: RFValue(12),
-    lineHeight: RFValue(14),
-    marginLeft: RFValue(8),
-    marginRight: RFValue(29),
+    fontSize: Scaled.fontSize(12),
+    lineHeight: Scaled.height(14),
+    marginLeft: Scaled.width(8),
+    marginRight: Scaled.width(29),
     color: theme.lightElementColor,
   },
 });

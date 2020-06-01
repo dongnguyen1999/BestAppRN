@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
-import {RFValue} from 'react-native-responsive-fontsize';
 import theme from '../themes/default';
+import * as Scaled from '../utilities/scaled';
 
 class Input extends Component {
   constructor(props) {
@@ -59,21 +59,21 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: RFValue(16),
-    lineHeight: RFValue(18),
+    fontSize: Scaled.fontSize(16),
+    lineHeight: Scaled.height(18),
     color: 'rgba(255, 255, 255, 0.87)',
     borderBottomColor: theme.lightBackground,
-    borderBottomWidth: RFValue(2),
-    paddingTop: RFValue(1),
-    paddingBottom: RFValue(8),
+    borderBottomWidth: Scaled.width(2),
+    paddingTop: Scaled.height(1),
+    paddingBottom: Scaled.height(8),
   },
   title: {
-    marginTop: RFValue(30),
+    marginTop: Scaled.height(30),
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: RFValue(12),
-    lineHeight: RFValue(12),
+    fontSize: Scaled.fontSize(12),
+    lineHeight: Scaled.height(12),
     color: theme.lightBackground,
     opacity: 0.87,
   },

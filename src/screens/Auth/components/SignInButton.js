@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import {RFValue} from 'react-native-responsive-fontsize';
 import theme from '../../../themes/default';
+import * as Scaled from '../../../utilities/scaled';
 
 function SignInButton(props) {
   const {title, onPress} = props;
@@ -27,17 +27,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    width: RFValue(160),
-    height: RFValue(44),
+    width: Scaled.width(160),
+    height: Scaled.height(44),
     backgroundColor: theme.darkElementColor,
   },
   text: {
-    paddingLeft: RFValue(5),
+    paddingLeft: Scaled.width(5),
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: RFValue(13),
-    lineHeight: RFValue(24),
+    fontSize: Scaled.fontSize(13),
+    lineHeight: Scaled.height(24),
     color: theme.lightElementColor,
   },
   button: {

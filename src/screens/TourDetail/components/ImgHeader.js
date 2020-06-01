@@ -1,7 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {RFValue} from 'react-native-responsive-fontsize';
 import {
   TourDetailHeader,
   Watch,
@@ -11,6 +10,7 @@ import {
 } from '../../../assets/images';
 import theme from '../../../themes/default';
 import {Image} from 'react-native';
+import * as Scaled from '../../../utilities/scaled';
 
 function ImgHeader(props) {
   function formatNumber(num) {
@@ -23,13 +23,13 @@ function ImgHeader(props) {
       <View style={styles.contentView}>
         <Text style={styles.tourName}>{name}</Text>
         <View style={styles.infoContainer}>
-          <Watch width={RFValue(11)} height={RFValue(11)} />
+          <Watch width={Scaled.height(11)} height={Scaled.height(11)} />
           <Text style={styles.middleText}>
             {nbDay} ngày {nbNight} đêm
           </Text>
-          <TourDetailDot width={RFValue(3)} height={RFValue(3)} />
-          <View style={{height: '100%', width: RFValue(13)}} />
-          <TravelPlan width={RFValue(11)} height={RFValue(11)} />
+          <TourDetailDot width={Scaled.height(3)} height={Scaled.height(3)} />
+          <View style={{height: '100%', width: Scaled.width(13)}} />
+          <TravelPlan width={Scaled.height(11)} height={Scaled.height(11)} />
           <Text style={styles.middleText}>{nbPlaces} địa điểm</Text>
         </View>
         <Text style={styles.price}>Giá {formatNumber(price)} vnđ</Text>
@@ -41,12 +41,12 @@ function ImgHeader(props) {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: RFValue(103),
-    borderRadius: RFValue(12),
-    marginTop: RFValue(12),
+    height: Scaled.height(103),
+    borderRadius: Scaled.fontSize(12),
+    marginTop: Scaled.height(12),
   },
   contentView: {
-    height: RFValue(103),
+    height: Scaled.height(103),
     position: 'absolute',
     width: '100%',
     display: 'flex',
@@ -56,8 +56,8 @@ const styles = StyleSheet.create({
   },
   imgHeader: {
     width: '100%',
-    height: RFValue(103),
-    borderRadius: RFValue(12),
+    height: Scaled.height(103),
+    borderRadius: Scaled.fontSize(12),
   },
   tourName: {
     flex: 1,
@@ -65,18 +65,18 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'bold',
-    fontSize: RFValue(22),
-    lineHeight: RFValue(24),
+    fontSize: Scaled.fontSize(22),
+    lineHeight: Scaled.height(24),
     color: 'white',
-    marginTop: RFValue(10),
+    marginTop: Scaled.height(10),
   },
   price: {
     flex: 1,
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: RFValue(16),
-    lineHeight: RFValue(20),
+    fontSize: Scaled.fontSize(16),
+    lineHeight: Scaled.height(20),
     color: theme.fontColor,
   },
   infoContainer: {
@@ -90,11 +90,11 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: RFValue(12),
-    lineHeight: RFValue(20),
+    fontSize: Scaled.fontSize(12),
+    lineHeight: Scaled.height(20),
     color: theme.fontColor,
-    marginLeft: RFValue(8),
-    marginRight: RFValue(13),
+    marginLeft: Scaled.width(8),
+    marginRight: Scaled.width(13),
   },
 });
 

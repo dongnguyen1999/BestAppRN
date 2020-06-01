@@ -3,10 +3,10 @@ import {View, Text, StyleSheet} from 'react-native';
 import StourButton from '../../../components/StourButton';
 import Filter from '../../../components/Filter';
 import data from '../../../constants/filtersData';
-import {RFValue} from 'react-native-responsive-fontsize';
 import theme from '../../../themes/default';
 import ExceptionInput from './ExceptionInput';
 import {EXCEPT} from '../../../constants/offlineFilters';
+import * as Scaled from '../../../utilities/scaled';
 
 class FiltersButton extends Component {
   constructor(props) {
@@ -51,6 +51,7 @@ class FiltersButton extends Component {
             style={styles.filter}
             callbackValue={this.updateFiltersData}
             selectedValue={this.state.filtersData.get(item.title)}
+            show={true}
           />
           {nextItem ? (
             <Filter
@@ -59,6 +60,7 @@ class FiltersButton extends Component {
               style={styles.filter}
               callbackValue={this.updateFiltersData}
               selectedValue={this.state.filtersData.get(nextItem.title)}
+              show={true}
             />
           ) : null}
         </View>,
@@ -79,7 +81,7 @@ class FiltersButton extends Component {
       <View
         style={[
           styles.container,
-          !this.state.showFilters ? {height: RFValue(40)} : undefined,
+          !this.state.showFilters ? {height: Scaled.height(40)} : undefined,
         ]}>
         <StourButton
           title={
@@ -125,10 +127,10 @@ class FiltersButton extends Component {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: RFValue(90) * ((data.length + 2) / 2),
+    height: Scaled.height(95) * ((data.length + 2) / 2),
   },
   filtersContainer: {
-    marginTop: RFValue(10),
+    marginTop: Scaled.height(10),
     flex: 1,
     display: 'flex',
     flexDirection: 'column',
@@ -141,8 +143,8 @@ const styles = StyleSheet.create({
   },
   buttonsRow: {
     flex: 1,
-    marginTop: RFValue(5),
-    marginBottom: RFValue(5),
+    marginTop: Scaled.height(5),
+    marginBottom: Scaled.height(5),
   },
   filter: {
     width: '48%',
@@ -150,7 +152,7 @@ const styles = StyleSheet.create({
   refreshButton: {
     width: '48%',
     backgroundColor: theme.pageColor,
-    borderWidth: RFValue(1),
+    borderWidth: Scaled.width(1),
     borderColor: theme.lightElementColor,
   },
   refreshButtonTitle: {

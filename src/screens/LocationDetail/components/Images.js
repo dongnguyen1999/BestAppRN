@@ -4,9 +4,8 @@ import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import theme from '../../../themes/default';
 import {Image} from 'react-native';
 import {minhthuImg, minhthu1Img, minhthu2Img} from '../../../assets/images';
-import {RFValue} from 'react-native-responsive-fontsize';
 import RefImage from '../../../components/RefImage';
-
+import * as Scaled from '../../../utilities/scaled';
 function Images(props) {
   const {photos} = props;
   function renderPhotos() {
@@ -60,8 +59,8 @@ const styles = StyleSheet.create({
   },
   imgWrapper: {
     flex: 1,
-    height: RFValue(120),
-    padding: RFValue(2),
+    height: Scaled.height(120),
+    padding: Scaled.width(2),
   },
   img: {
     width: '100%',

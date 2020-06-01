@@ -13,8 +13,8 @@ import {
   Animated,
 } from 'react-native';
 import {recordingIcon} from '../assets/images';
-import {RFValue} from 'react-native-responsive-fontsize';
 import Voice from '@react-native-community/voice';
+import * as Scaled from '../utilities/scaled';
 
 export default class RecordingAminated extends Component {
   state = {
@@ -63,9 +63,9 @@ export default class RecordingAminated extends Component {
       return (
         <Animated.View
           style={{
-            width: RFValue(100),
-            height: RFValue(100),
-            borderRadius: RFValue(50),
+            width: Scaled.height(100),
+            height: Scaled.height(100),
+            borderRadius: Scaled.fontSize(50),
             backgroundColor: 'rgba(255,0,0,1)',
             opacity: opacityA,
             transform: [
@@ -82,9 +82,9 @@ export default class RecordingAminated extends Component {
       return (
         <View
           style={{
-            width: RFValue(100),
-            height: RFValue(100),
-            borderRadius: RFValue(50),
+            width: Scaled.height(100),
+            height: Scaled.height(100),
+            borderRadius: Scaled.fontSize(50),
             backgroundColor: 'rgba(255,0,0,0.7)',
           }}>
           {/* icon or image */}
@@ -112,21 +112,21 @@ export default class RecordingAminated extends Component {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    top: RFValue(450),
+    top: Scaled.height(450),
     flex: 1,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
   },
   recordingIcon: {
-    width: RFValue(75),
-    height: RFValue(75),
+    width: Scaled.height(75),
+    height: Scaled.height(75),
   },
   imgContainer: {
     position: 'absolute',
     zIndex: -100,
-    width: RFValue(100),
-    height: RFValue(100),
+    width: Scaled.height(100),
+    height: Scaled.height(100),
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

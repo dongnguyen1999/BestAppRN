@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import {RFValue} from 'react-native-responsive-fontsize';
 import theme from '../../../themes/default';
+import * as Scaled from '../../../utilities/scaled';
 
 function FunctionOption(props) {
   const {title, icon, onPress, isActive} = props;
@@ -28,17 +28,17 @@ function FunctionOption(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginLeft: RFValue(10),
-    marginRight: RFValue(10),
+    marginLeft: Scaled.width(10),
+    marginRight: Scaled.width(10),
   },
   activeContainer: {
     borderBottomColor: theme.lightElementColor,
-    borderBottomWidth: RFValue(1),
+    borderBottomWidth: Scaled.width(1),
   },
   icon: {
     flex: 1,
-    margin: RFValue(20),
-    marginBottom: -RFValue(10),
+    margin: Scaled.width(10),
+    marginBottom: -Scaled.height(10),
   },
   title: {
     flex: 1,
@@ -47,8 +47,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: '500',
-    fontSize: RFValue(14),
-    lineHeight: RFValue(24),
+    fontSize: Scaled.fontSize(14),
+    lineHeight: Scaled.height(24),
     color: theme.fontButtonTabs,
   },
   activeTextTitle: {

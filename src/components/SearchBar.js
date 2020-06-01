@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
 import {SearchIcon, VoiceInputIcon} from '../assets/images';
-import {RFValue} from 'react-native-responsive-fontsize';
 import theme from '../themes/default';
 import Voice from '@react-native-community/voice';
+import * as Scaled from '../utilities/scaled';
 
 function SearchBar(props) {
   const {searchTextCallback, value, onRecognizeVoice, onSearchText} = props;
@@ -13,7 +13,7 @@ function SearchBar(props) {
       <TouchableOpacity
         style={styles.searchIcon}
         onPress={() => onSearchText()}>
-        <SearchIcon width={RFValue(18)} height={RFValue(18)} />
+        <SearchIcon width={Scaled.width(18)} height={Scaled.height(18)} />
       </TouchableOpacity>
       <TextInput
         style={styles.textInput}
@@ -26,7 +26,7 @@ function SearchBar(props) {
       <TouchableOpacity
         style={styles.voiceInputIcon}
         onPress={onRecognizeVoice}>
-        <VoiceInputIcon width={RFValue(18)} height={RFValue(18)} />
+        <VoiceInputIcon width={Scaled.width(18)} height={Scaled.height(18)} />
       </TouchableOpacity>
     </View>
   );
@@ -38,12 +38,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    height: RFValue(48),
-    marginTop: RFValue(15),
-    marginBottom: RFValue(12),
+    height: Scaled.height(48),
+    marginTop: Scaled.height(15),
+    marginBottom: Scaled.height(12),
     width: '100%',
     backgroundColor: theme.darkElementColor,
-    borderRadius: RFValue(3),
+    borderRadius: Scaled.fontSize(3),
   },
   searchIcon: {
     flex: 1,
@@ -56,8 +56,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: RFValue(16),
-    lineHeight: RFValue(24),
+    fontSize: Scaled.fontSize(16),
+    lineHeight: Scaled.height(24),
     color: theme.fontColor,
   },
   voiceInputIcon: {

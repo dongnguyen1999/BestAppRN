@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
-import {RFValue} from 'react-native-responsive-fontsize';
 import {defaultFoodImg} from '../assets/images';
 import theme from '../themes/default';
 import fetchPhotosGgApi from '../api/fetchPhotosGgApi';
 import {convertMeter} from '../utilities/computeDistance';
 import CheckBox from '@react-native-community/checkbox';
+import * as Scaled from '../utilities/scaled';
 
 class PlaceItem extends Component {
   constructor(props) {
@@ -95,10 +95,10 @@ class PlaceItem extends Component {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: RFValue(69),
+    height: Scaled.height(69),
     backgroundColor: theme.darkElementColor,
-    borderRadius: RFValue(5),
-    marginBottom: RFValue(4),
+    borderRadius: Scaled.fontSize(5),
+    marginBottom: Scaled.height(4),
     display: 'flex',
     flexDirection: 'row',
   },
@@ -108,8 +108,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   leftContainer: {
-    height: RFValue(69),
-    width: RFValue(69),
+    height: Scaled.height(69),
+    width: Scaled.height(69),
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -117,31 +117,31 @@ const styles = StyleSheet.create({
   rightContainer: {
     flex: 1,
     // backgroundColor: 'pink',
-    paddingLeft: RFValue(6),
-    paddingRight: RFValue(6),
+    paddingLeft: Scaled.width(6),
+    paddingRight: Scaled.width(6),
   },
   img: {
-    width: RFValue(63),
-    height: RFValue(63),
-    borderRadius: RFValue(3),
+    width: Scaled.height(63),
+    height: Scaled.height(63),
+    borderRadius: Scaled.fontSize(3),
   },
   nameText: {
-    marginTop: RFValue(2),
+    marginTop: Scaled.height(2),
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: '500',
-    fontSize: RFValue(14),
-    lineHeight: RFValue(24),
+    fontSize: Scaled.fontSize(14),
+    lineHeight: Scaled.height(24),
     color: theme.lightElementColor,
   },
   addressText: {
     // flex: 3,
-    marginTop: -RFValue(3),
+    marginTop: -Scaled.height(3),
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: RFValue(12),
-    lineHeight: RFValue(20),
+    fontSize: Scaled.fontSize(12),
+    lineHeight: Scaled.height(20),
     color: theme.fontColor,
   },
   distanceText: {
@@ -149,14 +149,14 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: RFValue(10),
-    lineHeight: RFValue(20),
+    fontSize: Scaled.fontSize(10),
+    lineHeight: Scaled.height(20),
     color: theme.lightElementColor,
-    marginTop: RFValue(6),
-    marginBottom: RFValue(2),
+    marginTop: Scaled.height(6),
+    marginBottom: Scaled.height(2),
   },
   checkView: {
-    width: RFValue(40),
+    width: Scaled.width(40),
     alignItems: 'center',
     justifyContent: 'center',
   },

@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {RFValue} from 'react-native-responsive-fontsize';
 import Input from '../../../components/Input';
 import Filter from '../../../components/Filter';
+import * as Scaled from '../../../utilities/scaled';
 
 class DetailInputs extends Component {
   constructor(props) {
@@ -11,7 +11,13 @@ class DetailInputs extends Component {
   }
 
   render() {
-    const {data, callbackValue, scrollViewCallback, style} = this.props;
+    const {
+      data,
+      callbackValue,
+      scrollViewCallback,
+      style,
+      showFilter,
+    } = this.props;
     return (
       <View style={[styles.container, style]}>
         <Input
@@ -60,6 +66,7 @@ class DetailInputs extends Component {
             onPop={scrollViewCallback}
             selectedValue={data.get('nbDay')}
             callbackValue={(title, text) => callbackValue('nbDay', text)}
+            show={showFilter}
           />
           <Filter
             title="Đêm"
@@ -68,6 +75,7 @@ class DetailInputs extends Component {
             onPop={scrollViewCallback}
             selectedValue={data.get('nbNight')}
             callbackValue={(title, text) => callbackValue('nbNight', text)}
+            show={showFilter}
           />
         </View>
       </View>
@@ -80,16 +88,16 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   inputTitle: {
-    marginTop: RFValue(15),
+    marginTop: Scaled.height(15),
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'bold',
-    fontSize: RFValue(12),
-    lineHeight: RFValue(12),
+    fontSize: Scaled.fontSize(12),
+    lineHeight: Scaled.height(12),
     color: 'white',
   },
   dayNightView: {
-    marginTop: RFValue(10),
+    marginTop: Scaled.height(10),
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',

@@ -11,6 +11,7 @@ import Information from './components/Information';
 import Reviews from './components/Reviews';
 import Images from './components/Images';
 import FunctionOptionsBar from './components/FunctionOptionsBar';
+import * as Scaled from '../../utilities/scaled';
 
 class LocationDetail extends Component {
   constructor(props) {
@@ -123,7 +124,7 @@ const styles = StyleSheet.create({
   },
 
   navBarLabelStyle: {
-    fontSize: 16,
+    fontSize: Scaled.fontSize(16),
     textTransform: 'uppercase',
   },
 });

@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import {RFValue} from 'react-native-responsive-fontsize';
 import theme from '../../../themes/default';
 import Button from './Button';
+import * as Scaled from '../../../utilities/scaled';
 
 function ButtonsBar(props) {
   function renderTabs() {
@@ -27,11 +27,11 @@ function ButtonsBar(props) {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: RFValue(48),
+    height: Scaled.height(48),
     backgroundColor: theme.darkBackground,
     display: 'flex',
     flexDirection: 'row',
-    borderTopWidth: RFValue(1.5),
+    borderTopWidth: Scaled.width(1.5),
     borderTopColor: theme.borderTabs,
     shadowColor: '#000',
     shadowOffset: {

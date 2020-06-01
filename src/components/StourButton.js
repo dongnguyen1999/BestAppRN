@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, StyleSheet, TouchableOpacity} from 'react-native';
-import {RFValue} from 'react-native-responsive-fontsize';
 import theme from '../themes/default';
+import * as Scaled from '../utilities/scaled';
 
 function StourButton(props) {
   const {title, onPress, style, titleStyle} = props;
@@ -18,10 +18,10 @@ function StourButton(props) {
 const styles = StyleSheet.create({
   button: {
     backgroundColor: theme.lightBackground,
-    borderWidth: RFValue(1),
+    borderWidth: Scaled.width(1),
     borderColor: theme.lightElementColor,
-    borderRadius: RFValue(3),
-    height: RFValue(40),
+    borderRadius: Scaled.fontSize(3),
+    height: Scaled.height(40),
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -30,8 +30,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: '500',
-    fontSize: RFValue(14),
-    lineHeight: RFValue(24),
+    fontSize: Scaled.fontSize(14),
+    lineHeight: Scaled.height(24),
     color: '#F2F2F2',
   },
 });

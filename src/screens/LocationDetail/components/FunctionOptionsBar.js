@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {RFValue} from 'react-native-responsive-fontsize';
 import FunctionOption from './FunctionOption';
 import {
   Direction,
@@ -11,6 +10,7 @@ import {
   BlueImagesLib,
 } from '../../../assets/images';
 import theme from '../../../themes/default';
+import * as Scaled from '../../../utilities/scaled';
 
 function FunctionOptionsBar(props) {
   const {onDirection, onChangeTab, activeTab} = props;
@@ -19,9 +19,12 @@ function FunctionOptionsBar(props) {
       <FunctionOption
         icon={
           activeTab == 0 ? (
-            <BlueDirection width={RFValue(20)} height={RFValue(20)} />
+            <BlueDirection
+              width={Scaled.height(20)}
+              height={Scaled.height(20)}
+            />
           ) : (
-            <Direction width={RFValue(20)} height={RFValue(20)} />
+            <Direction width={Scaled.height(20)} height={Scaled.height(20)} />
           )
         }
         title="DẪN ĐƯỜNG"
@@ -35,14 +38,14 @@ function FunctionOptionsBar(props) {
         icon={
           activeTab == 1 ? (
             <BlueCommentIcon
-              width={RFValue(22)}
-              height={RFValue(22)}
+              width={Scaled.height(22)}
+              height={Scaled.height(22)}
               color={theme.lightElementColor}
             />
           ) : (
             <CommentIcon
-              width={RFValue(22)}
-              height={RFValue(22)}
+              width={Scaled.height(22)}
+              height={Scaled.height(22)}
               color={theme.lightElementColor}
             />
           )
@@ -54,9 +57,12 @@ function FunctionOptionsBar(props) {
       <FunctionOption
         icon={
           activeTab == 2 ? (
-            <BlueImagesLib width={RFValue(17)} height={RFValue(17)} />
+            <BlueImagesLib
+              width={Scaled.width(17)}
+              height={Scaled.height(17)}
+            />
           ) : (
-            <ImagesLib width={RFValue(17)} height={RFValue(17)} />
+            <ImagesLib width={Scaled.width(17)} height={Scaled.height(17)} />
           )
         }
         title="HÌNH ẢNH"
@@ -71,13 +77,13 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: theme.darkElementColor,
     width: '100%',
-    height: RFValue(75),
+    height: Scaled.height(65),
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     borderColor: theme.borderTabs,
-    borderWidth: RFValue(1.5),
+    borderWidth: Scaled.width(1.5),
     elevation: 5,
   },
 });

@@ -6,7 +6,6 @@ import {
   ScrollView,
   ActivityIndicator,
 } from 'react-native';
-import {RFValue} from 'react-native-responsive-fontsize';
 import theme from '../../themes/default';
 import {ArrowDownIcon, ArrowRightIcon} from '../../assets/images';
 import Input from '../../components/Input';
@@ -27,6 +26,7 @@ import {FlatList} from 'react-native-gesture-handler';
 import fetchAllDetail from '../../api/fetchAllDetail';
 import {getDistanceFrom2Locations} from '../../utilities/computeDistance';
 import updateTourInfo from '../../api/updateTourInfo';
+import * as Scaled from '../../utilities/scaled';
 
 class AdjustTour extends Component {
   constructor(props) {
@@ -45,6 +45,7 @@ class AdjustTour extends Component {
       nextPageToken: undefined,
       selectedLocations: new Map(),
       fetchingLocations: false,
+      showFilter: false,
     };
     this.updateTourData = this.updateTourData.bind(this);
     this.updateSearchText = this.updateSearchText.bind(this);
@@ -193,9 +194,16 @@ class AdjustTour extends Component {
   };
 
   render() {
-    const {navigation} = this.props;
+    // console.log(this.state.showFilter);
     return (
-      <ScrollView style={styles.container} ref={ref => (this.mainScroll = ref)}>
+      <ScrollView
+        style={styles.container}
+        ref={ref => (this.mainScroll = ref)}
+        onScroll={event => {
+          const {contentOffset} = event.nativeEvent;
+          const {y} = contentOffset;
+          this.setState({showFilter: y > Scaled.height(370)});
+        }}>
         <View
           style={[
             styles.headerView,
@@ -206,9 +214,12 @@ class AdjustTour extends Component {
           }>
           <Text style={[styles.headerText]}>Thông tin chi tiết tour</Text>
           {this.state.showDetail ? (
-            <ArrowDownIcon width={RFValue(14)} height={RFValue(7)} />
+            <ArrowDownIcon width={Scaled.width(14)} height={Scaled.height(7)} />
           ) : (
-            <ArrowRightIcon width={RFValue(16)} height={RFValue(10)} />
+            <ArrowRightIcon
+              width={Scaled.width(16)}
+              height={Scaled.height(10)}
+            />
           )}
         </View>
         {this.state.showDetail ? (
@@ -216,9 +227,16 @@ class AdjustTour extends Component {
             data={this.state.tourData}
             style={styles.detailInput}
             callbackValue={this.updateTourData}
-            scrollViewCallback={() =>
-              this.mainScroll.scrollTo({x: 0, y: RFValue(400), animated: true})
-            }
+            scrollViewCallback={() => {
+              if (!this.state.showFilter) {
+                this.mainScroll.scrollTo({
+                  x: 0,
+                  y: Scaled.height(390),
+                  animated: true,
+                });
+              }
+            }}
+            showFilter={this.state.showFilter}
           />
         ) : (
           []
@@ -235,7 +253,7 @@ class AdjustTour extends Component {
             !this.state.addingLocation ? (
               <FlatList
                 showsVerticalScrollIndicator={false}
-                style={[styles.flatList, {marginTop: RFValue(12)}]}
+                style={[styles.flatList, {marginTop: Scaled.height(12)}]}
                 data={[...this.state.selectedLocations.values()]}
                 renderItem={({index, item}) =>
                   this.renderLocationItem(index, item)
@@ -303,8 +321,8 @@ const styles = StyleSheet.create({
     backgroundColor: theme.pageColor,
   },
   containerWrapper: {
-    paddingLeft: RFValue(16),
-    paddingRight: RFValue(16),
+    paddingLeft: Scaled.width(16),
+    paddingRight: Scaled.width(16),
   },
   headerView: {
     flex: 1,
@@ -313,9 +331,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     borderBottomColor: theme.commentDividers,
-    borderBottomWidth: RFValue(1),
-    padding: RFValue(16),
-    marginBottom: RFValue(16),
+    borderBottomWidth: Scaled.width(1),
+    padding: Scaled.width(16),
+    marginBottom: Scaled.height(16),
   },
   showingDetailHeader: {
     borderBottomWidth: 0,
@@ -326,38 +344,38 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: '500',
-    fontSize: RFValue(14),
-    lineHeight: RFValue(20),
+    fontSize: Scaled.fontSize(14),
+    lineHeight: Scaled.height(20),
     color: theme.fontColor,
   },
   placesView: {
-    height: RFValue(460),
+    height: Scaled.height(400),
   },
   saveButton: {
-    marginBottom: RFValue(32),
+    marginBottom: Scaled.height(15),
   },
   detailInput: {
     borderBottomColor: theme.commentDividers,
-    borderBottomWidth: RFValue(1),
-    padding: RFValue(16),
+    borderBottomWidth: Scaled.width(1),
+    padding: Scaled.width(16),
     paddingTop: 0,
-    marginBottom: RFValue(16),
+    marginBottom: Scaled.height(16),
   },
   recognitionView: {
     alignItems: 'center',
     width: '100%',
     position: 'relative',
-    top: RFValue(-700),
+    top: Scaled.height(-700),
   },
   flatList: {
     width: '100%',
-    height: RFValue(375),
+    height: Scaled.height(375),
   },
   smallIndicator: {
     width: '100%',
-    height: RFValue(30),
-    marginTop: RFValue(10),
-    marginBottom: RFValue(10),
+    height: Scaled.height(30),
+    marginTop: Scaled.height(10),
+    marginBottom: Scaled.height(10),
   },
 });
 

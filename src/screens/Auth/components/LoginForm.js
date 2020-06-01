@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View, StyleSheet} from 'react-native';
 import Input from '../../../components/Input';
-import {RFValue} from 'react-native-responsive-fontsize';
+import * as Scaled from '../../../utilities/scaled';
 
 function LoginForm(props) {
   const {usernameCallback, passwordCallback} = props;
@@ -25,7 +25,7 @@ function LoginForm(props) {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    top: RFValue(170),
+    top: Scaled.height(170),
     width: '100%',
   },
 });

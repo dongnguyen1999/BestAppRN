@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
-import {RFValue} from 'react-native-responsive-fontsize';
 import {defaultFoodImg} from '../assets/images';
 import fetchAllDetail from '../api/fetchAllDetail';
 import fetchPhotosGgApi from '../api/fetchPhotosGgApi';
 import RefImage from '../components/RefImage';
+import * as Scaled from '../utilities/scaled';
 
 class TourImgsPane extends Component {
   constructor(props) {
@@ -55,15 +55,15 @@ class TourImgsPane extends Component {
             if (index == 0) {
               borderRadius = {
                 ...borderRadius,
-                borderTopLeftRadius: RFValue(3),
-                borderBottomLeftRadius: RFValue(3),
+                borderTopLeftRadius: Scaled.fontSize(3),
+                borderBottomLeftRadius: Scaled.fontSize(3),
               };
             }
             if (index == this.state.imgRefs.length - 1) {
               borderRadius = {
                 ...borderRadius,
-                borderTopRightRadius: RFValue(3),
-                borderBottomRightRadius: RFValue(3),
+                borderTopRightRadius: Scaled.fontSize(3),
+                borderBottomRightRadius: Scaled.fontSize(3),
               };
             }
             return (
@@ -77,7 +77,7 @@ class TourImgsPane extends Component {
         ) : (
           <RefImage
             wrapperStyle={styles.imgView}
-            imgStyle={[styles.img, {borderRadius: RFValue(3)}]}
+            imgStyle={[styles.img, {borderRadius: Scaled.fontSize(3)}]}
           />
         )}
         {console.log('end')}
@@ -88,9 +88,9 @@ class TourImgsPane extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: RFValue(8),
+    marginTop: Scaled.height(8),
     width: '100%',
-    height: RFValue(63),
+    height: Scaled.height(63),
     // backgroundColor: 'blue',
     display: 'flex',
     flexDirection: 'row',
@@ -102,9 +102,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   img: {
-    height: RFValue(63),
+    height: Scaled.height(63),
     width: '100%',
-    aspectRatio: 10 / 6,
+    aspectRatio: Scaled.width(9) / Scaled.width(6),
   },
 });
 

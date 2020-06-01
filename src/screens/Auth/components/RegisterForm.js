@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import Input from '../../../components/Input';
-import {RFValue} from 'react-native-responsive-fontsize';
+import * as Scaled from '../../../utilities/scaled';
 
 function RegisterForm(props) {
   const {usernameCallback, passwordCallback, confirmPasswordCallback} = props;
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     position: 'absolute',
-    top: RFValue(170),
+    top: Scaled.height(170),
   },
 });
 

@@ -11,7 +11,6 @@ import {
 import theme from '../../themes/default';
 import Dialog from '../../components/Dialog';
 import SearchBar from '../../components/SearchBar';
-import {RFValue} from 'react-native-responsive-fontsize';
 import FiltersButton from './components/FiltersButton';
 import RecordingAminated from '../../components/RecordingAminated';
 import getCurrentPosition from '../../api/getCurrentLocation';
@@ -258,9 +257,9 @@ const styles = StyleSheet.create({
   },
   contentWrapper: {
     width: '100%',
-    paddingLeft: RFValue(16),
-    paddingRight: RFValue(16),
-    marginBottom: RFValue(13),
+    paddingLeft: Scaled.width(16),
+    paddingRight: Scaled.width(16),
+    marginBottom: Scaled.height(13),
   },
   toggleContainer: {
     display: 'flex',
@@ -268,14 +267,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   resultCaption: {
-    marginTop: RFValue(13),
+    marginTop: Scaled.height(13),
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: '500',
-    fontSize: RFValue(21),
-    lineHeight: RFValue(32),
+    fontSize: Scaled.fontSize(21),
+    lineHeight: Scaled.height(32),
     color: theme.fontColor,
-    marginBottom: RFValue(15),
+    marginBottom: Scaled.height(15),
   },
   indicatorContainer: {
     flex: 1,
@@ -286,8 +285,8 @@ const styles = StyleSheet.create({
   },
   smallIndicator: {
     width: '100%',
-    height: RFValue(30),
-    marginBottom: RFValue(10),
+    height: Scaled.height(30),
+    // marginBottom: Scaled.height(10),
   },
 });
 

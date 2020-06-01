@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import ModalDropdown from './ModalDropdown';
 import {FacebookIcon, ArrowDownIcon, ArrowUpIcon} from '../assets/images';
-import {RFValue} from 'react-native-responsive-fontsize';
 import theme from '../themes/default';
+import * as Scaled from '../utilities/scaled';
 
 class Filter extends Component {
   constructor(props) {
@@ -27,6 +27,7 @@ class Filter extends Component {
       callbackValue,
       style,
       selectedValue,
+      show,
       onPop,
     } = this.props;
     return (
@@ -36,7 +37,9 @@ class Filter extends Component {
         </View>
         <ModalDropdown
           options={listItem}
-          onDropdownWillShow={async () => this.changeDropDownState(true)}
+          onDropdownWillShow={
+            show ? async () => this.changeDropDownState(true) : undefined
+          }
           onDropdownWillHide={() => this.changeDropDownState(false)}
           dropdownStyle={[
             styles.dropdownStyle,
@@ -44,6 +47,7 @@ class Filter extends Component {
               ? {width: `${parseFloat(style.width.replace('%', '')) - 4}%`}
               : undefined,
           ]}
+          show={show}
           dropdownTextStyle={styles.dropdownTextStyle}
           dropdownTextHighlightStyle={styles.selectedTextStyle}
           onSelect={(index, value) => {
@@ -58,9 +62,15 @@ class Filter extends Component {
             </View>
             <View style={styles.iconContainer}>
               {this.state.isDropDown ? (
-                <ArrowUpIcon width={RFValue(10)} height={RFValue(6)} />
+                <ArrowUpIcon
+                  width={Scaled.width(10)}
+                  height={Scaled.height(6)}
+                />
               ) : (
-                <ArrowDownIcon width={RFValue(10)} height={RFValue(6)} />
+                <ArrowDownIcon
+                  width={Scaled.width(10)}
+                  height={Scaled.height(6)}
+                />
               )}
             </View>
           </View>
@@ -72,25 +82,25 @@ class Filter extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    width: RFValue(160),
+    width: Scaled.width(160),
     display: 'flex',
     flexDirection: 'column',
   },
   title: {
-    height: RFValue(40),
+    height: Scaled.height(40),
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     backgroundColor: theme.pageColor,
-    borderWidth: RFValue(1),
+    borderWidth: Scaled.width(1),
     borderColor: theme.lightElementColor,
-    borderRadius: RFValue(3),
+    borderRadius: Scaled.fontSize(3),
   },
   titleText: {
     flex: 5,
     display: 'flex',
     justifyContent: 'center',
-    paddingLeft: RFValue(8),
+    paddingLeft: Scaled.width(8),
   },
   iconContainer: {
     flex: 1,
@@ -102,25 +112,25 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: RFValue(12),
-    lineHeight: RFValue(20),
+    fontSize: Scaled.fontSize(12),
+    lineHeight: Scaled.height(20),
     color: theme.fontColor,
   },
   dropdownStyle: {
-    width: RFValue(160),
+    width: Scaled.width(160),
     height: 'auto',
-    borderWidth: RFValue(1),
+    borderWidth: Scaled.width(1),
     borderColor: theme.lightElementColor,
-    borderRadius: RFValue(3),
+    borderRadius: Scaled.fontSize(3),
     backgroundColor: theme.darkElementColor,
   },
   dropdownTextStyle: {
-    height: RFValue(36),
+    height: Scaled.height(36),
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: RFValue(12),
-    lineHeight: RFValue(20),
+    fontSize: Scaled.fontSize(12),
+    lineHeight: Scaled.height(20),
     color: theme.fontColor,
     backgroundColor: theme.darkElementColor,
     display: 'flex',
@@ -133,9 +143,9 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'bold',
-    fontSize: RFValue(12),
-    lineHeight: RFValue(20),
-    paddingLeft: RFValue(8),
+    fontSize: Scaled.fontSize(12),
+    lineHeight: Scaled.height(20),
+    paddingLeft: Scaled.width(8),
     color: theme.fontColor,
   },
 });

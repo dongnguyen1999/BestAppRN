@@ -3,12 +3,12 @@ import {createStackNavigator} from 'react-navigation-stack';
 import Home from '../screens/Home';
 import theme from '../themes/default';
 import {StyleSheet} from 'react-native';
-import {RFValue} from 'react-native-responsive-fontsize';
 import LogoutButton from '../components/LogoutButton';
 import LocationDetail from '../screens/LocationDetail';
 import TourDetail from '../screens/TourDetail';
 import AdjustTour from '../screens/AdjustTour';
 import AdminHome from '../screens/AdminHome';
+import * as Scaled from '../utilities/scaled';
 
 const homeNavigationOptions = (navigation, title) => {
   return {
@@ -82,25 +82,25 @@ const HomeNavigator = createStackNavigator({
 const styles = StyleSheet.create({
   header: {
     backgroundColor: theme.lightBackground,
-    height: RFValue(56),
+    height: Scaled.height(56),
   },
   titleContainer: {
     position: 'absolute',
-    left: RFValue(24),
+    left: Scaled.width(24),
   },
   headerTitle: {
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: '500',
-    fontSize: RFValue(21),
-    lineHeight: RFValue(32),
-    letterSpacing: RFValue(0.5),
+    fontSize: Scaled.fontSize(19),
+    lineHeight: Scaled.height(32),
+    letterSpacing: Scaled.width(0.5),
   },
   detailHeaderTitle: {
-    paddingLeft: RFValue(36),
+    paddingLeft: Scaled.width(36),
   },
   rightContainer: {
-    marginRight: RFValue(20),
+    marginRight: Scaled.width(20),
   },
 });
 

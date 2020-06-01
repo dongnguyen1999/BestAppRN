@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import {RFValue} from 'react-native-responsive-fontsize';
 import theme from '../../../themes/default';
+import * as Scaled from '../../../utilities/scaled';
 
 function Suggestion(props) {
   const {message, action, onAction} = props;
@@ -18,7 +18,7 @@ function Suggestion(props) {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    top: RFValue(600),
+    top: Scaled.height(567),
     display: 'flex',
     flexDirection: 'row',
   },
@@ -26,16 +26,16 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: RFValue(13),
-    lineHeight: RFValue(24),
+    fontSize: Scaled.fontSize(13),
+    lineHeight: Scaled.height(24),
     color: 'white',
   },
   link: {
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: RFValue(13),
-    lineHeight: RFValue(24),
+    fontSize: Scaled.fontSize(13),
+    lineHeight: Scaled.height(24),
     color: theme.lightElementColor,
   },
 });

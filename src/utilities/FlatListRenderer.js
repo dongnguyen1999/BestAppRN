@@ -2,7 +2,7 @@ import React from 'react';
 import PlaceItem from '../components/PlaceItem';
 import TourItem from '../components/TourItem';
 import {FlatList, ScrollView} from 'react-native';
-import {RFValue} from 'react-native-responsive-fontsize';
+import * as Scaled from '../utilities/scaled';
 
 function renderLocationItem(key, location, navigation, currentLocation) {
   return (
@@ -93,12 +93,12 @@ class FlatListRenderer {
         ref={view => (this.toursList = view)}
         onScroll={event => {
           if (isCloseToTop(event.nativeEvent)) {
-            this.toursList.scrollTo(RFValue(1), 0, false);
+            this.toursList.scrollTo(Scaled.height(1), 0, false);
             this.updateToursIndex(-1);
           }
           if (isCloseToBottom(event.nativeEvent)) {
             if (this.state.currentToursIndex != this.state.maxToursIndex)
-              this.toursList.scrollTo(RFValue(1), 0, false);
+              this.toursList.scrollTo(Scaled.height(1), 0, false);
             this.updateToursIndex(1);
           }
         }}>

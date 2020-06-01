@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {RFValue} from 'react-native-responsive-fontsize';
 import {Image} from 'react-native';
 import {minhthu1Img, minhthuImg} from '../../../assets/images';
 import theme from '../../../themes/default';
+import * as Scaled from '../../../utilities/scaled';
 
 class Comment extends Component {
   constructor(props) {
@@ -35,38 +35,38 @@ class Comment extends Component {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    // height: RFValue(115),
+    // height: Scaled.height(115),
     display: 'flex',
     flexDirection: 'row',
-    borderBottomWidth: RFValue(1),
+    borderBottomWidth: Scaled.width(1),
     borderBottomColor: theme.commentDividers,
   },
   username: {
-    marginTop: RFValue(11),
+    marginTop: Scaled.height(11),
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: RFValue(14),
-    lineHeight: RFValue(24),
+    fontSize: Scaled.fontSize(14),
+    lineHeight: Scaled.height(24),
     color: theme.fontColor,
   },
   time: {
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: RFValue(12),
-    lineHeight: RFValue(24),
+    fontSize: Scaled.fontSize(12),
+    lineHeight: Scaled.height(24),
     color: theme.fontColor,
   },
   comment: {
     fontFamily: 'Roboto',
     fontStyle: 'italic',
     fontWeight: 'normal',
-    fontSize: RFValue(13),
-    lineHeight: RFValue(16),
+    fontSize: Scaled.fontSize(13),
+    lineHeight: Scaled.height(16),
     color: theme.fontColor,
-    paddingRight: RFValue(15),
-    paddingBottom: RFValue(11),
+    paddingRight: Scaled.width(15),
+    paddingBottom: Scaled.height(11),
   },
   avatarView: {
     width: '20%',
@@ -76,11 +76,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   avatar: {
-    width: RFValue(50),
-    height: RFValue(50),
-    borderRadius: RFValue(25),
-    marginBottom: RFValue(13),
-    marginTop: RFValue(13),
+    width: Scaled.height(50),
+    height: Scaled.height(50),
+    borderRadius: Scaled.fontSize(25),
+    marginBottom: Scaled.height(13),
+    marginTop: Scaled.height(13),
   },
 });
 

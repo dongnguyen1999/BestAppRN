@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {View, StyleSheet, Image} from 'react-native';
 import Swiper from 'react-native-swiper';
-import {RFValue} from 'react-native-responsive-fontsize';
 import theme from '../../../themes/default';
 import {Dot, ActiveDot, defaultFoodImg} from '../../../assets/images';
 import RefImage from '../../../components/RefImage';
+import * as Scaled from '../../../utilities/scaled';
 
 function ImageSlideshow(props) {
   function renderImages() {
@@ -35,12 +35,12 @@ function ImageSlideshow(props) {
         paginationStyle={styles.paginationStyle}
         dot={
           <View style={styles.dot}>
-            <Dot width={RFValue(5)} height={RFValue(5)} />
+            <Dot width={Scaled.height(5)} height={Scaled.height(5)} />
           </View>
         }
         activeDot={
           <View style={styles.dot}>
-            <ActiveDot width={RFValue(7)} height={RFValue(7)} />
+            <ActiveDot width={Scaled.height(7)} height={Scaled.height(7)} />
           </View>
         }>
         {renderImages()}
@@ -52,22 +52,22 @@ function ImageSlideshow(props) {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: RFValue(240),
+    height: Scaled.height(240),
     backgroundColor: theme.pageColor,
   },
   paginationStyle: {
-    marginBottom: -RFValue(16),
+    marginBottom: -Scaled.height(16),
   },
   dot: {
-    marginLeft: RFValue(4),
-    marginRight: RFValue(4),
+    marginLeft: Scaled.width(4),
+    marginRight: Scaled.width(4),
   },
   wrapper: {
     // alignItems: 'center',
   },
   imgSlide: {
     width: '100%',
-    height: RFValue(240),
+    height: Scaled.height(240),
     // aspectRatio: 8 / 6,
   },
 });

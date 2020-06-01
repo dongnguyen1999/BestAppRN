@@ -4,7 +4,6 @@ import firebaseApp from '../../utilities/firebaseApp';
 import LoginForm from './components/LoginForm';
 import FormButtons from './components/FormButtons';
 import Suggestion from './components/Suggestion';
-import {RFValue} from 'react-native-responsive-fontsize';
 import Dialog from '../../components/Dialog';
 import {GoogleSignin} from '@react-native-community/google-signin';
 import {
@@ -12,6 +11,7 @@ import {
   googleSignInConfig,
 } from '../../utilities/googleSignIn';
 import theme from '../../themes/default';
+import * as Scaled from '../../utilities/scaled';
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -157,8 +157,8 @@ const styles = StyleSheet.create({
   },
   formWrapper: {
     width: '100%',
-    paddingLeft: RFValue(16),
-    paddingRight: RFValue(16),
+    paddingLeft: Scaled.width(16),
+    paddingRight: Scaled.width(16),
     alignItems: 'center',
   },
   appName: {
@@ -166,11 +166,11 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'bold',
-    fontSize: RFValue(44),
-    lineHeight: RFValue(52),
+    fontSize: Scaled.fontSize(44),
+    lineHeight: Scaled.height(52),
     color: theme.lightElementColor,
     position: 'absolute',
-    top: RFValue(95),
+    top: Scaled.height(95),
   },
   indicatorContainer: {
     flex: 1,

@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 import {View, Text, FlatList, ActivityIndicator} from 'react-native';
 import {StyleSheet} from 'react-native';
 import theme from '../../themes/default';
-import {RFValue} from 'react-native-responsive-fontsize';
 import PlaceItem from '../../components/PlaceItem';
 import CompanyInfo from './components/CompanyInfo';
 import fetchPlacesUseTourId from '../../api/fetchPlacesUseTourId';
@@ -11,6 +10,7 @@ import fetchCompanyInfo from '../../api/fetchCompanyInfo';
 import fetchAllDetail from '../../api/fetchAllDetail';
 import {getDistanceFrom2Locations} from '../../utilities/computeDistance';
 import ImgHeader from './components/ImgHeader';
+import * as Scaled from '../../utilities/scaled';
 
 class TourDetail extends Component {
   constructor(props) {
@@ -133,27 +133,27 @@ const styles = StyleSheet.create({
   },
   contentWrapper: {
     width: '100%',
-    paddingLeft: RFValue(16),
-    paddingRight: RFValue(16),
-    marginBottom: RFValue(13),
+    paddingLeft: Scaled.width(16),
+    paddingRight: Scaled.width(16),
+    marginBottom: Scaled.height(13),
   },
   flatList: {
     // flex: 1,
     height: '50%',
   },
   resultCaption: {
-    marginTop: RFValue(11),
+    marginTop: Scaled.height(11),
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: '500',
-    fontSize: RFValue(20),
-    lineHeight: RFValue(32),
+    fontSize: Scaled.fontSize(20),
+    lineHeight: Scaled.height(32),
     color: theme.fontColor,
-    marginBottom: RFValue(3),
+    marginBottom: Scaled.height(3),
   },
   smallIndicator: {
     width: '100%',
-    height: RFValue(100),
+    height: Scaled.height(100),
     justifyContent: 'center',
   },
 });

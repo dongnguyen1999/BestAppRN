@@ -2,14 +2,13 @@ import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import theme from '../../../themes/default';
 import FunctionOptionsBar from './FunctionOptionsBar';
-import {RFValue} from 'react-native-responsive-fontsize';
+import * as Scaled from '../../../utilities/scaled';
 
 function Information(props) {
   return (
     <View style={styles.container}>
-      <Text style={styles.message}>
-        Đang mở trong Google Map Vui lòng đợi...
-      </Text>
+      <Text style={styles.message}>Đang mở trong Google Map</Text>
+      <Text style={styles.message}>Vui lòng đợi...</Text>
     </View>
   );
 }
@@ -26,10 +25,10 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: RFValue(16),
-    lineHeight: RFValue(19),
+    fontSize: Scaled.fontSize(16),
+    lineHeight: Scaled.height(19),
     color: theme.fontButtonTabs,
-    width: RFValue(196),
+    width: Scaled.width(196),
     textAlign: 'center',
   },
 });
