@@ -22,7 +22,7 @@ import fetchTours from '../../api/fetchTours';
 import FlatListRenderer from '../../utilities/FlatListRenderer';
 import firebaseApp from '../../utilities/firebaseApp';
 import {GoogleSignin} from '@react-native-community/google-signin';
-import * as Scaled from '../../utilities/scaled';
+import Scaled from '../../utilities/Scaled';
 
 class Home extends Component {
   constructor(props) {
