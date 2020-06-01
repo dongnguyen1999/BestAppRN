@@ -52,7 +52,7 @@ function ImageSlideshow(props) {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: Scaled.height(240),
+    height: Scaled.height(210),
     backgroundColor: theme.pageColor,
   },
   paginationStyle: {
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   },
   imgSlide: {
     width: '100%',
-    height: Scaled.height(240),
+    height: Scaled.height(210),
     // aspectRatio: 8 / 6,
   },
 });
