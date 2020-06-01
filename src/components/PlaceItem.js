@@ -57,7 +57,9 @@ class PlaceItem extends Component {
             <Image style={styles.img} source={this.state.imgSrc} />
           </View>
           <View style={styles.rightContainer}>
-            <Text style={styles.nameText}>{name}</Text>
+            <Text style={styles.nameText} numberOfLines={1}>
+              {name}
+            </Text>
             <Text numberOfLines={1} style={styles.addressText}>
               {address}
             </Text>
@@ -114,7 +116,7 @@ const styles = StyleSheet.create({
   },
   rightContainer: {
     flex: 1,
-    display: 'flex',
+    // backgroundColor: 'pink',
     paddingLeft: RFValue(6),
     paddingRight: RFValue(6),
   },
@@ -124,9 +126,7 @@ const styles = StyleSheet.create({
     borderRadius: RFValue(3),
   },
   nameText: {
-    flex: 2,
-    // marginTop: RFValue(2),
-    // marginBottom: 3,
+    marginTop: RFValue(2),
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: '500',
@@ -135,7 +135,8 @@ const styles = StyleSheet.create({
     color: theme.lightElementColor,
   },
   addressText: {
-    flex: 3,
+    // flex: 3,
+    marginTop: -RFValue(3),
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'normal',
@@ -144,13 +145,14 @@ const styles = StyleSheet.create({
     color: theme.fontColor,
   },
   distanceText: {
-    flex: 2,
+    // flex: 2,
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: RFValue(10),
     lineHeight: RFValue(20),
     color: theme.lightElementColor,
+    marginTop: RFValue(6),
     marginBottom: RFValue(2),
   },
   checkView: {

@@ -22,12 +22,13 @@ import fetchTours from '../../api/fetchTours';
 import FlatListRenderer from '../../utilities/FlatListRenderer';
 import firebaseApp from '../../utilities/firebaseApp';
 import {GoogleSignin} from '@react-native-community/google-signin';
+import * as Scaled from '../../utilities/scaled';
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchText: '',
+      searchText: 'Gà',
       filtersData: new Map(),
       recognized: '',
       started: '',
@@ -100,7 +101,7 @@ class Home extends Component {
       isLoading: false,
       currentLocation: {lat: info.coords.latitude, lng: info.coords.longitude},
     });
-    // this.locationsFetcher.searchLocations();
+    this.locationsFetcher.searchLocations();
   };
 
   componentWillUnmount() {
