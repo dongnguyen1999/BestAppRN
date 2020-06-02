@@ -29,7 +29,13 @@ class AdminHome extends Component {
 
   fetchToursList = async () => {
     this.setState({fetchingLocations: true, tours: []});
-    let info = await getCurrentPosition();
+    let info;
+    info = await getCurrentPosition().catch(
+      e => (info = {coords: {latitude: 0, longitude: 0}}),
+    );
+    this.setState({
+      currentLocation: {lat: info.coords.latitude, lng: info.coords.longitude},
+    });
     let toursData = [];
     let response = await fetchTours();
     toursData = response.data;
@@ -48,7 +54,6 @@ class AdminHome extends Component {
       fetchingLocations: false,
       tours: splitedData,
       maxToursIndex: maxIndex,
-      currentLocation: {lat: info.coords.latitude, lng: info.coords.longitude},
     });
   };
 
@@ -65,6 +70,7 @@ class AdminHome extends Component {
   };
 
   render() {
+    console.log(this.state.currentLocation);
     let willLogout = this.props.navigation.getParam('willLogout');
     let logout = this.props.navigation.getParam('logouter');
     return (

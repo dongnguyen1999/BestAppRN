@@ -95,7 +95,10 @@ class Home extends Component {
     this.isAdmin = isAdmin;
     if (isAdmin)
       navigation.navigate('AdminHomeStack', {loggedInBy: loggedInBy});
-    let info = await getCurrentPosition();
+    let info;
+    info = await getCurrentPosition().catch(
+      e => (info = {coords: {latitude: 0, longitude: 0}}),
+    );
     this.setState({
       isLoading: false,
       currentLocation: {lat: info.coords.latitude, lng: info.coords.longitude},

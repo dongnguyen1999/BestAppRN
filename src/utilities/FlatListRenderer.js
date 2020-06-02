@@ -86,6 +86,7 @@ class FlatListRenderer {
   renderToursFlatList(styles, showImgs) {
     const {navigation} = this.props;
     let currentLocation = this.state.currentLocation;
+    // console.log(this.state.tours.length, this.state.currentToursIndex);
     return this.state.tours.length != 0 && !this.state.showPlaces ? (
       <ScrollView
         style={styles.contentWrapper}
