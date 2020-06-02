@@ -195,7 +195,11 @@ class AdjustTour extends Component {
 
   render() {
     // console.log(this.state.showFilter);
-    return (
+    return this.state.isLoading ? (
+      <View style={styles.indicatorContainer}>
+        <ActivityIndicator size="large" color={theme.lightElementColor} />
+      </View>
+    ) : (
       <ScrollView
         style={styles.container}
         ref={ref => (this.mainScroll = ref)}
@@ -376,6 +380,13 @@ const styles = StyleSheet.create({
     height: Scaled.height(30),
     marginTop: Scaled.height(10),
     marginBottom: Scaled.height(10),
+  },
+  indicatorContainer: {
+    flex: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: theme.pageColor,
   },
 });
 
