@@ -160,16 +160,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   appName: {
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: 'bold',
     fontSize: Scaled.fontSize(44),
     lineHeight: Scaled.height(52),
     color: theme.lightElementColor,
     marginTop: Scaled.height(71),
-  },
-  formButtons: {
-    marginTop: Scaled.height(24),
   },
   indicatorContainer: {
     flex: 1,

@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     textAlign: 'center',
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: '500',
     fontSize: Scaled.fontSize(14),

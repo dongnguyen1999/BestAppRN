@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
   },
   nameText: {
     marginTop: Scaled.height(2),
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: '500',
     fontSize: Scaled.fontSize(14),
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
   addressText: {
     // flex: 3,
     marginTop: -Scaled.height(3),
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: Scaled.fontSize(12),
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
   },
   distanceText: {
     // flex: 2,
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: Scaled.fontSize(10),

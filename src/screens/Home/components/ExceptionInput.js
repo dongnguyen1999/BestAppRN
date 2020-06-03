@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   text: {
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: Scaled.fontSize(12),
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   },
   dropdownTextStyle: {
     height: Scaled.height(36),
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: Scaled.fontSize(12),
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     color: theme.fontColor,
   },
   caption: {
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: 'bold',
     fontSize: Scaled.fontSize(12),

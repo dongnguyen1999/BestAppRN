@@ -11,6 +11,7 @@ const theme = {
   borderTabs: 'rgba(0, 0, 0, 0.12);',
   fontButtonTabs: '#E0E0E0',
   commentDividers: '#4F4F4F',
+  fontFamily: 'NunitoSans-Regular',
 };
 
 export default theme;

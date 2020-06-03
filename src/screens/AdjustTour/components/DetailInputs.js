@@ -3,6 +3,7 @@ import {View, Text, StyleSheet} from 'react-native';
 import Input from '../../../components/Input';
 import Filter from '../../../components/Filter';
 import * as Scaled from '../../../utilities/scaled';
+import theme from '../../../themes/default';
 
 class DetailInputs extends Component {
   constructor(props) {
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
   },
   inputTitle: {
     marginTop: Scaled.height(15),
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: 'bold',
     fontSize: Scaled.fontSize(12),

@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   headerText: {
     marginLeft: Scaled.width(16),
     color: theme.fontColor,
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: '500',
     fontSize: Scaled.fontSize(18),
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
   },
   detailText: {
     color: theme.fontColor,
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: Scaled.fontSize(12),

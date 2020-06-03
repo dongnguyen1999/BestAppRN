@@ -51,12 +51,14 @@ class Input extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    width: '100%',
+    height: Scaled.height(60),
+    marginTop: Scaled.height(14),
     // display: 'flex',
     // flexDirection: 'column',
   },
   textInput: {
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: Scaled.fontSize(16),
@@ -68,12 +70,11 @@ const styles = StyleSheet.create({
     paddingBottom: Scaled.height(8),
   },
   title: {
-    marginTop: Scaled.height(30),
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: Scaled.fontSize(12),
-    lineHeight: Scaled.height(12),
+    lineHeight: Scaled.height(15),
     color: theme.lightBackground,
     opacity: 0.87,
   },

@@ -4,6 +4,7 @@ import SignInButton from './SignInButton';
 import {GoogleIcon, FacebookIcon} from '../../../assets/images';
 import StourButton from '../../../components/StourButton';
 import * as Scaled from '../../../utilities/scaled';
+import theme from '../../../themes/default';
 
 function FormButtons(props) {
   const {title, onPress, style, onGoogleSignIn} = props;
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
   text: {
     padding: Scaled.width(7),
     textAlign: 'center',
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: Scaled.fontSize(13),

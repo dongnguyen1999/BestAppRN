@@ -1,7 +1,7 @@
 import * as googleAPI from '../api/searchGooglePlaces';
 import * as resolveLocations from './resolveLocations';
-import * as offlineFilter from '../constants/offlineFilters';
 import fetchAllDetail from '../api/fetchAllDetail';
+import createSearchString from '../utilities/createSearchString';
 
 export default class LocationsFetcher {
   constructor(context) {
@@ -14,29 +14,8 @@ export default class LocationsFetcher {
     if (!filtersData) {
       filtersData = this.state.filtersData;
     }
-    let createSearchString = function() {
-      let str = this.state.searchText;
-      for (let [key, value] of filtersData.entries()) {
-        if (offlineFilter.keys.includes(key)) {
-          continue;
-        }
-        if (key === offlineFilter.EXCEPT && value) {
-          const exceptKeywords = value
-            .split(',')
-            .map(value => value.toLowerCase().trim())
-            .filter(value => value.length !== 0);
-          exceptKeywords.forEach(
-            keyword => (str = [str, `-${keyword}`].join(' ')),
-          );
-          continue;
-        }
-        let filterName = key ? key.toLowerCase() : '';
-        let filterValue = value ? value.toLowerCase() : '';
-        str = [str, filterValue].join(' ');
-      }
-      return str.trim();
-    }.bind(this);
-    const searchText = createSearchString();
+    let str = this.state.searchText;
+    const searchText = createSearchString(str, filtersData);
     this.setState({showPlaces: true, tours: []});
     // console.log(searchText);
     if (searchText !== this.previousSearch) {

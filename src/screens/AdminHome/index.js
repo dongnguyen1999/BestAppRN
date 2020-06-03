@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     marginBottom: Scaled.height(13),
   },
   adminHeader: {
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: '500',
     fontSize: Scaled.fontSize(20),

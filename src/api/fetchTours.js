@@ -2,7 +2,7 @@ import Axios from 'axios';
 import * as PATH from '../constants/path';
 
 const fetchTours = placeIds => {
-  if (!ids || ids.length == 0) {
+  if (!placeIds || placeIds.length == 0) {
     return Axios.get(
       `${PATH.databaseDomain}${PATH.stourDatabase}${PATH.getTours}`,
     );

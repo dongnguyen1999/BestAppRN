@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   appName: {
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: 'bold',
     fontSize: Scaled.fontSize(44),

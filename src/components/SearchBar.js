@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     flex: 4,
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: Scaled.fontSize(16),

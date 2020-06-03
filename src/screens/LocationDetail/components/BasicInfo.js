@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     paddingRight: Scaled.width(24),
   },
   textName: {
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: 'bold',
     fontSize: Scaled.fontSize(20),
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   ratingNum: {
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: 'bold',
     fontSize: Scaled.fontSize(14),
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   textRating: {
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: Scaled.fontSize(14),
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     color: theme.fontColor,
   },
   address: {
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: Scaled.fontSize(12),

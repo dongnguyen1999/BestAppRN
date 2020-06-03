@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   message: {
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: Scaled.fontSize(16),

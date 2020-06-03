@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
   },
   resultCaption: {
     marginTop: Scaled.height(11),
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: '500',
     fontSize: Scaled.fontSize(20),

@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     borderRadius: Scaled.fontSize(17),
   },
   priceText: {
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: Scaled.width(17),

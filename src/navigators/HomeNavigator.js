@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     left: Scaled.width(24),
   },
   headerTitle: {
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: '500',
     fontSize: Scaled.fontSize(19),

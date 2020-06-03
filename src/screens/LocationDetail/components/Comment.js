@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   },
   username: {
     marginTop: Scaled.height(11),
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: Scaled.fontSize(14),
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     color: theme.fontColor,
   },
   time: {
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: Scaled.fontSize(12),
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     color: theme.fontColor,
   },
   comment: {
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'italic',
     fontWeight: 'normal',
     fontSize: Scaled.fontSize(13),

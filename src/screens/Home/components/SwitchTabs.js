@@ -9,54 +9,28 @@ import {
 import * as Scaled from '../../../utilities/scaled';
 import theme from '../../../themes/default';
 
-class SwitchTabs extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      switchValue: true,
-    };
-  }
-
-  pressTabHandler = () => {
-    const {callbackValue} = this.props;
-    callbackValue(this.state.switchValue);
-    this.setState({switchValue: !this.state.switchValue});
-  };
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <TouchableOpacity
-          onPress={() => this.pressTabHandler()}
-          style={[
-            styles.tab,
-            this.state.switchValue ? styles.activeTab : undefined,
-          ]}>
-          <Text
-            style={[
-              styles.text,
-              this.state.switchValue ? styles.activeText : undefined,
-            ]}>
-            Địa điểm
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => this.pressTabHandler()}
-          style={[
-            styles.tab,
-            !this.state.switchValue ? styles.activeTab : undefined,
-          ]}>
-          <Text
-            style={[
-              styles.text,
-              !this.state.switchValue ? styles.activeText : undefined,
-            ]}>
-            Tour
-          </Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
+function SwitchTabs(props) {
+  const {switchValue, callbackValue} = props;
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity
+        onPress={() => callbackValue(true)}
+        style={[styles.tab, switchValue ? styles.activeTab : undefined]}>
+        <Text
+          style={[styles.text, switchValue ? styles.activeText : undefined]}>
+          Địa điểm
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => callbackValue(false)}
+        style={[styles.tab, !switchValue ? styles.activeTab : undefined]}>
+        <Text
+          style={[styles.text, !switchValue ? styles.activeText : undefined]}>
+          Tour
+        </Text>
+      </TouchableOpacity>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -79,7 +53,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   text: {
-    fontFamily: 'Nunito',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: '600',
     fontSize: Scaled.fontSize(18),

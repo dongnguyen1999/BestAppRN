@@ -1,3 +1,4 @@
+/* eslint-disable no-bitwise */
 import React, {Component} from 'react';
 import {
   View,
@@ -24,6 +25,7 @@ import {GoogleSignin} from '@react-native-community/google-signin';
 import * as Scaled from '../../utilities/scaled';
 import defaultLocation from '../../constants/defaultLocation';
 import SwitchTabs from './components/SwitchTabs';
+import createSearchString from '../../utilities/createSearchString';
 
 class Home extends Component {
   constructor(props) {
@@ -137,9 +139,21 @@ class Home extends Component {
     this.setState({fetchingLocations: true, tours: []});
     let toursData = [];
     if (this.state.locations.size != 0) {
-      let placeIds = [...this.state.locations.values()].map(
-        location => location.place_id,
+      let searchString = createSearchString(
+        this.state.searchText,
+        this.state.filtersData,
       );
+      let keywords = searchString
+        .split(' ')
+        .map(word => word.trim().toLowerCase());
+      let placeIds = [...this.state.locations.values()]
+        .filter(({name, place_id}) => {
+          let checker = false;
+          let lowerName = name.toLowerCase();
+          keywords.forEach(word => (checker |= lowerName.includes(word)));
+          return checker;
+        })
+        .map(location => location.place_id);
       let response = await fetchTours(placeIds);
       toursData = response.data;
     }
@@ -266,10 +280,10 @@ class Home extends Component {
               value={this.state.showPlaces}
             /> */}
             <SwitchTabs
-              callbackValue={value => {
-                let showTours = value;
-                if (showTours) this.fetchToursList();
-                this.setState({showPlaces: !showTours});
+              switchValue={this.state.showPlaces}
+              callbackValue={showPlaces => {
+                if (!showPlaces) this.fetchToursList();
+                this.setState({showPlaces: showPlaces});
               }}
             />
           </View>
@@ -309,7 +323,7 @@ const styles = StyleSheet.create({
   },
   resultCaption: {
     marginTop: Scaled.height(13),
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: '500',
     fontSize: Scaled.fontSize(20),

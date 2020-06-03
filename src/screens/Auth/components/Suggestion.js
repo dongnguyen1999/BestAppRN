@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   text: {
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: Scaled.fontSize(13),
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   link: {
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: Scaled.fontSize(13),

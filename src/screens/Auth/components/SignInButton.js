@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   },
   text: {
     paddingLeft: Scaled.width(5),
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: Scaled.fontSize(13),

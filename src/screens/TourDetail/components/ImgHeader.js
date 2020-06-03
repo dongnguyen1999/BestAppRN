@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   tourName: {
     flex: 1,
     textAlignVertical: 'center',
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: 'bold',
     fontSize: Scaled.fontSize(22),
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   },
   price: {
     flex: 1,
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: Scaled.fontSize(16),
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   middleText: {
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: Scaled.fontSize(12),

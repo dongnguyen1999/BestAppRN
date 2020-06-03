@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   },
   welcomeText: {
     width: Scaled.width(250),
-    fontFamily: 'Nunito Sans',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: Scaled.height(16),

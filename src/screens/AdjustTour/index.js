@@ -342,7 +342,7 @@ const styles = StyleSheet.create({
     marginBottom: 0,
   },
   headerText: {
-    fontFamily: 'Roboto',
+    fontFamily: theme.fontFamily,
     fontStyle: 'normal',
     fontWeight: '500',
     fontSize: Scaled.fontSize(14),
