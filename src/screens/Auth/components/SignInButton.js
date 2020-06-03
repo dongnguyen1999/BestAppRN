@@ -8,12 +8,12 @@ function SignInButton(props) {
   return (
     <TouchableOpacity
       activeOpacity={0.5}
-      style={styles.container}
+      style={styles.buttonContent}
       onPress={onPress}>
-      <View style={styles.buttonContent}>
-        {props.children}
-        <Text style={styles.text}>{title}</Text>
-      </View>
+      {/* <View style={styles.buttonContent}> */}
+      {props.children}
+      <Text style={styles.text}>{title}</Text>
+      {/* </View> */}
     </TouchableOpacity>
   );
 }

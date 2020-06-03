@@ -34,8 +34,7 @@ function FormButtons(props) {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    position: 'absolute',
-    top: Scaled.height(330),
+    marginTop: Scaled.height(9),
   },
   text: {
     padding: Scaled.width(7),

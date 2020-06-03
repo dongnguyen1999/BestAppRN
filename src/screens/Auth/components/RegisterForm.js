@@ -31,8 +31,8 @@ function RegisterForm(props) {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    position: 'absolute',
-    top: Scaled.height(170),
+    marginTop: Scaled.height(43),
+    height: Scaled.height(200),
   },
 });
 

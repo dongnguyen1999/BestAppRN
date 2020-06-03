@@ -24,9 +24,9 @@ function LoginForm(props) {
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
-    top: Scaled.height(170),
+    marginTop: Scaled.height(43),
     width: '100%',
+    height: Scaled.height(160),
   },
 });
 

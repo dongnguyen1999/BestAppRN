@@ -152,18 +152,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   appName: {
-    flex: 2,
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'bold',
     fontSize: Scaled.fontSize(44),
     lineHeight: Scaled.height(52),
     color: theme.lightElementColor,
-    position: 'absolute',
-    top: Scaled.height(95),
+    marginTop: Scaled.height(71),
   },
   formButtons: {
-    top: Scaled.height(405),
+    marginTop: Scaled.height(24),
   },
   indicatorContainer: {
     flex: 1,

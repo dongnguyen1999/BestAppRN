@@ -93,11 +93,11 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'normal',
+    flex: 1,
     fontSize: Scaled.fontSize(12),
     lineHeight: Scaled.height(14),
-    marginLeft: Scaled.width(8),
-    marginRight: Scaled.width(29),
     color: theme.lightElementColor,
+    paddingLeft: Scaled.width(5),
   },
 });
 
