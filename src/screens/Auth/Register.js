@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, ActivityIndicator, Button} from 'react-native';
-import {usernameIcon} from '../../assets/images';
+import {usernameIcon, BlueBestTour} from '../../assets/images';
 import firebaseApp from '../../utilities/firebaseApp';
 import LoginForm from './components/LoginForm';
 import FormButtons from './components/FormButtons';
@@ -114,7 +114,13 @@ class Register extends Component {
       <View style={styles.container}>
         <View>{this.showErrorDialog()}</View>
         <View style={styles.formWrapper}>
-          <Text style={styles.appName}>STour</Text>
+          {/* <Text style={styles.appName}>STour</Text> */}
+          <View style={styles.appName}>
+            <BlueBestTour
+              width={Scaled.width(250)}
+              height={Scaled.height(100)}
+            />
+          </View>
           <RegisterForm
             usernameCallback={this.updateUsername}
             passwordCallback={this.updatePassword}

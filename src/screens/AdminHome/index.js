@@ -1,20 +1,27 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, ActivityIndicator} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ActivityIndicator,
+  BackHandler,
+} from 'react-native';
 import Dialog from '../../components/Dialog';
 import theme from '../../themes/default';
 import FlatListRenderer from '../../utilities/FlatListRenderer';
 import fetchTours from '../../api/fetchTours';
-import getCurrentPosition from '../../api/getCurrentLocation';
 import * as Scaled from '../../utilities/scaled';
 
 class AdminHome extends Component {
   constructor(props) {
     super(props);
+    const {navigation} = props;
+    let currentLocation = navigation.getParam('currentLocation');
     this.state = {
       fetchingLocations: false,
       tours: [],
       currentToursIndex: 0,
-      currentLocation: undefined,
+      currentLocation: currentLocation,
     };
     this.isAdmin = true;
     this.maxNbToursShown = 15;
@@ -25,17 +32,13 @@ class AdminHome extends Component {
 
   componentDidMount() {
     this.fetchToursList();
+    BackHandler.addEventListener('hardwareBackPress', function() {
+      return true;
+    });
   }
 
   fetchToursList = async () => {
     this.setState({fetchingLocations: true, tours: []});
-    let info;
-    info = await getCurrentPosition().catch(
-      e => (info = {coords: {latitude: 0, longitude: 0}}),
-    );
-    this.setState({
-      currentLocation: {lat: info.coords.latitude, lng: info.coords.longitude},
-    });
     let toursData = [];
     let response = await fetchTours();
     toursData = response.data;

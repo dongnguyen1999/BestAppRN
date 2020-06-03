@@ -20,7 +20,6 @@ import fetchCompanyInfo from '../../api/fetchCompanyInfo';
 import VoiceRecognition from '../../utilities/VoiceRecognition';
 import LocationsFetcher from '../../utilities/LocationsFetcher';
 import RecordingAminated from '../../components/RecordingAminated';
-import getCurrentPosition from '../../api/getCurrentLocation';
 import fetchPlacesUseTourId from '../../api/fetchPlacesUseTourId';
 import {FlatList} from 'react-native-gesture-handler';
 import fetchAllDetail from '../../api/fetchAllDetail';
@@ -31,6 +30,8 @@ import * as Scaled from '../../utilities/scaled';
 class AdjustTour extends Component {
   constructor(props) {
     super(props);
+    const {navigation} = props;
+    let currentLocation = navigation.getParam('currentLocation');
     this.state = {
       showDetail: false,
       tourData: new Map(),
@@ -41,7 +42,7 @@ class AdjustTour extends Component {
       started: '',
       results: [],
       locations: new Map(),
-      currentLocation: undefined,
+      currentLocation: currentLocation,
       nextPageToken: undefined,
       selectedLocations: new Map(),
       fetchingLocations: false,
@@ -64,11 +65,7 @@ class AdjustTour extends Component {
     this.setState({isLoading: true});
     await this.fetchTourInfo();
     await this.fetchPlacesFromTour();
-    let info = await getCurrentPosition();
-    this.setState({
-      isLoading: false,
-      currentLocation: {lat: info.coords.latitude, lng: info.coords.longitude},
-    });
+    this.setState({isLoading: false});
   };
 
   updateSearchText = text => this.setState({searchText: text});

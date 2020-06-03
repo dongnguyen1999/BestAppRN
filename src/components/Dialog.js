@@ -4,28 +4,42 @@ import DialogBuilder from 'react-native-dialog';
 import theme from '../themes/default';
 
 function Dialog(props) {
-  const {title, description, type, onAccept, onCancel} = props;
+  const {
+    title,
+    description,
+    type,
+    onAccept,
+    onCancel,
+    acceptLabel,
+    cancelLabel,
+    suggestion,
+  } = props;
   return (
     <View>
       <DialogBuilder.Container visible={true}>
         <DialogBuilder.Title>{title}</DialogBuilder.Title>
         <DialogBuilder.Description>{description}</DialogBuilder.Description>
+        {suggestion ? (
+          <DialogBuilder.Description>{suggestion}</DialogBuilder.Description>
+        ) : (
+          undefined
+        )}
         {type === 'prompt' ? (
           <View style={styles.prompt}>
             <DialogBuilder.Button
-              label="Cancel"
+              label={cancelLabel ? cancelLabel : 'Cancel'}
               onPress={onCancel}
               style={styles.button}
             />
             <DialogBuilder.Button
-              label="Oki"
+              label={acceptLabel ? acceptLabel : 'Oki'}
               onPress={onAccept}
               style={styles.button}
             />
           </View>
         ) : (
           <DialogBuilder.Button
-            label="Oki"
+            label={acceptLabel ? acceptLabel : 'Oki'}
             onPress={onAccept}
             style={styles.button}
           />

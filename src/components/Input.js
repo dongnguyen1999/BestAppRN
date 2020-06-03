@@ -51,9 +51,9 @@ class Input extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 2,
-    display: 'flex',
-    flexDirection: 'column',
+    flex: 1,
+    // display: 'flex',
+    // flexDirection: 'column',
   },
   textInput: {
     fontFamily: 'Roboto',

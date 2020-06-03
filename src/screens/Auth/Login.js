@@ -13,7 +13,7 @@ import {
 import theme from '../../themes/default';
 import * as Scaled from '../../utilities/scaled';
 import SplashScreen from '../SplashScreen';
-import {SmallPalm} from '../../assets/images';
+import {SmallPalm, BlueBestTour} from '../../assets/images';
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -119,7 +119,8 @@ class Login extends Component {
   errorCallback = error =>
     this.setState({error: error.message, isLoading: false});
 
-  loggedInCallback = method => this.setState({loggedInBy: method});
+  loggedInCallback = method =>
+    this.setState({loggedInBy: method, isLoading: false});
 
   render() {
     // console.log(this.state.isLoading);
@@ -138,8 +139,13 @@ class Login extends Component {
       <View style={styles.container}>
         {this.showErrorDialog()}
         <View style={styles.formWrapper}>
-          <Text style={styles.appName}>STour</Text>
-          {/* <SmallPalm /> */}
+          {/* <Text style={styles.appName}>STour</Text> */}
+          <View style={styles.appName}>
+            <BlueBestTour
+              width={Scaled.width(250)}
+              height={Scaled.height(100)}
+            />
+          </View>
 
           <LoginForm
             usernameCallback={this.updateUsername}
@@ -148,9 +154,10 @@ class Login extends Component {
           <FormButtons
             title="ĐĂNG NHẬP"
             onPress={() => this.verifyAndLogin()}
-            onGoogleSignIn={() =>
-              loginWithGoogle(this.loggedInCallback, this.errorCallback)
-            }
+            onGoogleSignIn={() => {
+              this.setState({isLoading: true});
+              loginWithGoogle(this.loggedInCallback, this.errorCallback);
+            }}
           />
           <Suggestion
             message="Chưa có tài khoản?"

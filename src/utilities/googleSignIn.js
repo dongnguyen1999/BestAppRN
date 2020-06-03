@@ -1,4 +1,5 @@
 import {GoogleSignin, statusCodes} from '@react-native-community/google-signin';
+import {Alert} from 'react-native';
 
 export const googleSignInConfig = () => {
   GoogleSignin.configure({
@@ -30,7 +31,8 @@ export const loginWithGoogle = async (callback, errorCallback) => {
     } else {
       // some other error happened
     }
-    error.message = error;
-    errorCallback(error);
+
+    let errorWithMessage = {message: error.message};
+    errorCallback(errorWithMessage);
   }
 };

@@ -26,6 +26,7 @@ class RefImage extends Component {
   }
 
   render() {
+    // console.log(this.state.imgSrc);
     const {wrapperStyle, imgStyle} = this.props;
     return (
       <View style={wrapperStyle ? wrapperStyle : styles.wrapper}>

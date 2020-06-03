@@ -19,7 +19,9 @@ function BasicInfo(props) {
   const {name, rating, nbReviews, address} = props;
   return (
     <View style={styles.container}>
-      <Text style={styles.textName}>{name}</Text>
+      <Text style={styles.textName} numberOfLines={1}>
+        {name}
+      </Text>
       <View style={styles.ratingContainer}>
         <Text style={styles.ratingNum}>{rating.toFixed(1)}</Text>
         <View style={styles.ratingStars}>{renderStars(rating)}</View>

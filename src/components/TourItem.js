@@ -49,10 +49,11 @@ class InfoItem extends Component {
   };
 
   navigateAsAdmin = () => {
-    const {navigation, id, onRefreshTours} = this.props;
+    const {navigation, id, onRefreshTours, currentLocation} = this.props;
     navigation.navigate('AdjustTour', {
       id: id,
       onRefreshTours: onRefreshTours,
+      currentLocation: currentLocation,
     });
   };
 
