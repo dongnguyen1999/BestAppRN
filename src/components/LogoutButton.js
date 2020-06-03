@@ -34,7 +34,12 @@ class LogoutButton extends Component {
     firebaseApp
       .auth()
       .signOut()
-      .then(() => this.props.navigation.navigate('Login', {loggedOut: true}))
+      .then(() =>
+        this.props.navigation.navigate('Login', {
+          loggedOut: true,
+          showSplashScreen: false,
+        }),
+      )
       .catch(function(error) {
         console.log(error);
       });
@@ -43,7 +48,10 @@ class LogoutButton extends Component {
     try {
       await GoogleSignin.revokeAccess();
       await GoogleSignin.signOut();
-      this.props.navigation.navigate('Login', {loggedOut: true});
+      this.props.navigation.navigate('Login', {
+        loggedOut: true,
+        showSplashScreen: false,
+      });
     } catch (error) {
       console.error(error);
     }

@@ -12,15 +12,19 @@ import {
 } from '../../utilities/googleSignIn';
 import theme from '../../themes/default';
 import * as Scaled from '../../utilities/scaled';
+import SplashScreen from '../SplashScreen';
 class Login extends Component {
   constructor(props) {
     super(props);
+    const {navigation} = props;
+    let showSplashScreen = navigation.getParam('showSplashScreen');
     this.state = {
       isLoading: true,
       username: '',
       password: '',
       error: undefined,
       loggedInBy: undefined,
+      showSplashScreen: showSplashScreen === false ? false : true,
     };
     this.updateUsername = this.updateUsername.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
@@ -29,9 +33,15 @@ class Login extends Component {
   }
 
   componentDidMount() {
+    this.showSplashScreen();
     this.checkLoggedIn();
     googleSignInConfig();
   }
+
+  showSplashScreen = async () => {
+    const showingTime = 2000;
+    setTimeout(() => this.setState({showSplashScreen: false}), showingTime);
+  };
 
   checkLoggedIn = async () => {
     const user = await this.isLoggedInWithAccount();
@@ -115,9 +125,10 @@ class Login extends Component {
     // console.log(this.state.loggedInBy);
     console.disableYellowBox = true;
     const {navigation} = this.props;
-    if (this.state.loggedInBy) {
+    if (this.state.loggedInBy && !this.state.showSplashScreen) {
       navigation.navigate('Home', {loggedInBy: this.state.loggedInBy});
     }
+    if (this.state.showSplashScreen) return <SplashScreen />;
     return this.state.isLoading ? (
       <View style={styles.indicatorContainer}>
         <ActivityIndicator size="large" color={theme.lightElementColor} />

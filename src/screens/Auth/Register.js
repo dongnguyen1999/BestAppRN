@@ -131,7 +131,9 @@ class Register extends Component {
           <Suggestion
             message="Có tài khoản?"
             action="Đăng nhập"
-            onAction={() => navigation.navigate('Login')}
+            onAction={() =>
+              navigation.navigate('Login', {showSplashScreen: false})
+            }
           />
         </View>
       </View>
