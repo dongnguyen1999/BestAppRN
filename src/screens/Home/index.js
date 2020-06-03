@@ -262,7 +262,6 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingLeft: Scaled.width(16),
     paddingRight: Scaled.width(16),
-    marginBottom: Scaled.height(13),
   },
   toggleContainer: {
     display: 'flex',
@@ -274,8 +273,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: '500',
-    fontSize: Scaled.fontSize(21),
-    lineHeight: Scaled.height(32),
+    fontSize: Scaled.fontSize(20),
+    lineHeight: Scaled.height(30),
     color: theme.fontColor,
     marginBottom: Scaled.height(15),
   },
@@ -289,7 +288,7 @@ const styles = StyleSheet.create({
   smallIndicator: {
     width: '100%',
     height: Scaled.height(30),
-    // marginBottom: Scaled.height(10),
+    marginTop: Scaled.height(10),
   },
 });
 

@@ -13,6 +13,7 @@ import {
 import theme from '../../themes/default';
 import * as Scaled from '../../utilities/scaled';
 import SplashScreen from '../SplashScreen';
+import {SmallPalm} from '../../assets/images';
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -138,6 +139,8 @@ class Login extends Component {
         {this.showErrorDialog()}
         <View style={styles.formWrapper}>
           <Text style={styles.appName}>STour</Text>
+          {/* <SmallPalm /> */}
+
           <LoginForm
             usernameCallback={this.updateUsername}
             passwordCallback={this.updatePassword}

@@ -25,6 +25,8 @@ import BlueImagesLib from './svg/blueImagesLib.svg';
 import BlueDirection from './svg/blueDirection.svg';
 import ArrowRightIcon from './svg/arrowRightIcon.svg';
 import SplashLogo from './svg/splashLogo.svg';
+import HeaderLogo from './svg/headerLogo.svg';
+import SmallPalm from './svg/smallPalm.svg';
 
 export const usernameIcon = require('./usernameInput.png');
 export const passwordIcon = require('./passwordInput.png');
@@ -64,4 +66,6 @@ export {
   BlueImagesLib,
   ArrowRightIcon,
   SplashLogo,
+  HeaderLogo,
+  SmallPalm,
 };

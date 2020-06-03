@@ -2,13 +2,15 @@ import React from 'react';
 import {createStackNavigator} from 'react-navigation-stack';
 import Home from '../screens/Home';
 import theme from '../themes/default';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import LogoutButton from '../components/LogoutButton';
 import LocationDetail from '../screens/LocationDetail';
 import TourDetail from '../screens/TourDetail';
 import AdjustTour from '../screens/AdjustTour';
 import AdminHome from '../screens/AdminHome';
 import * as Scaled from '../utilities/scaled';
+import {SmallPalm, HeaderLogo} from '../assets/images';
+import HomeHeader from '../components/HomeHeader';
 
 const homeNavigationOptions = (navigation, title) => {
   return {
@@ -18,6 +20,26 @@ const homeNavigationOptions = (navigation, title) => {
     headerTitleContainerStyle: styles.titleContainer,
     headerTintColor: theme.headerTintColor,
     headerRightContainerStyle: styles.rightContainer,
+    headerRight: () => {
+      return (
+        <LogoutButton
+          navigation={navigation}
+          loggedInBy={navigation.getParam('loggedInBy', undefined)}
+        />
+      );
+    },
+  };
+};
+
+const bestTourHeader = navigation => {
+  return {
+    title: '',
+    headerStyle: styles.header,
+    headerTitleStyle: styles.headerTitle,
+    headerTitleContainerStyle: styles.titleContainer,
+    headerTintColor: theme.headerTintColor,
+    headerRightContainerStyle: styles.rightContainer,
+    headerLeft: () => <HomeHeader />,
     headerRight: () => {
       return (
         <LogoutButton
@@ -60,8 +82,7 @@ const AdminHomeNavigator = createStackNavigator({
 const HomeNavigator = createStackNavigator({
   Home: {
     screen: Home,
-    navigationOptions: ({navigation}) =>
-      homeNavigationOptions(navigation, 'Stour'),
+    navigationOptions: ({navigation}) => bestTourHeader(navigation),
   },
   AdminHomeStack: {
     screen: AdminHomeNavigator,
