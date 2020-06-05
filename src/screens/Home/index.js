@@ -31,7 +31,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchText: 'Gà',
+      searchText: '',
       filtersData: new Map(),
       recognized: '',
       started: '',
@@ -147,13 +147,14 @@ class Home extends Component {
         .split(' ')
         .map(word => word.trim().toLowerCase());
       let placeIds = [...this.state.locations.values()]
-        .filter(({name, place_id}) => {
-          let checker = false;
-          let lowerName = name.toLowerCase();
-          keywords.forEach(word => (checker |= lowerName.includes(word)));
-          return checker;
-        })
+        // .filter(({name, place_id}) => {
+        //   let checker = false;
+        //   let lowerName = name.toLowerCase();
+        //   keywords.forEach(word => (checker |= lowerName.includes(word)));
+        //   return checker;
+        // })
         .map(location => location.place_id);
+      // console.log(placeIds);
       let response = await fetchTours(placeIds);
       toursData = response.data;
     }
@@ -161,12 +162,13 @@ class Home extends Component {
     toursData.sort(() => Math.random() - 0.5);
     let splitedData = [];
     for (let i = 0; i <= maxIndex; i++) {
-      splitedData.push(
-        toursData.slice(
-          i * this.maxNbToursShown,
-          i * this.maxNbToursShown + this.maxNbToursShown,
-        ),
+      let fold = toursData.slice(
+        i * this.maxNbToursShown,
+        i * this.maxNbToursShown + this.maxNbToursShown,
       );
+      if (fold.length != 0) {
+        splitedData.push(fold);
+      }
     }
     this.setState({
       fetchingLocations: false,
@@ -205,11 +207,12 @@ class Home extends Component {
     // ('ChIJp8jxUTuIoDERyBcwpCPpzQM','ChIJ60pywR6IoDERhfZEhWlmn2s','ChIJ0VRx_gOIoDER0lUk8X0mtt4','ChIJ5f1X5R-IoDERoa8wRZ-qo1M','ChIJEUcyC8aJoDERifNoSARsqZI','ChIJEb4JocWJoDERJLvFAoiBPBw','ChIJV6JsWT6IoDEREaLArv999RQ','ChIJTXcDk0eJoDERdJa0O22aeeM','ChIJ6V-lFEeJoDERMCvFnIHIvAA','ChIJuYb_h5WJoDERctRVzWmAaGk','ChIJ5UsFYNyJoDERgR1JXN1ltWg','ChIJa0hrbaBioDERVyjh1sbkvyQ','ChIJmRMrNp9ioDERFTTz_SX0q98','ChIJh5k_pDiJoDERz8bYV7hN8DI','ChIJMyZt7juJoDERZefxD9QMs-Q','ChIJi61qC0uJoDERw-SB7t-3VAw','ChIJ_bOU9qFioDERbj90-AO96U0','ChIJ3R5lgDWIoDERBbJIUDznp4E','ChIJkYsYSYCJoDERlz-f5guV8Vk','ChIJt6mxpgKIoDERNh6JLOAiH4U','ChIJeQMGhqWJoDERsoJbIYX9MrM','ChIJMUiaCcGJoDERAaVgMFBR-Qk','ChIJbwhuWiOIoDER65Fiyhg7igk','ChIJ13HN4OSJoDER7tXLeIFGlVs','ChIJqRhwS7KJoDERMcQ0Br7S_QY','ChIJo61LXCWIoDERSJJP1s_rh00','ChIJDQtAqSaIoDER1P9k3g5B5wc','ChIJQRnBMEKIoDERf4x_L7J4qps','ChIJ-x4BNY-JoDERZotWzLvtMSc','ChIJJ06SxZtjoDERDf6VilBheGs','ChIJwSKEAoiJoDER5DgwRrEWZJY','ChIJ54eipQKIoDERIm8DOOcsvuc','ChIJpR0e8aGJoDERlknCWe30GeU','ChIJYxX15cCOoDER5L7Q9HssDQk','ChIJ_2I9E7GJoDERNbHmqePQe2g','ChIJE1UNZwaIoDERev8caxlFa5k','ChIJpY4pDq9ioDERfrBz2X3wDyc','ChIJJQH8VTKJoDERxa7OqXN6OCw','ChIJU0S0fdtjoDERpIVwsbbhazg','ChIJgdjFNZyJoDERcVTVRSlPJ7o','ChIJBaCU6ahioDERWz1GFHCzVBs','ChIJl1Itx1GGoDERW50fvPAmqDw','ChIJTU4fPKBioDERUxdmkOJUHFM','ChIJWR2TuhCIoDERxAmY3u_KZg4','ChIJ3YD53eCEoDERybLIPgYpUPE','ChIJ6SPycoSJoDER9mNGNZ1JT5g','ChIJ7yVT2B-IoDERc_XozfIkSjk','ChIJTy8754iJoDER3JZDksH3ZHM','ChIJBWqKXzeIoDERidjeHXVN9UM','ChIJZYGTmxiJoDERiC8lQjc0bJ8','ChIJrysGDK9ioDERTleWW1Ugd4Q','ChIJp2c-JA6IoDERlKdoeyx1J9E','ChIJYUQggaFioDERA9jQdLhuN6g','ChIJl_JGML-JoDERjZfu5jQBGf4','ChIJ0WXQK5KJoDERCMv3QhR7dk8','ChIJB-oGOw6IoDERi3BuQcHBjlg','ChIJe_SlTJ9ioDERl2nd20r35jM','ChIJ5zrOMs2JoDERabb5TltvVYM','ChIJqzF1n55ioDERHFz6CJAnQAk','ChIJt2icrkBnoDERlZUsPLSw3qg')
     const {navigation} = this.props;
     const loggedInBy = navigation.getParam('loggedInBy');
-    if (this.state.isAdmin && !this.state.showErrorDialog)
+    if (this.state.isAdmin && !this.state.showErrorDialog) {
       navigation.navigate('AdminHomeStack', {
         loggedInBy: loggedInBy,
         currentLocation: this.state.currentLocation,
       });
+    }
     let willLogout = this.props.navigation.getParam('willLogout');
     let logout = this.props.navigation.getParam('logouter');
     return this.state.isLoading ? (
@@ -282,7 +285,9 @@ class Home extends Component {
             <SwitchTabs
               switchValue={this.state.showPlaces}
               callbackValue={showPlaces => {
-                if (!showPlaces) this.fetchToursList();
+                if (!showPlaces) {
+                  this.fetchToursList();
+                }
                 this.setState({showPlaces: showPlaces});
               }}
             />
@@ -342,6 +347,22 @@ const styles = StyleSheet.create({
     width: '100%',
     height: Scaled.height(30),
     marginTop: Scaled.height(10),
+  },
+  notFoundTextView: {
+    flex: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  notFoundText: {
+    fontFamily: theme.fontFamily,
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    fontSize: Scaled.fontSize(16),
+    lineHeight: Scaled.height(19),
+    color: theme.fontButtonTabs,
+    width: Scaled.width(230),
+    textAlign: 'center',
   },
 });
 

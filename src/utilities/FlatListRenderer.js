@@ -1,7 +1,7 @@
 import React from 'react';
 import PlaceItem from '../components/PlaceItem';
 import TourItem from '../components/TourItem';
-import {FlatList, ScrollView} from 'react-native';
+import {FlatList, ScrollView, Text, View} from 'react-native';
 import * as Scaled from '../utilities/scaled';
 
 function renderLocationItem(key, location, navigation, currentLocation) {
@@ -68,55 +68,89 @@ class FlatListRenderer {
   renderLocationsFlatList(styles) {
     const {navigation} = this.props;
     let currentLocation = this.state.currentLocation;
-    return this.state.locations.size != 0 && this.state.showPlaces ? (
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        style={styles.contentWrapper}
-        onEndReached={this.locationsFetcher.getNextPageLocations}
-        data={this.renderLocationList()}
-        renderItem={({index, item}) =>
-          renderLocationItem(index, item, navigation, currentLocation)
-        }
-      />
-    ) : (
-      undefined
-    );
+    if (this.state.showPlaces) {
+      return this.state.locations.size != 0 ? (
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          style={styles.contentWrapper}
+          onEndReached={this.locationsFetcher.getNextPageLocations}
+          data={this.renderLocationList()}
+          renderItem={({index, item}) =>
+            renderLocationItem(index, item, navigation, currentLocation)
+          }
+        />
+      ) : !this.state.fetchingLocations ? (
+        <View style={[styles.contentWrapper, styles.notFoundTextView]}>
+          <Text style={styles.notFoundText}>
+            Hiện không có địa điểm phù hợp, mời bạn tìm kiếm với từ khóa khác
+          </Text>
+        </View>
+      ) : (
+        undefined
+      );
+    } else {
+      return null;
+    }
+    // return this.state.locations.size != 0 && this.state.showPlaces ? (
+    //   <FlatList
+    //     showsVerticalScrollIndicator={false}
+    //     style={styles.contentWrapper}
+    //     onEndReached={this.locationsFetcher.getNextPageLocations}
+    //     data={this.renderLocationList()}
+    //     renderItem={({index, item}) =>
+    //       renderLocationItem(index, item, navigation, currentLocation)
+    //     }
+    //   />
+    // ) : (
+    //   undefined
+    // );
   }
 
   renderToursFlatList(styles, showImgs) {
     const {navigation} = this.props;
     let currentLocation = this.state.currentLocation;
     // console.log(this.state.tours.length, this.state.currentToursIndex);
-    return this.state.tours.length != 0 && !this.state.showPlaces ? (
-      <ScrollView
-        style={styles.contentWrapper}
-        showsVerticalScrollIndicator={false}
-        ref={view => (this.toursList = view)}
-        onScroll={event => {
-          if (isCloseToTop(event.nativeEvent)) {
-            this.toursList.scrollTo(Scaled.height(1), 0, false);
-            this.updateToursIndex(-1);
-          }
-          if (isCloseToBottom(event.nativeEvent)) {
-            if (this.state.currentToursIndex != this.state.maxToursIndex)
+    if (!this.state.showPlaces) {
+      return this.state.tours.length != 0 ? (
+        <ScrollView
+          style={styles.contentWrapper}
+          showsVerticalScrollIndicator={false}
+          ref={view => (this.toursList = view)}
+          onScroll={event => {
+            if (isCloseToTop(event.nativeEvent)) {
               this.toursList.scrollTo(Scaled.height(1), 0, false);
-            this.updateToursIndex(1);
-          }
-        }}>
-        {this.state.tours[this.state.currentToursIndex].map((item, index) =>
-          renderTourItem(
-            index,
-            item,
-            navigation,
-            currentLocation,
-            !this.isAdmin,
-            this.fetchToursList,
-          ),
-        )}
-      </ScrollView>
-    ) : (
-      undefined
-    );
+              this.updateToursIndex(-1);
+            }
+            if (isCloseToBottom(event.nativeEvent)) {
+              if (this.state.currentToursIndex != this.state.maxToursIndex) {
+                this.toursList.scrollTo(Scaled.height(1), 0, false);
+              }
+              this.updateToursIndex(1);
+            }
+          }}>
+          {this.state.tours[this.state.currentToursIndex].map((item, index) =>
+            renderTourItem(
+              index,
+              item,
+              navigation,
+              currentLocation,
+              !this.isAdmin,
+              this.fetchToursList,
+            ),
+          )}
+        </ScrollView>
+      ) : !this.state.fetchingLocations ? (
+        <View style={[styles.contentWrapper, styles.notFoundTextView]}>
+          <Text style={styles.notFoundText}>
+            Hiện không có tour phù hợp, mời bạn tìm kiếm với từ khóa khác
+          </Text>
+        </View>
+      ) : (
+        undefined
+      );
+    } else {
+      return null;
+    }
   }
 }
 

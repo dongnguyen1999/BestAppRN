@@ -17,7 +17,7 @@ function SearchBar(props) {
       </TouchableOpacity>
       <TextInput
         style={styles.textInput}
-        placeholder="Nhập địa điểm"
+        placeholder="Tìm kiếm..."
         placeholderTextColor={theme.placeholderColor}
         onChangeText={text => searchTextCallback(text)}
         onSubmitEditing={onSearchText}>
