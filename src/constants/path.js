@@ -14,3 +14,4 @@ export const getPlaces = '/get_places.php';
 export const getTourDetail = '/get_tour_detail.php';
 export const getCompanyInfo = '/get_company_info.php';
 export const updateTourInfo = '/update_tour_info.php';
+export const deleteTour = '/delete_tour.php';

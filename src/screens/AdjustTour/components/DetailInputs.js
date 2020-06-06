@@ -4,12 +4,26 @@ import Input from '../../../components/Input';
 import Filter from '../../../components/Filter';
 import * as Scaled from '../../../utilities/scaled';
 import theme from '../../../themes/default';
+import fetchCompanyInfo from '../../../api/fetchCompanyInfo';
 
 class DetailInputs extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.insertMode = props.insertMode;
+    this.state = {
+      companyData: [],
+      selectedCompany: undefined,
+    };
   }
+
+  componentDidMount() {
+    if (this.insertMode) this.fetchCompany();
+  }
+
+  fetchCompany = async () => {
+    let comData = await fetchCompanyInfo();
+    this.setState({companyData: comData.data});
+  };
 
   render() {
     const {
@@ -34,31 +48,56 @@ class DetailInputs extends Component {
           type="numeric"
           callbackValue={text => callbackValue('price', text)}
         />
-        <Input
-          title="Tên công ty cung cấp"
-          titleStyle={styles.inputTitle}
-          value={data.get('comName')}
-          callbackValue={text => callbackValue('comName', text)}
-        />
-        <Input
-          title="Địa chỉ"
-          titleStyle={styles.inputTitle}
-          value={data.get('comAddress')}
-          callbackValue={text => callbackValue('comAddress', text)}
-        />
-        <Input
-          title="Số điện thoại"
-          titleStyle={styles.inputTitle}
-          value={data.get('comPhone')}
-          callbackValue={text => callbackValue('comPhone', text)}
-        />
-        <Input
-          title="Email"
-          titleStyle={styles.inputTitle}
-          value={data.get('comEmail')}
-          type="email-address"
-          callbackValue={text => callbackValue('comEmail', text)}
-        />
+        {this.insertMode ? (
+          <View style={styles.companyView}>
+            <Filter
+              title="Công ty cung cấp: "
+              style={styles.companySelection}
+              listItem={this.state.companyData.map(com => com.name)}
+              selectedValue={this.state.selectedCompany}
+              callbackValue={(title, text) => {
+                callbackValue(
+                  'comId',
+                  this.state.companyData.length > 0
+                    ? this.state.companyData.filter(com => com.name == text)[0]
+                        .id
+                    : undefined,
+                );
+                this.setState({selectedCompany: text});
+              }}
+              show={true}
+              fixedHeight={Scaled.height(200)}
+            />
+          </View>
+        ) : (
+          <View>
+            <Input
+              title="Tên công ty cung cấp"
+              titleStyle={styles.inputTitle}
+              value={data.get('comName')}
+              callbackValue={text => callbackValue('comName', text)}
+            />
+            <Input
+              title="Địa chỉ"
+              titleStyle={styles.inputTitle}
+              value={data.get('comAddress')}
+              callbackValue={text => callbackValue('comAddress', text)}
+            />
+            <Input
+              title="Số điện thoại"
+              titleStyle={styles.inputTitle}
+              value={data.get('comPhone')}
+              callbackValue={text => callbackValue('comPhone', text)}
+            />
+            <Input
+              title="Email"
+              titleStyle={styles.inputTitle}
+              value={data.get('comEmail')}
+              type="email-address"
+              callbackValue={text => callbackValue('comEmail', text)}
+            />
+          </View>
+        )}
         <View style={styles.dayNightView}>
           <Filter
             title="Ngày"
@@ -105,6 +144,12 @@ const styles = StyleSheet.create({
   },
   filter: {
     width: '48%',
+  },
+  companySelection: {
+    width: '100%',
+  },
+  companyView: {
+    marginTop: Scaled.height(20),
   },
 });
 

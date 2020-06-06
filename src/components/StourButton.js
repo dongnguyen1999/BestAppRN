@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     borderWidth: Scaled.width(1),
     borderColor: theme.lightElementColor,
     borderRadius: Scaled.fontSize(3),
-    height: Scaled.height(40),
+    height: Scaled.height(36),
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

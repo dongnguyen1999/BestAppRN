@@ -26,15 +26,25 @@ import fetchAllDetail from '../../api/fetchAllDetail';
 import {getDistanceFrom2Locations} from '../../utilities/computeDistance';
 import updateTourInfo from '../../api/updateTourInfo';
 import * as Scaled from '../../utilities/scaled';
+import Dialog from '../../components/Dialog';
+import deleteTourFromServer from '../../api/deleteTourFromServer';
+import nameFields from '../../constants/fieldName';
 
 class AdjustTour extends Component {
   constructor(props) {
     super(props);
     const {navigation} = props;
     let currentLocation = navigation.getParam('currentLocation');
+    let tourId = navigation.getParam('id');
+    let initMap = new Map();
+    initMap.set('comId', undefined);
+    initMap.set('name', undefined);
+    initMap.set('price', undefined);
+    initMap.set('nbDay', undefined);
+    initMap.set('nbNight', undefined);
     this.state = {
       showDetail: false,
-      tourData: new Map(),
+      tourData: initMap,
       addingLocation: false,
       searchText: '',
       filtersData: new Map(),
@@ -47,6 +57,9 @@ class AdjustTour extends Component {
       selectedLocations: new Map(),
       fetchingLocations: false,
       showFilter: false,
+      showDeleteConfirm: false,
+      showNullInputAlert: undefined,
+      insertMode: tourId == undefined,
     };
     this.updateTourData = this.updateTourData.bind(this);
     this.updateSearchText = this.updateSearchText.bind(this);
@@ -58,7 +71,9 @@ class AdjustTour extends Component {
   }
 
   componentDidMount() {
-    this.firstLoadScreen();
+    if (!this.state.insertMode) {
+      this.firstLoadScreen();
+    }
   }
 
   firstLoadScreen = async () => {
@@ -163,11 +178,12 @@ class AdjustTour extends Component {
           ...locationData,
           checked: this.state.selectedLocations.get(placeId).checked,
         };
-      } else
+      } else {
         locationData = {
           ...locationData,
           checked: false,
         };
+      }
       return locationData;
     });
     return data.sort((a, b) => a.distance > b.distance);
@@ -178,20 +194,41 @@ class AdjustTour extends Component {
     let data = {};
     for (let [key, value] of this.state.tourData.entries()) {
       data[key] = value;
+      if (value === undefined || `${value}`.trim() === '') {
+        this.setState({showNullInputAlert: nameFields[key].toLowerCase()});
+        return;
+      }
     }
     let placeIds = [];
     for (let [placeId, {checked}] of this.state.selectedLocations.entries()) {
-      if (checked) placeIds.push(placeId);
+      if (checked) {
+        placeIds.push(placeId);
+      }
     }
-    data['placeIds'] = placeIds;
-    await updateTourInfo(data);
+    data.placeIds = placeIds;
+    await updateTourInfo(data).then(r => console.log(r.data));
     let refreshTours = navigation.getParam('onRefreshTours');
-    if (refreshTours) refreshTours();
+    if (refreshTours) {
+      refreshTours();
+    }
+    navigation.navigate('AdminHome');
+  };
+
+  deleteTour = async () => {
+    const {navigation} = this.props;
+    let tourId = this.state.tourData.get('id');
+    await deleteTourFromServer(tourId);
+    let refreshTours = navigation.getParam('onRefreshTours');
+    if (refreshTours) {
+      refreshTours();
+    }
     navigation.navigate('AdminHome');
   };
 
   render() {
     // console.log(this.state.showFilter);
+    const UPDATE_MODE_SCROLL_DISTANCE = 390;
+    const INSERT_MODE_SCROLL_DISTANCE = 200;
     return this.state.isLoading ? (
       <View style={styles.indicatorContainer}>
         <ActivityIndicator size="large" color={theme.lightElementColor} />
@@ -203,8 +240,29 @@ class AdjustTour extends Component {
         onScroll={event => {
           const {contentOffset} = event.nativeEvent;
           const {y} = contentOffset;
-          this.setState({showFilter: y > Scaled.height(370)});
+          this.setState({
+            showFilter:
+              y >
+              Scaled.height(
+                this.state.insertMode
+                  ? INSERT_MODE_SCROLL_DISTANCE - 20
+                  : UPDATE_MODE_SCROLL_DISTANCE - 20,
+              ),
+          });
         }}>
+        {this.state.showNullInputAlert ? (
+          <Dialog
+            title="Lỗi nhập liệu"
+            description={`Thông tin về ${
+              this.state.showNullInputAlert
+            } không được bỏ trống. Vui lòng nhập hoặc chọn giá trị cho ${
+              this.state.showNullInputAlert
+            }`}
+            onAccept={() => this.setState({showNullInputAlert: undefined})}
+          />
+        ) : (
+          undefined
+        )}
         <View
           style={[
             styles.headerView,
@@ -228,11 +286,16 @@ class AdjustTour extends Component {
             data={this.state.tourData}
             style={styles.detailInput}
             callbackValue={this.updateTourData}
+            insertMode={this.state.insertMode}
             scrollViewCallback={() => {
               if (!this.state.showFilter) {
                 this.mainScroll.scrollTo({
                   x: 0,
-                  y: Scaled.height(390),
+                  y: Scaled.height(
+                    this.state.insertMode
+                      ? INSERT_MODE_SCROLL_DISTANCE
+                      : UPDATE_MODE_SCROLL_DISTANCE,
+                  ),
                   animated: true,
                 });
               }
@@ -249,7 +312,11 @@ class AdjustTour extends Component {
               this.setState({addingLocation: !this.state.addingLocation})
             }
           />
-          <View style={styles.placesView}>
+          <View
+            style={[
+              styles.placesView,
+              this.state.insertMode ? {height: Scaled.height(400)} : undefined,
+            ]}>
             {this.state.selectedLocations.size != 0 &&
             !this.state.addingLocation ? (
               <FlatList
@@ -297,11 +364,43 @@ class AdjustTour extends Component {
               undefined
             )}
           </View>
-          <StourButton
-            style={styles.saveButton}
-            title="LƯU THAY ĐỔI"
-            onPress={this.saveChange}
-          />
+          {this.state.insertMode ? (
+            <View style={styles.bottomButtons}>
+              <StourButton
+                style={[styles.saveButton, {marginBottom: Scaled.height(15)}]}
+                title="HOÀN TẤT"
+                onPress={this.saveChange}
+              />
+            </View>
+          ) : (
+            <View style={styles.bottomButtons}>
+              <StourButton
+                style={styles.saveButton}
+                title="LƯU THAY ĐỔI"
+                onPress={this.saveChange}
+              />
+              <StourButton
+                style={styles.deleteButton}
+                titleStyle={styles.deleteButtonText}
+                title="XOÁ TOUR"
+                onPress={() => this.setState({showDeleteConfirm: true})}
+              />
+            </View>
+          )}
+
+          {this.state.showDeleteConfirm ? (
+            <Dialog
+              title="Xác nhận xóa"
+              description="Thao tác này sẽ xóa hoàn toàn thông tin về tour du lịch này trên hệ thống. Bạn có chắc muốn xóa"
+              type="prompt"
+              onAccept={() => this.deleteTour()}
+              onCancel={() => this.setState({showDeleteConfirm: false})}
+              acceptLabel="Xóa luôn"
+              cancelLabel="Xem lại đã"
+            />
+          ) : (
+            undefined
+          )}
         </View>
         {this.state.started ? (
           <View style={styles.recognitionView}>
@@ -350,10 +449,10 @@ const styles = StyleSheet.create({
     color: theme.fontColor,
   },
   placesView: {
-    height: Scaled.height(400),
+    height: Scaled.height(343),
   },
   saveButton: {
-    marginBottom: Scaled.height(15),
+    marginBottom: Scaled.height(12),
   },
   detailInput: {
     borderBottomColor: theme.commentDividers,
@@ -384,6 +483,25 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: theme.pageColor,
+  },
+  deleteButton: {
+    marginBottom: Scaled.height(15),
+    backgroundColor: theme.pageColor,
+    borderWidth: Scaled.width(1),
+    borderRadius: Scaled.fontSize(2),
+    borderColor: theme.errorColor,
+  },
+  deleteButtonText: {
+    color: theme.errorColor,
+    fontFamily: theme.fontFamily,
+    fontStyle: 'normal',
+    fontWeight: '500',
+    fontSize: Scaled.fontSize(14),
+    lineHeight: Scaled.height(24),
+  },
+  bottomButtons: {
+    backgroundColor: theme.pageColor,
+    paddingTop: Scaled.height(10),
   },
 });
 

@@ -12,6 +12,7 @@ const theme = {
   fontButtonTabs: '#E0E0E0',
   commentDividers: '#4F4F4F',
   fontFamily: 'NunitoSans-Regular',
+  errorColor: '#EB5757',
 };
 
 export default theme;

@@ -355,6 +355,7 @@ export default class ModalDropdown extends Component {
     const highlighted = rowID == selectedIndex;
     const row = !renderRow ? (
       <Text
+        numberOfLines={1}
         style={[
           styles.rowText,
           dropdownTextStyle,

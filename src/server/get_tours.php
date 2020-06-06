@@ -5,7 +5,7 @@
     $ids = $_GET['place_ids'];
     $sql = "SELECT * FROM TOUR WHERE T_Id in (SELECT DISTINCT TOUR_PLACE.T_Id FROM TOUR_PLACE WHERE TOUR_PLACE.P_Id in (".$ids.")) ORDER BY T_Id;";
   } else {
-    $sql = "SELECT * FROM TOUR;";
+    $sql = "SELECT * FROM TOUR ORDER BY T_Id DESC;";
   }
 
   $result = $connect->query($sql);

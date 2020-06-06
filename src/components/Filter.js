@@ -29,6 +29,7 @@ class Filter extends Component {
       selectedValue,
       show,
       onPop,
+      fixedHeight,
     } = this.props;
     return (
       <View onTouchStart={onPop} style={[styles.container, style]}>
@@ -43,8 +44,12 @@ class Filter extends Component {
           onDropdownWillHide={() => this.changeDropDownState(false)}
           dropdownStyle={[
             styles.dropdownStyle,
+            fixedHeight ? {height: Scaled.height(fixedHeight)} : undefined,
             style
-              ? {width: `${parseFloat(style.width.replace('%', '')) - 4}%`}
+              ? {
+                  width: `${parseFloat(style.width.replace('%', '')) -
+                    (9 * parseFloat(style.width.replace('%', ''))) / 100}%`,
+                }
               : undefined,
           ]}
           show={show}
@@ -56,7 +61,7 @@ class Filter extends Component {
           }}>
           <View style={styles.title}>
             <View style={styles.titleText}>
-              <Text style={styles.text}>
+              <Text style={styles.text} numberOfLines={1}>
                 {selectedValue ? selectedValue : `Chọn ${title.toLowerCase()}`}
               </Text>
             </View>

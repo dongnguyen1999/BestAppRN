@@ -11,6 +11,7 @@ import theme from '../../themes/default';
 import FlatListRenderer from '../../utilities/FlatListRenderer';
 import fetchTours from '../../api/fetchTours';
 import * as Scaled from '../../utilities/scaled';
+import StourButton from '../../components/StourButton';
 
 class AdminHome extends Component {
   constructor(props) {
@@ -73,7 +74,7 @@ class AdminHome extends Component {
   };
 
   render() {
-    console.log(this.state.currentLocation);
+    const {navigation} = this.props;
     let willLogout = this.props.navigation.getParam('willLogout');
     let logout = this.props.navigation.getParam('logouter');
     return (
@@ -90,6 +91,18 @@ class AdminHome extends Component {
           />
         ) : null}
         <View style={{flex: 1, width: '100%'}}>
+          <StourButton
+            style={styles.insertButton}
+            title="THÊM TOUR"
+            tittleStyle={styles.insertButtonText}
+            onPress={() =>
+              navigation.navigate('AdjustTour', {
+                id: undefined,
+                onRefreshTours: this.fetchToursList,
+                currentLocation: this.state.currentLocation,
+              })
+            }
+          />
           <Text style={styles.adminHeader}>Danh sách tour</Text>
           {this.state.fetchingLocations ? (
             <View style={styles.smallIndicator}>
@@ -132,6 +145,21 @@ const styles = StyleSheet.create({
     width: '100%',
     height: Scaled.height(30),
     marginBottom: Scaled.height(10),
+  },
+  insertButton: {
+    marginLeft: Scaled.width(16),
+    marginRight: Scaled.height(16),
+    marginTop: Scaled.height(24),
+    backgroundColor: theme.pageColor,
+    borderWidth: Scaled.width(1),
+    borderColor: theme.lightElementColor,
+  },
+  insertButtonText: {
+    fontFamily: theme.fontFamily,
+    fontStyle: 'normal',
+    fontWeight: '500',
+    fontSize: Scaled.fontSize(14),
+    lineHeight: Scaled.height(24),
   },
 });
 
