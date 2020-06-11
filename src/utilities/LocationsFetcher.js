@@ -17,7 +17,6 @@ export default class LocationsFetcher {
     let str = this.state.searchText;
     const searchText = createSearchString(str, filtersData);
     this.setState({showPlaces: true, tours: []});
-    // console.log(searchText);
     if (searchText !== this.previousSearch) {
       this.setState({
         fetchingLocations: true,

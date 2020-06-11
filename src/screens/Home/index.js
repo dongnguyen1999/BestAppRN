@@ -26,6 +26,7 @@ import * as Scaled from '../../utilities/scaled';
 import defaultLocation from '../../constants/defaultLocation';
 import SwitchTabs from './components/SwitchTabs';
 import createSearchString from '../../utilities/createSearchString';
+import RNAndroidLocationEnabler from 'react-native-android-location-enabler';
 
 class Home extends Component {
   constructor(props) {
@@ -94,10 +95,16 @@ class Home extends Component {
   }
 
   firstLoadHomeScreen = async () => {
+    this.setState({isLoading: true});
     let info = {};
+    await RNAndroidLocationEnabler.promptForEnableLocationIfNeeded({
+      interval: 10000,
+      fastInterval: 5000,
+    }).catch(e => this.setState({showErrorDialog: true, isLoading: false}));
     info = await getCurrentPosition().catch(e =>
-      this.setState({showErrorDialog: true}),
+      this.setState({showErrorDialog: true, isLoading: false}),
     );
+    // console.log(info);
     let currentLocation = info.coords
       ? {
           lat: info.coords.latitude,
@@ -146,7 +153,7 @@ class Home extends Component {
       let keywords = searchString
         .split(' ')
         .map(word => word.trim().toLowerCase());
-      let placeIds = [...this.state.locations.values()]
+      let placeIds = this.renderLocationList()
         // .filter(({name, place_id}) => {
         //   let checker = false;
         //   let lowerName = name.toLowerCase();
