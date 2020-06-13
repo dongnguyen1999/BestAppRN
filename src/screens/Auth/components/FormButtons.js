@@ -19,14 +19,14 @@ function FormButtons(props) {
             <GoogleIcon width={Scaled.height(18)} height={Scaled.height(18)} />
           </SignInButton>
         </View>
-        <View style={styles.rightHalf}>
+        {/* <View style={styles.rightHalf}>
           <SignInButton title="FACEBOOK" onPress={() => console.log('press')}>
             <FacebookIcon
               width={Scaled.height(18)}
               height={Scaled.height(18)}
             />
           </SignInButton>
-        </View>
+        </View> */}
       </View>
     </View>
   );
@@ -50,7 +50,8 @@ const styles = StyleSheet.create({
   flexRow: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
+    // justifyContent: 'space-between',
   },
 });
 export default FormButtons;

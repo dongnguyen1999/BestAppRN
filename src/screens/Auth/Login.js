@@ -63,8 +63,10 @@ class Login extends Component {
       });
     });
   }
+
   isLoggedInWithGoogle = async () => {
-    return await GoogleSignin.isSignedIn();
+    let profile = await GoogleSignin.getCurrentUser();
+    return profile ? profile.user : null;
   };
 
   verifyAndLogin() {
@@ -122,13 +124,39 @@ class Login extends Component {
   loggedInCallback = method =>
     this.setState({loggedInBy: method, isLoading: false});
 
+  getLoggedInEmail = async () => {
+    const loggedInBy = this.state.loggedInBy;
+    let user;
+    if (loggedInBy === 'GOOGLE') {
+      user = await this.isLoggedInWithGoogle();
+    }
+    if (loggedInBy === 'EMAIL') {
+      user = await this.isLoggedInWithAccount();
+    }
+    return user ? user.email : null;
+  };
+
+  checkIsAdmin(email) {
+    //...temp
+    // console.log(email);
+    return email === 'huynhhoangan@gmail.com';
+  }
+
   render() {
     // console.log(this.state.isLoading);
     // console.log(this.state.loggedInBy);
     console.disableYellowBox = true;
     const {navigation} = this.props;
     if (this.state.loggedInBy && !this.state.showSplashScreen) {
-      navigation.navigate('Home', {loggedInBy: this.state.loggedInBy});
+      this.getLoggedInEmail().then(email => {
+        let isAdmin = this.checkIsAdmin(email);
+        console.log(isAdmin);
+        if (isAdmin)
+          navigation.navigate('AdminHome', {
+            loggedInBy: this.state.loggedInBy,
+          });
+        else navigation.navigate('Home', {loggedInBy: this.state.loggedInBy});
+      });
     }
     if (this.state.showSplashScreen) return <SplashScreen />;
     return this.state.isLoading ? (

@@ -12,17 +12,19 @@ import FlatListRenderer from '../../utilities/FlatListRenderer';
 import fetchTours from '../../api/fetchTours';
 import * as Scaled from '../../utilities/scaled';
 import StourButton from '../../components/StourButton';
+import defaultLocation from '../../constants/defaultLocation';
+import RNAndroidLocationEnabler from 'react-native-android-location-enabler';
+import getCurrentPosition from '../../api/getCurrentLocation';
 
 class AdminHome extends Component {
   constructor(props) {
     super(props);
-    const {navigation} = props;
-    let currentLocation = navigation.getParam('currentLocation');
     this.state = {
       fetchingLocations: false,
       tours: [],
       currentToursIndex: 0,
-      currentLocation: currentLocation,
+      currentLocation: undefined,
+      showErrorDialog: false,
     };
     this.isAdmin = true;
     this.maxNbToursShown = 15;
@@ -31,12 +33,34 @@ class AdminHome extends Component {
     this.flatListRenderer = new FlatListRenderer(this);
   }
 
-  componentDidMount() {
-    this.fetchToursList();
-    BackHandler.addEventListener('hardwareBackPress', function() {
-      return true;
-    });
+  async componentDidMount() {
+    await this.firstLoadScreen();
+    await this.fetchToursList();
   }
+
+  firstLoadScreen = async () => {
+    this.setState({isLoading: true});
+    let info = {};
+    await RNAndroidLocationEnabler.promptForEnableLocationIfNeeded({
+      interval: 10000,
+      fastInterval: 5000,
+    }).catch(e => this.setState({showErrorDialog: true, isLoading: false}));
+    info = await getCurrentPosition().catch(e =>
+      this.setState({showErrorDialog: true, isLoading: false}),
+    );
+    // console.log(info);
+    let currentLocation =
+      info && info.coords
+        ? {
+            lat: info.coords.latitude,
+            lng: info.coords.longitude,
+          }
+        : defaultLocation;
+    this.setState({
+      isLoading: false,
+      currentLocation: currentLocation,
+    });
+  };
 
   fetchToursList = async () => {
     this.setState({fetchingLocations: true, tours: []});
@@ -77,7 +101,11 @@ class AdminHome extends Component {
     const {navigation} = this.props;
     let willLogout = this.props.navigation.getParam('willLogout');
     let logout = this.props.navigation.getParam('logouter');
-    return (
+    return this.state.isLoading ? (
+      <View style={styles.indicatorContainer}>
+        <ActivityIndicator size="large" color={theme.lightElementColor} />
+      </View>
+    ) : (
       <View style={styles.container}>
         {willLogout ? (
           <Dialog
@@ -87,6 +115,25 @@ class AdminHome extends Component {
             onAccept={logout}
             onCancel={() =>
               this.props.navigation.setParams({willLogout: false})
+            }
+          />
+        ) : null}
+        {this.state.showErrorDialog ? (
+          <Dialog
+            title="Unknown location"
+            description="Ứng dụng không thể truy cập vị trí hiện tại của bạn."
+            suggestion="Hãy chắc chắn rằng bạn đã cấp quyền truy cập vị trí và có kết nối mạng ổn định"
+            acceptLabel="Sử dụng vị trí mặc định"
+            cancelLabel="Thoát"
+            type="prompt"
+            onAccept={() =>
+              this.setState({
+                currentLocation: defaultLocation,
+                showErrorDialog: false,
+              })
+            }
+            onCancel={() =>
+              this.props.navigation.navigate('Login', {showSplashScreen: false})
             }
           />
         ) : null}
@@ -109,7 +156,7 @@ class AdminHome extends Component {
               <ActivityIndicator color={theme.lightElementColor} />
             </View>
           ) : (
-            this.flatListRenderer.renderToursFlatList(styles, false)
+            this.flatListRenderer.renderToursFlatList(styles)
           )}
         </View>
       </View>
@@ -160,6 +207,13 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     fontSize: Scaled.fontSize(14),
     lineHeight: Scaled.height(24),
+  },
+  indicatorContainer: {
+    flex: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: theme.pageColor,
   },
 });
 

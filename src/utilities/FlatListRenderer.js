@@ -106,7 +106,7 @@ class FlatListRenderer {
     // );
   }
 
-  renderToursFlatList(styles, showImgs) {
+  renderToursFlatList(styles) {
     const {navigation} = this.props;
     let currentLocation = this.state.currentLocation;
     // console.log(this.state.tours.length, this.state.currentToursIndex);

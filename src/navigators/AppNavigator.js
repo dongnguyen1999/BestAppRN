@@ -1,6 +1,7 @@
 import {createSwitchNavigator} from 'react-navigation';
 import Auth from '../screens/Auth';
 import HomeNavigator from './HomeNavigator';
+import AdminHomeNavigator from './AdminHomeNavigator';
 
 const AppNavigator = createSwitchNavigator(
   {
@@ -8,7 +9,7 @@ const AppNavigator = createSwitchNavigator(
     Login: {screen: Auth.Login},
     Register: {screen: Auth.Register},
     HomeStack: {screen: HomeNavigator},
-    // Auth: {screen: Auth, navigationOptions: {title: 'Log in'}},
+    AdminHomeStack: {screen: AdminHomeNavigator},
   },
   {
     initialRouteName: 'Login',

@@ -12,15 +12,15 @@ import * as Scaled from '../utilities/scaled';
 import {SmallPalm, HeaderLogo} from '../assets/images';
 import HomeHeader from '../components/HomeHeader';
 
-const bestTourHeader = navigation => {
+const navigationOptions = (navigation, title) => {
   return {
-    title: '',
+    title: typeof title === 'string' ? title : title(navigation),
     headerStyle: styles.header,
     headerTitleStyle: styles.headerTitle,
     headerTitleContainerStyle: styles.titleContainer,
     headerTintColor: theme.headerTintColor,
     headerRightContainerStyle: styles.rightContainer,
-    headerLeft: () => <HomeHeader />,
+    headerLeft: <View />,
     headerRight: () => {
       return (
         <LogoutButton
@@ -32,25 +32,18 @@ const bestTourHeader = navigation => {
   };
 };
 
-const navigationOptions = (navigation, title) => {
-  return {
-    title: title,
-    headerStyle: styles.header,
-    headerTitleStyle: [styles.headerTitle, styles.detailHeaderTitle],
-    headerTitleContainerStyle: styles.titleContainer,
-    headerTintColor: theme.headerTintColor,
-  };
-};
-
-const HomeNavigator = createStackNavigator({
-  Home: {
-    screen: Home,
-    navigationOptions: ({navigation}) => bestTourHeader(navigation),
+const AdminHomeNavigator = createStackNavigator({
+  AdminHome: {
+    screen: AdminHome,
+    navigationOptions: ({navigation}) => navigationOptions(navigation, 'Admin'),
   },
-  TourDetail: {
-    screen: TourDetail,
+  AdjustTour: {
+    screen: AdjustTour,
     navigationOptions: ({navigation}) =>
-      navigationOptions(navigation, 'Chi tiết tour du lịch'),
+      navigationOptions(navigation, nav => {
+        let id = nav.getParam('id');
+        return id ? 'Chi tiết tour' : 'Thêm tour';
+      }),
   },
   LocationDetail: {
     screen: LocationDetail,
@@ -58,6 +51,8 @@ const HomeNavigator = createStackNavigator({
       navigationOptions(navigation, 'Chi tiết địa điểm'),
   },
 });
+
+export default AdminHomeNavigator;
 
 const styles = StyleSheet.create({
   header: {
@@ -83,5 +78,3 @@ const styles = StyleSheet.create({
     marginRight: Scaled.width(20),
   },
 });
-
-export default HomeNavigator;

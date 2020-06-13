@@ -45,7 +45,6 @@ class Home extends Component {
       fetchingLocations: false,
       showPlaces: true,
       showErrorDialog: false,
-      isAdmin: false,
     };
 
     this.maxNbToursShown = 15;
@@ -64,36 +63,6 @@ class Home extends Component {
     this.firstLoadHomeScreen();
   }
 
-  getLoggedInEmail = async () => {
-    const {navigation} = this.props;
-    const loggedInBy = navigation.getParam('loggedInBy');
-    let user;
-    if (loggedInBy === 'GOOGLE') {
-      user = await this.isLoggedInWithGoogle();
-    }
-    if (loggedInBy === 'EMAIL') {
-      user = await this.isLoggedInWithAccount();
-    }
-    return user.email;
-  };
-
-  isLoggedInWithAccount() {
-    return new Promise(resolve => {
-      firebaseApp.auth().onAuthStateChanged(user => {
-        resolve(user);
-      });
-    });
-  }
-  isLoggedInWithGoogle = async () => {
-    let profile = await GoogleSignin.getCurrentUser();
-    return profile.user;
-  };
-
-  checkIsAdmin(email) {
-    //...temp
-    return email === 'nvdkg1999@gmail.com';
-  }
-
   firstLoadHomeScreen = async () => {
     this.setState({isLoading: true});
     let info = {};
@@ -105,20 +74,18 @@ class Home extends Component {
       this.setState({showErrorDialog: true, isLoading: false}),
     );
     // console.log(info);
-    let currentLocation = info.coords
-      ? {
-          lat: info.coords.latitude,
-          lng: info.coords.longitude,
-        }
-      : defaultLocation;
-    let loggedInEmail = await this.getLoggedInEmail();
-    let isAdmin = this.checkIsAdmin(loggedInEmail);
+    let currentLocation =
+      info && info.coords
+        ? {
+            lat: info.coords.latitude,
+            lng: info.coords.longitude,
+          }
+        : defaultLocation;
     this.setState({
       isLoading: false,
       currentLocation: currentLocation,
-      isAdmin: isAdmin,
     });
-    this.locationsFetcher.searchLocations();
+    // this.locationsFetcher.searchLocations();
   };
 
   componentWillUnmount() {
@@ -212,14 +179,6 @@ class Home extends Component {
     // );
     // SELECT * FROM TOUR WHERE T_Id in (SELECT DISTINCT TOUR_PLACE.T_Id FROM TOUR_PLACE WHERE TOUR_PLACE.P_Id in ('ChIJp8jxUTuIoDERyBcwpCPpzQM',...));
     // ('ChIJp8jxUTuIoDERyBcwpCPpzQM','ChIJ60pywR6IoDERhfZEhWlmn2s','ChIJ0VRx_gOIoDER0lUk8X0mtt4','ChIJ5f1X5R-IoDERoa8wRZ-qo1M','ChIJEUcyC8aJoDERifNoSARsqZI','ChIJEb4JocWJoDERJLvFAoiBPBw','ChIJV6JsWT6IoDEREaLArv999RQ','ChIJTXcDk0eJoDERdJa0O22aeeM','ChIJ6V-lFEeJoDERMCvFnIHIvAA','ChIJuYb_h5WJoDERctRVzWmAaGk','ChIJ5UsFYNyJoDERgR1JXN1ltWg','ChIJa0hrbaBioDERVyjh1sbkvyQ','ChIJmRMrNp9ioDERFTTz_SX0q98','ChIJh5k_pDiJoDERz8bYV7hN8DI','ChIJMyZt7juJoDERZefxD9QMs-Q','ChIJi61qC0uJoDERw-SB7t-3VAw','ChIJ_bOU9qFioDERbj90-AO96U0','ChIJ3R5lgDWIoDERBbJIUDznp4E','ChIJkYsYSYCJoDERlz-f5guV8Vk','ChIJt6mxpgKIoDERNh6JLOAiH4U','ChIJeQMGhqWJoDERsoJbIYX9MrM','ChIJMUiaCcGJoDERAaVgMFBR-Qk','ChIJbwhuWiOIoDER65Fiyhg7igk','ChIJ13HN4OSJoDER7tXLeIFGlVs','ChIJqRhwS7KJoDERMcQ0Br7S_QY','ChIJo61LXCWIoDERSJJP1s_rh00','ChIJDQtAqSaIoDER1P9k3g5B5wc','ChIJQRnBMEKIoDERf4x_L7J4qps','ChIJ-x4BNY-JoDERZotWzLvtMSc','ChIJJ06SxZtjoDERDf6VilBheGs','ChIJwSKEAoiJoDER5DgwRrEWZJY','ChIJ54eipQKIoDERIm8DOOcsvuc','ChIJpR0e8aGJoDERlknCWe30GeU','ChIJYxX15cCOoDER5L7Q9HssDQk','ChIJ_2I9E7GJoDERNbHmqePQe2g','ChIJE1UNZwaIoDERev8caxlFa5k','ChIJpY4pDq9ioDERfrBz2X3wDyc','ChIJJQH8VTKJoDERxa7OqXN6OCw','ChIJU0S0fdtjoDERpIVwsbbhazg','ChIJgdjFNZyJoDERcVTVRSlPJ7o','ChIJBaCU6ahioDERWz1GFHCzVBs','ChIJl1Itx1GGoDERW50fvPAmqDw','ChIJTU4fPKBioDERUxdmkOJUHFM','ChIJWR2TuhCIoDERxAmY3u_KZg4','ChIJ3YD53eCEoDERybLIPgYpUPE','ChIJ6SPycoSJoDER9mNGNZ1JT5g','ChIJ7yVT2B-IoDERc_XozfIkSjk','ChIJTy8754iJoDER3JZDksH3ZHM','ChIJBWqKXzeIoDERidjeHXVN9UM','ChIJZYGTmxiJoDERiC8lQjc0bJ8','ChIJrysGDK9ioDERTleWW1Ugd4Q','ChIJp2c-JA6IoDERlKdoeyx1J9E','ChIJYUQggaFioDERA9jQdLhuN6g','ChIJl_JGML-JoDERjZfu5jQBGf4','ChIJ0WXQK5KJoDERCMv3QhR7dk8','ChIJB-oGOw6IoDERi3BuQcHBjlg','ChIJe_SlTJ9ioDERl2nd20r35jM','ChIJ5zrOMs2JoDERabb5TltvVYM','ChIJqzF1n55ioDERHFz6CJAnQAk','ChIJt2icrkBnoDERlZUsPLSw3qg')
-    const {navigation} = this.props;
-    const loggedInBy = navigation.getParam('loggedInBy');
-    if (this.state.isAdmin && !this.state.showErrorDialog) {
-      navigation.navigate('AdminHomeStack', {
-        loggedInBy: loggedInBy,
-        currentLocation: this.state.currentLocation,
-      });
-    }
     let willLogout = this.props.navigation.getParam('willLogout');
     let logout = this.props.navigation.getParam('logouter');
     return this.state.isLoading ? (
