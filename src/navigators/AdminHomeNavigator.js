@@ -12,9 +12,9 @@ import * as Scaled from '../utilities/scaled';
 import {SmallPalm, HeaderLogo} from '../assets/images';
 import HomeHeader from '../components/HomeHeader';
 
-const navigationOptions = (navigation, title) => {
+const homeNavigationOptions = (navigation, title) => {
   return {
-    title: typeof title === 'string' ? title : title(navigation),
+    title: title,
     headerStyle: styles.header,
     headerTitleStyle: styles.headerTitle,
     headerTitleContainerStyle: styles.titleContainer,
@@ -32,10 +32,21 @@ const navigationOptions = (navigation, title) => {
   };
 };
 
+const navigationOptions = (navigation, title) => {
+  return {
+    title: typeof title === 'string' ? title : title(navigation),
+    headerStyle: styles.header,
+    headerTitleStyle: [styles.headerTitle, styles.detailHeaderTitle],
+    headerTitleContainerStyle: styles.titleContainer,
+    headerTintColor: theme.headerTintColor,
+  };
+};
+
 const AdminHomeNavigator = createStackNavigator({
   AdminHome: {
     screen: AdminHome,
-    navigationOptions: ({navigation}) => navigationOptions(navigation, 'Admin'),
+    navigationOptions: ({navigation}) =>
+      homeNavigationOptions(navigation, 'Admin'),
   },
   AdjustTour: {
     screen: AdjustTour,
