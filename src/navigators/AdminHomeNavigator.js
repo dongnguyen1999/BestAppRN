@@ -20,7 +20,7 @@ const homeNavigationOptions = (navigation, title) => {
     headerTitleContainerStyle: styles.titleContainer,
     headerTintColor: theme.headerTintColor,
     headerRightContainerStyle: styles.rightContainer,
-    headerLeft: <View />,
+    headerLeft: null,
     headerRight: () => {
       return (
         <LogoutButton
